@@ -2,6 +2,6 @@
 
 class TicTacToe
   def hello
-    'HELLO'
+    'Welcome to Tic-Tac-Toe'
   end
 end
