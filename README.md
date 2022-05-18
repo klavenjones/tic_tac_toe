@@ -36,6 +36,8 @@ Run the linter and autocorrect:
 bundle exec rubocop -a
 ````
 
+## Run Tests
+
 Run tests:
 
 ````
