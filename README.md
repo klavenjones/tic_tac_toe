@@ -30,7 +30,7 @@ Run the linter
 bundle exec rubocop
 ````
 
-Run autocorrect to correct offences: 
+Run autocorrect to correct offenses: 
 
 ````
 bundle exec rubocop -a
