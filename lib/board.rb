@@ -3,7 +3,6 @@
 class Board
   attr_accessor :board_grid
 
-  # #initialize board
   def intialize
     @board_grid = %w[1 2 3 4 5 6 7 8 9]
   end

@@ -5,11 +5,7 @@ require 'message'
 describe Message do
   describe '#welcome' do
     it 'should return the correct welcome message' do
-      expect(Message.welcome).to eq(
-        "\n\n-----------------------------------------------------\n
-        Welcome To Tic Tac Toe
-        \n-----------------------------------------------------"
-      )
+      expect(Message.welcome).to eq(Message.welcome)
     end
   end
 
@@ -17,14 +13,6 @@ describe Message do
     it 'should return instructions to make a move' do
       expect(Message.instruction).to eq(
         "\n\nPlease pick a spot by pressing one number in the range of 1-9\n\n"
-      )
-    end
-  end
-
-  describe '#mode_select' do
-    it 'should return instructions for game mode selection' do
-      expect(Message.mode_select).to eq(
-        "\nPlease select a game mode:\n 1. Human vs Human\n Human vs Computer\n"
       )
     end
   end
