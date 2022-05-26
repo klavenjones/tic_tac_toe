@@ -1,10 +1,13 @@
-require "player"
+# frozen_string_literal: true
+
+require 'player'
 
 class Human < Player
   attr_accessor :marker, :type
-  
-  def initialize(marker)
+
+  def initialize
+    super
     @marker = marker
-    @type = "Human"
+    @type = 'Human'
   end
 end

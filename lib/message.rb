@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 class Message
   def self.welcome
-    "\n\n-----------------------------------------------------\nWelcome To Tic Tac Toe\n-----------------------------------------------------"
+    "\n\n-----------------------------------------------------\n
+     Welcome To Tic Tac Toe
+    \n-----------------------------------------------------"
   end
 
   def self.instruction
@@ -16,10 +20,10 @@ class Message
   end
 
   def self.tie
-    "The game has ended in a tie."
+    'The game has ended in a tie.'
   end
 
   def self.exit
-    "Thanks for playing Tic Tac Toe!"
+    'Thanks for playing Tic Tac Toe!'
   end
 end
