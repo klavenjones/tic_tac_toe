@@ -17,13 +17,21 @@ describe Message do
     end
   end
 
+  describe '#current_player' do
+    it 'should return a prompt to the current player' do
+      expect(Message.current_player('X')).to eq(
+        "\nPlayer X it's your turn to make a move."
+      )
+    end
+  end
+
   describe '#winner' do
     it 'should return the correct message when player X is the winner' do
-      expect(Message.winner('X')).to eq('Player X is the winner.')
+      expect(Message.winner('X')).to eq("\n\nPlayer X is the winner.")
     end
 
     it 'should return the correct message when player O is the winner' do
-      expect(Message.winner('O')).to eq('Player O is the winner.')
+      expect(Message.winner('O')).to eq("\n\nPlayer O is the winner.")
     end
   end
 

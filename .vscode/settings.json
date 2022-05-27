@@ -1,0 +1,9 @@
+{
+  "prettier.singleQuote": true,
+  "ruby.format": "prettier",
+  "ruby.lint": {
+  "rubocop": false
+  },
+  "ruby.useBundler": true,
+  "prettier.jsxSingleQuote": true
+}

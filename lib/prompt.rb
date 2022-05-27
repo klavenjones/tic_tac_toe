@@ -4,6 +4,8 @@ require 'message'
 require 'board'
 
 class Prompt
+  @board = Board.new
+
   def self.welcome
     print_message(Message.welcome)
   end
@@ -13,7 +15,11 @@ class Prompt
   end
 
   def self.print_board
-    print_message(Board.display_board)
+    print_message(@board.display_board)
+  end
+
+  def self.print_current_player(marker)
+    print_message(Message.current_player(marker))
   end
 
   def self.print_message(msg)
