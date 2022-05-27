@@ -19,11 +19,15 @@ class Message
     "\nPlayer #{marker} it's your turn to make a move."
   end
 
+  def self.players_move(marker, move)
+    "\nPlayer #{marker} chose the spot labeled: #{move}\n"
+  end
+
   def self.tie
-    'The game has ended in a tie.'
+    "The game has ended in a tie."
   end
 
   def self.exit
-    'Thanks for playing Tic Tac Toe!'
+    "Thanks for playing Tic Tac Toe!"
   end
 end
