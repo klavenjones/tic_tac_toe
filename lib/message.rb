@@ -24,10 +24,10 @@ class Message
   end
 
   def self.tie
-    "The game has ended in a tie."
+    'The game has ended in a tie.'
   end
 
   def self.exit
-    "Thanks for playing Tic Tac Toe!"
+    'Thanks for playing Tic Tac Toe!'
   end
 end

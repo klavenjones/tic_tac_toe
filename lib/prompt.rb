@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "message"
-require "board"
+require 'message'
+require 'board'
 
 class Prompt
   @board = Board.new

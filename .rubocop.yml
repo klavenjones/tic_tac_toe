@@ -11,3 +11,5 @@ Layout/LineLength:
   Max: 250
 Style/Documentation:
   Enabled: false
+Naming/AccessorMethodName:
+  Enabled: false
