@@ -41,12 +41,12 @@ describe Board do
 
   describe '#full?' do
     it 'should display true when the board is full' do
-       board.board_grid.each_with_index do | item, index| 
+      board.board_grid.each_with_index do |_item, index|
         board.mark_board('X', index)
       end
       expect(board.full?).to eq(true)
     end
- 
+
     it 'should display false when the board is not full' do
       expect(board.full?).to eq(false)
     end
@@ -54,16 +54,12 @@ describe Board do
 
   describe '#winner?' do
     it 'should display true if there is a winner' do
-      for i in 1..3
-        # puts i
+      (1..3).each do |i|
         board.mark_board('X', i)
       end
-      puts board.board_grid
       expect(board.winner?).to eq(true)
     end
-
   end
-
 end
 
 ## Utility Methods

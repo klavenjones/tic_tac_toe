@@ -19,9 +19,12 @@ class Game
   end
 
   def turn
-    Prompt.print_current_player(@current_player.marker)
-    Prompt.print_instruction
-    play_turn(@current_player, @current_player.get_move)
+    until game_over?
+      Prompt.print_current_player(@current_player.marker)
+      Prompt.print_instruction
+      play_turn(@current_player, @current_player.get_move)
+      Prompt.print_message(@board.display_board)
+    end
 
     Prompt.print_message(@board.display_board)
   end
@@ -41,5 +44,9 @@ class Game
 
   def set_current_player(current_player)
     @current_player = current_player
+  end
+
+  def game_over?
+    @board.full? || @board.winner?
   end
 end

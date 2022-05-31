@@ -27,10 +27,8 @@ class Board
   end
 
   def taken_spaces
-    count = 0 
-    @board_grid.each do |space|
-      count += 1 if space == "X" || space == "O" 
-    end
+    count = 0
+    @board_grid.each { |space| count += 1 if %w[X O].include?(space) }
     count
   end
 
@@ -40,14 +38,11 @@ class Board
 
   def winner?
     winning_moves = []
-    WINNING_COMBOS.all? do |winning_game| 
+    WINNING_COMBOS.all? do |winning_game|
       first_space_eq_second_space = @board_grid[winning_game[0]] == @board_grid[winning_game[1]]
       second_space_eq_third_space = @board_grid[winning_game[1]] == @board_grid[winning_game[2]]
       winning_moves.push(first_space_eq_second_space && second_space_eq_third_space ? true : false)
     end
-
-    winning_moves.any? { |game| game == true}
+    winning_moves.any? { |game| game == true }
   end
-
-  
 end
