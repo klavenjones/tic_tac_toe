@@ -38,7 +38,7 @@ Run the linter and autocorrect:
 bundle exec rubocop -a
 ```
 
-## Run Tests
+### Run Tests
 
 Run tests:
 
@@ -52,6 +52,4 @@ Run to automate test suite:
 bundle exec guard
 ```
 
-## Future Implementation
 
-- Adding Gameplay
