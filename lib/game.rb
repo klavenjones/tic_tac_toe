@@ -49,4 +49,8 @@ class Game
   def game_over?
     @board.full? || @board.winner?
   end
+
+  def status
+    board.full? && !board.winner? ? Prompt.print_tie : Prompt.print_winner
+  end
 end

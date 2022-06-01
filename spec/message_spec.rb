@@ -40,7 +40,7 @@ describe Message do
       )
     end
   end
-  
+
   describe '#spot_taken_error' do
     it 'should return an error message when the player chooses a spot that is already taken' do
       expect(Message.spot_taken_error).to eq(

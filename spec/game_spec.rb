@@ -32,6 +32,20 @@ describe Game do
     end
   end
 
+  describe '#status' do
+      it 'should print a message when there is a tie' do
+        board.board_grid = %w[X O X 4 O X O O X]
+        game.status
+        expect(game.status).to eq(true)
+      end
+  
+      it 'should return true when a player has won' do
+        board.board_grid = %w[X X X O 5 6 O 8 9]
+        expect(game.game_over?).to eq(true)
+      end
+      
+  end
+
   describe '#game_over?' do
     it 'should return false if the game is not over' do
       expect(game.game_over?).to eq(false)

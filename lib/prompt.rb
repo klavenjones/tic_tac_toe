@@ -18,6 +18,14 @@ class Prompt
     print_message(@board.display_board)
   end
 
+  def self.print_tie
+    print_message(Message.tie)
+  end
+
+  def self.print_winner(marker)
+    print_message(Message.winner(marker))
+  end
+
   def self.print_current_player(marker)
     print_message(Message.current_player(marker))
   end

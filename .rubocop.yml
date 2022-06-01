@@ -6,7 +6,7 @@ AllCops:
 Metrics/AbcSize:
   Max: 25
 Metrics/BlockLength:
-  Max: 50
+  Max: 100
 Metrics/MethodLength:
   Max: 10
 Layout/LineLength:

@@ -41,13 +41,24 @@ describe Prompt do
       ).to_stdout
     end
 
+    it 'Should print that the game ended in a tie' do
+      expect { Prompt.print_tie }.to output(Message.tie).to_stdout
+    end
+
+    it 'Should print the winner of the game' do
+      marker = 'X'
+      expect { Prompt.print_winner(marker) }.to output(
+        Message.winner(marker)
+      ).to_stdout
+    end
+
     it 'Should print the current player\'s recent move ' do
       marker = 'X'
       expect { Prompt.print_players_move(marker, 9) }.to output(
         "\nPlayer X chose the spot labeled: 9\n"
       ).to_stdout
     end
-    
+
     it 'Should receive the current player\'s move ' do
       prompt = Prompt.new
       allow(prompt).to receive(:gets).and_return('9')
