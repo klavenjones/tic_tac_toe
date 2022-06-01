@@ -12,7 +12,15 @@ class Message
   end
 
   def self.winner(player)
-    "Player #{player} is the winner."
+    "\n\nPlayer #{player} is the winner."
+  end
+
+  def self.current_player(marker)
+    "\nPlayer #{marker} it's your turn to make a move."
+  end
+
+  def self.players_move(marker, move)
+    "\nPlayer #{marker} chose the spot labeled: #{move}\n"
   end
 
   def self.tie
