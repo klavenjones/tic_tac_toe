@@ -29,7 +29,6 @@ class Prompt
   def get_players_move(marker)
     player_move = gets.chomp.to_i
     self.class.print_players_move(marker, player_move)
-    sleep 1.5
     player_move
   end
 

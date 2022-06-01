@@ -5,7 +5,5 @@ require 'human'
 require 'board'
 require 'prompt'
 
-
-describe Game do
-
-end
+# describe Game do
+# end
