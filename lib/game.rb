@@ -4,7 +4,7 @@ require 'prompt'
 require 'board'
 
 class Game
-  attr_reader :board, :prompt, :player1, :player2
+  attr_reader :board, :prompt, :player1, :player2, :current_player
 
   def initialize(board, player1, player2)
     @board = board
