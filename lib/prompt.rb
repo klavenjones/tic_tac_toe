@@ -26,6 +26,14 @@ class Prompt
     print_message(Message.players_move(marker, move))
   end
 
+  def self.print_number_error
+    print_message(Message.number_error)
+  end
+
+  def self.print_spot_taken_error
+    print_message(Message.spot_taken_error)
+  end
+
   def get_players_move(marker)
     player_move = gets.chomp.to_i
     self.class.print_players_move(marker, player_move)

@@ -32,6 +32,10 @@ class Board
     count
   end
 
+  def spot_taken?(spot)
+    !@board_grid.include?(spot.to_s)
+  end
+
   def full?
     taken_spaces >= 9
   end

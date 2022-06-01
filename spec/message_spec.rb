@@ -33,6 +33,22 @@ describe Message do
     end
   end
 
+  describe '#number_error' do
+    it 'should return an error message when a player enters the wrong number' do
+      expect(Message.number_error).to eq(
+        "\nThat is not the correct number, please enter a number in the range of 1-9\n"
+      )
+    end
+  end
+  
+  describe '#spot_taken_error' do
+    it 'should return an error message when the player chooses a spot that is already taken' do
+      expect(Message.spot_taken_error).to eq(
+        "\nThis spot is not available, please choose another number in the range of 1-9\n"
+      )
+    end
+  end
+
   describe '#winner' do
     it 'should return the correct message when player X is the winner' do
       expect(Message.winner('X')).to eq("\n\nPlayer X is the winner.")

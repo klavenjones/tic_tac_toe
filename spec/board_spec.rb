@@ -60,6 +60,18 @@ describe Board do
       expect(board.winner?).to eq(true)
     end
   end
+
+  describe '#spot_taken?' do
+    it 'should return true if the space is taken' do
+      board.board_grid = '%w[X 2 3 4 5 6 7 8 9]'
+      expect(board.spot_taken?(1)).to eq(true)
+    end
+
+    it 'should return false if the space is available' do
+      board.board_grid = '%w[1 2 3 4 5 6 7 8 9]'
+      expect(board.spot_taken?(1)).to eq(false)
+    end
+  end
 end
 
 ## Utility Methods

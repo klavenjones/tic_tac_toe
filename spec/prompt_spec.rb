@@ -22,6 +22,18 @@ describe Prompt do
       ).to_stdout
     end
 
+    it 'Should print an error for when a player enters the wrong number.' do
+      expect { Prompt.print_number_error }.to output(
+        Message.number_error
+      ).to_stdout
+    end
+
+    it 'Should print an error for when a player chooses a spot that is taken.' do
+      expect { Prompt.print_spot_taken_error }.to output(
+        Message.spot_taken_error
+      ).to_stdout
+    end
+
     it 'Should print the current player' do
       marker = 'X'
       expect { Prompt.print_current_player(marker) }.to output(
@@ -35,7 +47,7 @@ describe Prompt do
         "\nPlayer X chose the spot labeled: 9\n"
       ).to_stdout
     end
-
+    
     it 'Should receive the current player\'s move ' do
       prompt = Prompt.new
       allow(prompt).to receive(:gets).and_return('9')

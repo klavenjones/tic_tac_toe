@@ -27,6 +27,14 @@ class Message
     'The game has ended in a tie.'
   end
 
+  def self.number_error
+    "\nThat is not the correct number, please enter a number in the range of 1-9\n"
+  end
+
+  def self.spot_taken_error
+    "\nThis spot is not available, please choose another number in the range of 1-9\n"
+  end
+
   def self.exit
     'Thanks for playing Tic Tac Toe!'
   end
