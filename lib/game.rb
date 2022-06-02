@@ -12,6 +12,7 @@ class Game
     @player1 = player1
     @player2 = player2
     @current_player = player1
+    @winning_player = player1
   end
 
   def start_game
@@ -33,10 +34,10 @@ class Game
   def play_turn(player, move)
     if valid_move?(move)
       update_board(player, move)
+      set_winning_player(player) if @board.winner?
       update_current_player
     else
         Prompt.print_invalid_move_error
-        sleep 2
     end
   end
 
@@ -56,8 +57,8 @@ class Game
     @board.full? || @board.winner?
   end
 
-  def determine_winner
-    @board.board_grid.count(player1.marker) > @board.board_grid.count(player2.marker) ? player1.marker : player2.marker
+  def set_winning_player(winning_player)
+    @winning_player = winning_player
   end
 
   def valid_move?(input)
@@ -65,6 +66,6 @@ class Game
   end
 
   def status
-    board.full? && !board.winner? ? Prompt.print_tie : Prompt.print_winner(determine_winner)
+    board.full? && !board.winner? ? Prompt.print_tie : Prompt.print_winner(@winning_player.marker)
   end
 end

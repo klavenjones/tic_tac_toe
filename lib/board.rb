@@ -32,6 +32,12 @@ class Board
     count
   end
 
+  def spaces_available
+    spaces = []
+    @board_grid.each { |space| spaces.push(space) unless space == "X" || space == "O" }
+    spaces
+  end
+
   def spot_taken?(spot)
     !@board_grid.include?(spot.to_s)
   end

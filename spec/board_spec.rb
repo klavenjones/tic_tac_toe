@@ -72,6 +72,30 @@ describe Board do
       expect(board.spot_taken?(1)).to eq(false)
     end
   end
+
+  describe '#spaces_available' do
+      it 'should return an array of available spaces on the board, when the first spot is taken' do
+        board.mark_board('X', 1)
+        expect(board.spaces_available).to eq(["2", "3", "4", "5", "6", "7", "8", "9"])
+      end
+
+      it 'should return an empty array when there are no spots left' do
+        dummy_game
+        expect(board.spaces_available).to eq([])
+      end
+  end
+
+  def dummy_game
+    board.mark_board('X', 1)
+    board.mark_board('X', 2)
+    board.mark_board('X', 3)
+    board.mark_board('X', 4)
+    board.mark_board('X', 5)
+    board.mark_board('X', 6)
+    board.mark_board('X', 7)
+    board.mark_board('X', 8)
+    board.mark_board('X', 9)
+  end
 end
 
 ## Utility Methods
@@ -91,3 +115,4 @@ def verify_position_nine(marker)
     "\n 1 | 2 | 3 \n---|---|---\n 4 | 5 | 6  \n---|---|---\n 7 | 8 | #{marker} \n\n\n"
   )
 end
+

@@ -41,7 +41,15 @@ class Prompt
   def get_players_move(marker)
     player_move = gets.chomp.to_i
     self.class.print_players_move(marker, player_move)
+    sleep 1.5
     player_move
+  end
+
+  def get_computers_move(marker)
+    computer_move = @board.spaces_available[0].to_i
+    self.class.print_computers_move(marker, computer_move)
+    sleep 1.5
+    computer_move
   end
 
   def self.print_message(msg)

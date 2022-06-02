@@ -4,6 +4,7 @@ require 'game'
 require 'human'
 require 'board'
 require 'prompt'
+require 'message'
 
 describe Game do
   let(:player1) { Human.new('X') }
@@ -11,12 +12,7 @@ describe Game do
   let(:board) { Board.new }
   subject(:game) { Game.new(board, player1, player2) }
 
-  describe '#determine_winner' do
-    it 'should determine winner based on the amount of markers on board' do
-      board.board_grid = %w[O O O X O X O O X]
-      expect(game.determine_winner).to eq('O')
-    end
-  end
+  
 
   describe '#start_game' do
     it 'should display tic tac toe board' do
@@ -31,6 +27,13 @@ describe Game do
     end
   end
 
+  describe '#set_winning_player' do
+    it 'should set player to winning player and return marker O' do
+      game.set_winning_player(game.player2)
+      expect(game.winning_player.marker).to eq('O')
+    end
+  end
+
   describe '#update_current_player' do
     it 'should update the current player correctly' do
       expect(game.current_player.marker).to eq('X')
@@ -42,7 +45,7 @@ describe Game do
   describe '#status' do
     it 'should print a message when there is a tie' do
       board.board_grid = %w[X O X 4 O X O O X]
-      expect(game.status).to eq(Prompt.print_tie)
+      expect { game.status }.to output(Prompt.print_tie).to_stdout
     end
   end
 
@@ -62,11 +65,5 @@ describe Game do
     end
   end
 
-  def dummy_game
-    game.play_turn('O', 1)
-    game.play_turn('X', 4)
-    game.play_turn('O', 2)
-    game.play_turn('X', 5)
-    game.play_turn('O', 3)
-  end
+
 end
