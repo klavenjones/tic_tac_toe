@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require 'prompt'
+require 'input_validation'
 require 'board'
 
 class Game
-  attr_reader :board, :prompt, :player1, :player2, :current_player
+  attr_reader :board, :prompt, :player1, :player2, :current_player, :winning_player
 
   def initialize(board, player1, player2)
     @board = board
@@ -26,12 +27,17 @@ class Game
       Prompt.print_message(@board.display_board)
     end
 
-    Prompt.print_message(@board.display_board)
+    status
   end
 
   def play_turn(player, move)
-    update_board(player, move)
-    update_current_player
+    if valid_move?(move)
+      update_board(player, move)
+      update_current_player
+    else
+        Prompt.print_invalid_move_error
+        sleep 2
+    end
   end
 
   def update_board(player, move)
@@ -50,7 +56,15 @@ class Game
     @board.full? || @board.winner?
   end
 
+  def determine_winner
+    @board.board_grid.count(player1.marker) > @board.board_grid.count(player2.marker) ? player1.marker : player2.marker
+  end
+
+  def valid_move?(input)
+    !@board.spot_taken?(input) && InputValidation.valid_number?(input)
+  end
+
   def status
-    board.full? && !board.winner? ? Prompt.print_tie : Prompt.print_winner
+    board.full? && !board.winner? ? Prompt.print_tie : Prompt.print_winner(determine_winner)
   end
 end

@@ -34,12 +34,8 @@ class Prompt
     print_message(Message.players_move(marker, move))
   end
 
-  def self.print_number_error
-    print_message(Message.number_error)
-  end
-
-  def self.print_spot_taken_error
-    print_message(Message.spot_taken_error)
+  def self.print_invalid_move_error
+    print_message(Message.invalid_move_error)
   end
 
   def get_players_move(marker)

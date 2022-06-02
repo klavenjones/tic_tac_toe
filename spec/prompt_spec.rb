@@ -22,17 +22,12 @@ describe Prompt do
       ).to_stdout
     end
 
-    it 'Should print an error for when a player enters the wrong number.' do
-      expect { Prompt.print_number_error }.to output(
-        Message.number_error
+    it 'Should print an error for when a player makes an invalid move.' do
+      expect { Prompt.print_invalid_move_error }.to output(
+        Message.invalid_move_error
       ).to_stdout
     end
 
-    it 'Should print an error for when a player chooses a spot that is taken.' do
-      expect { Prompt.print_spot_taken_error }.to output(
-        Message.spot_taken_error
-      ).to_stdout
-    end
 
     it 'Should print the current player' do
       marker = 'X'
