@@ -12,13 +12,15 @@ class GameRunner
   end
 
   def initialize_game
-    Prompt.welcome
-    Prompt.print_instruction
     @board = Board.new
-    @player1 = Human.new('X')
-    @player2 = Human.new('O')
+    @prompt = Prompt.new(@board)
+    @player1 = Human.new('X', @prompt)
+    @player2 = Human.new('O', @prompt)
+    
+    @prompt.welcome
+    @prompt.print_instruction
 
-    @game = Game.new(@board, @player1, @player2)
+    @game = Game.new(@board, @prompt, @player1, @player2)
   end
 
   def start_game

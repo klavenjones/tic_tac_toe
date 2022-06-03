@@ -1,7 +1,13 @@
+# frozen_string_literal: true
+
 require 'computer'
+require 'prompt'
+require 'board'
 
 describe Computer do
-  subject(:computer_player) { Computer.new('O') }
+  let(:board) {Board.new}
+  let(:prompt) {Prompt.new(board)}
+  subject(:computer_player) { Computer.new('O', prompt) }
 
   describe 'Computer marker and type' do
     it 'should have O marker for the Computer' do

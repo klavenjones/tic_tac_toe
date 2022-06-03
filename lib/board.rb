@@ -34,7 +34,7 @@ class Board
 
   def spaces_available
     spaces = []
-    @board_grid.each { |space| spaces.push(space) unless space == "X" || space == "O" }
+    @board_grid.each { |space| spaces.push(space) unless %w[X O].include?(space) }
     spaces
   end
 

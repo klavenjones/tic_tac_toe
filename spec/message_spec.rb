@@ -33,6 +33,14 @@ describe Message do
     end
   end
 
+  describe '#players_move' do
+    it 'should return the computer\'s move' do
+      expect(Message.computers_move('X', 9)).to eq(
+        "\nComputer player X chose the spot labeled: 9\n"
+      )
+    end
+  end
+
   describe '#invalid_move_error' do
     it 'should return an error message when a player enters the wrong number' do
       expect(Message.invalid_move_error).to eq(

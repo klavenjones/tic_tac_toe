@@ -7,8 +7,9 @@ require 'board'
 class Game
   attr_reader :board, :prompt, :player1, :player2, :current_player, :winning_player
 
-  def initialize(board, player1, player2)
+  def initialize(board, prompt, player1, player2)
     @board = board
+    @prompt = prompt
     @player1 = player1
     @player2 = player2
     @current_player = player1
@@ -16,16 +17,16 @@ class Game
   end
 
   def start_game
-    Prompt.print_message(@board.display_board)
+    @prompt.print_message(@board.display_board)
     turn
   end
 
   def turn
     until game_over?
-      Prompt.print_current_player(@current_player.marker)
-      Prompt.print_instruction
+      @prompt.print_current_player(@current_player.marker)
+      @prompt.print_instruction
       play_turn(@current_player, @current_player.get_move)
-      Prompt.print_message(@board.display_board)
+      @prompt.print_message(@board.display_board)
     end
 
     status
@@ -37,7 +38,7 @@ class Game
       set_winning_player(player) if @board.winner?
       update_current_player
     else
-        Prompt.print_invalid_move_error
+      @prompt.print_invalid_move_error
     end
   end
 
@@ -66,6 +67,6 @@ class Game
   end
 
   def status
-    board.full? && !board.winner? ? Prompt.print_tie : Prompt.print_winner(@winning_player.marker)
+    board.full? && !board.winner? ? @prompt.print_tie : @prompt.print_winner(@winning_player.marker)
   end
 end

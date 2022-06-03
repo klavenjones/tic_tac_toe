@@ -1,3 +1,4 @@
 {
-  "singleQuotes": true
+  "singleQuote": true,
+  "formatOnSave": true
 }

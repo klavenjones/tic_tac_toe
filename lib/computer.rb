@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 require 'player'
 require 'prompt'
+
 
 class Computer < Player
   attr_accessor :marker, :type
 
-  def initialize(marker)
+  def initialize(marker, prompt)
     super(marker, 'Computer')
-    @prompt = Prompt.new
+    @prompt = prompt
   end
 
   def get_move

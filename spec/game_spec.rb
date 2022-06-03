@@ -7,16 +7,15 @@ require 'prompt'
 require 'message'
 
 describe Game do
-  let(:player1) { Human.new('X') }
-  let(:player2) { Human.new('O') }
   let(:board) { Board.new }
-  subject(:game) { Game.new(board, player1, player2) }
-
-  
+  let(:player1) { Human.new('X', board) }
+  let(:player2) { Human.new('O', board) }
+  let(:prompt) {Prompt.new(board)}
+  subject(:game) { Game.new(board, prompt, player1, player2) }
 
   describe '#start_game' do
     it 'should display tic tac toe board' do
-      expect { Prompt.print_board }.to output(board.display_board).to_stdout
+      expect { prompt.print_board }.to output(board.display_board).to_stdout
     end
   end
 
@@ -44,8 +43,8 @@ describe Game do
 
   describe '#status' do
     it 'should print a message when there is a tie' do
-      board.board_grid = %w[X O X 4 O X O O X]
-      expect { game.status }.to output(Prompt.print_tie).to_stdout
+      board.board_grid = %w[O O X X X O O O X]
+      expect { game.status }.to output("\n\nThe game has ended in a tie.\n\n").to_stdout
     end
   end
 
@@ -64,6 +63,4 @@ describe Game do
       expect(game.game_over?).to eq(true)
     end
   end
-
-
 end

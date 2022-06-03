@@ -23,6 +23,10 @@ class Message
     "\nPlayer #{marker} chose the spot labeled: #{move}\n"
   end
 
+  def self.computers_move(marker, move)
+    "\nComputer player #{marker} chose the spot labeled: #{move}\n"
+  end
+
   def self.tie
     "\n\nThe game has ended in a tie.\n\n"
   end
