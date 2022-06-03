@@ -6,7 +6,7 @@ require 'board'
 
 describe Prompt do
   let(:board) { Board.new }
-  subject(:prompt) {described_class.new(board)}
+  subject(:prompt) { described_class.new(board) }
 
   describe '#welcome' do
     it 'should Print the welcome message' do
@@ -81,8 +81,6 @@ describe Prompt do
       expect(prompt.get_computers_move('X')).to eq(2)
     end
   end
-
- 
 
   describe '#print_message' do
     it 'should print any text supplied' do

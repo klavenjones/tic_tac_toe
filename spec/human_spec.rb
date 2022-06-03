@@ -5,10 +5,9 @@ require 'prompt'
 require 'board'
 
 describe Human do
-  let(:board) {Board.new}
-  let(:prompt) {Prompt.new(board)}  
+  let(:board) { Board.new }
+  let(:prompt) { Prompt.new(board) }
   subject(:human_player) { Human.new('O', board) }
-
 
   describe 'human marker and type' do
     it 'should have O marker for the human' do

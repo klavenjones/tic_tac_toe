@@ -3,7 +3,6 @@
 require 'player'
 require 'prompt'
 
-
 class Computer < Player
   attr_accessor :marker, :type
 

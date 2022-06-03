@@ -10,7 +10,7 @@ describe Game do
   let(:board) { Board.new }
   let(:player1) { Human.new('X', board) }
   let(:player2) { Human.new('O', board) }
-  let(:prompt) {Prompt.new(board)}
+  let(:prompt) { Prompt.new(board) }
   subject(:game) { Game.new(board, prompt, player1, player2) }
 
   describe '#start_game' do

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'human'
+require 'computer'
 require 'prompt'
 require 'game'
 require 'board'
@@ -15,8 +16,8 @@ class GameRunner
     @board = Board.new
     @prompt = Prompt.new(@board)
     @player1 = Human.new('X', @prompt)
-    @player2 = Human.new('O', @prompt)
-    
+    @player2 = Computer.new('O', @prompt)
+
     @prompt.welcome
     @prompt.print_instruction
 

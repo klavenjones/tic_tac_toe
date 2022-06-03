@@ -5,8 +5,8 @@ require 'prompt'
 require 'board'
 
 describe Computer do
-  let(:board) {Board.new}
-  let(:prompt) {Prompt.new(board)}
+  let(:board) { Board.new }
+  let(:prompt) { Prompt.new(board) }
   subject(:computer_player) { Computer.new('O', prompt) }
 
   describe 'Computer marker and type' do

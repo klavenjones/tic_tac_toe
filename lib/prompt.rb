@@ -5,11 +5,10 @@ require 'board'
 
 class Prompt
   attr_accessor :board
-    
+
   def initialize(board)
     @board = board
   end
-
 
   def welcome
     print_message(Message.welcome)
