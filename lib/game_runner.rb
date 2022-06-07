@@ -21,7 +21,6 @@ class GameRunner
     @prompt.welcome
     @prompt.print_instruction
 
-
     @game = Game.new(@board, @prompt, @player1, @player2)
   end
 

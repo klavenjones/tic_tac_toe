@@ -84,7 +84,6 @@ describe Board do
       expect(board.spaces_available).to eq([])
     end
   end
-  
 end
 
 ## Utility Methods
