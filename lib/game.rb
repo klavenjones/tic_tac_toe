@@ -1,37 +1,45 @@
 # frozen_string_literal: true
 
 require 'prompt'
+require 'input_validation'
 require 'board'
 
 class Game
-  attr_reader :board, :prompt, :player1, :player2
+  attr_reader :board, :prompt, :player1, :player2, :current_player, :winning_player
 
-  def initialize(board, player1, player2)
+  def initialize(board, prompt, player1, player2)
     @board = board
+    @prompt = prompt
     @player1 = player1
     @player2 = player2
     @current_player = player1
+    @winning_player = player1
   end
 
   def start_game
-    Prompt.print_message(@board.display_board)
+    @prompt.print_message(@board.display_board)
     turn
   end
 
   def turn
     until game_over?
-      Prompt.print_current_player(@current_player.marker)
-      Prompt.print_instruction
+      @prompt.print_current_player(@current_player.marker)
+      @prompt.print_instruction
       play_turn(@current_player, @current_player.get_move)
-      Prompt.print_message(@board.display_board)
+      @prompt.print_message(@board.display_board)
     end
 
-    Prompt.print_message(@board.display_board)
+    status
   end
 
   def play_turn(player, move)
-    update_board(player, move)
-    update_current_player
+    if valid_move?(move)
+      update_board(player, move)
+      set_winning_player(player) if @board.winner?
+      update_current_player
+    else
+      @prompt.print_invalid_move_error
+    end
   end
 
   def update_board(player, move)
@@ -48,5 +56,17 @@ class Game
 
   def game_over?
     @board.full? || @board.winner?
+  end
+
+  def set_winning_player(winning_player)
+    @winning_player = winning_player
+  end
+
+  def valid_move?(input)
+    !@board.spot_taken?(input) && InputValidation.valid_number?(input)
+  end
+
+  def status
+    board.full? && !board.winner? ? @prompt.print_tie : @prompt.print_winner(@winning_player.marker)
   end
 end

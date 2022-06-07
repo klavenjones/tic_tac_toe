@@ -3,15 +3,15 @@
 require 'player'
 require 'prompt'
 
-class Human < Player
+class Computer < Player
   attr_accessor :marker, :type
 
   def initialize(marker, prompt)
-    super(marker, 'Human')
+    super(marker, 'Computer')
     @prompt = prompt
   end
 
   def get_move
-    @prompt.get_players_move(@marker)
+    @prompt.get_computers_move(@marker)
   end
 end

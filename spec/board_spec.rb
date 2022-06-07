@@ -60,6 +60,30 @@ describe Board do
       expect(board.winner?).to eq(true)
     end
   end
+
+  describe '#spot_taken?' do
+    it 'should return true if the space is taken' do
+      board.board_grid = '%w[X 2 3 4 5 6 7 8 9]'
+      expect(board.spot_taken?(1)).to eq(true)
+    end
+
+    it 'should return false if the space is available' do
+      board.board_grid = '%w[1 2 3 4 5 6 7 8 9]'
+      expect(board.spot_taken?(1)).to eq(false)
+    end
+  end
+
+  describe '#spaces_available' do
+    it 'should return an array of available spaces on the board, when the first spot is taken' do
+      board.mark_board('X', 1)
+      expect(board.spaces_available).to eq(%w[2 3 4 5 6 7 8 9])
+    end
+
+    it 'should return an empty array when there are no spots left' do
+      board.board_grid = %w[X O X O X O X O]
+      expect(board.spaces_available).to eq([])
+    end
+  end
 end
 
 ## Utility Methods

@@ -12,7 +12,7 @@ class Message
   end
 
   def self.winner(player)
-    "\n\nPlayer #{player} is the winner."
+    "\n\nPlayer #{player} is the winner.\n\n"
   end
 
   def self.current_player(marker)
@@ -23,8 +23,16 @@ class Message
     "\nPlayer #{marker} chose the spot labeled: #{move}\n"
   end
 
+  def self.computers_move(marker, move)
+    "\nComputer player #{marker} chose the spot labeled: #{move}\n"
+  end
+
   def self.tie
-    'The game has ended in a tie.'
+    "\n\nThe game has ended in a tie.\n\n"
+  end
+
+  def self.invalid_move_error
+    "\nThat was an invalid move, please enter a number in the range of 1-9\n"
   end
 
   def self.exit
