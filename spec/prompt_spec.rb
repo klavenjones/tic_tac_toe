@@ -50,6 +50,7 @@ describe Prompt do
       expect { prompt.print_tie }.to output(Message.tie).to_stdout
     end
   end
+
   describe '#print_winner' do
     it 'should print the winner of the game' do
       marker = 'X'
@@ -60,31 +61,27 @@ describe Prompt do
   end
 
   describe '#print_players_move' do
-    it 'should print the current player\'s recent move' do
+    it 'should print the player\'s recent move' do
       marker = 'X'
       expect { prompt.print_players_move(marker, 9) }.to output(
-        "\nPlayer X chose the spot labeled: 9\n"
+        Message.players_move(marker, 9)
       ).to_stdout
     end
   end
 
   describe '#get_players_move' do
-    it 'should receive the current player\'s move ' do
+    it 'should receive the player\'s move ' do
       allow(prompt).to receive(:gets).and_return('9')
       expect(prompt.get_players_move('X')).to eq(9)
     end
   end
 
   describe '#get_computers_move' do
-    it 'should receive the current player\'s move ' do
+    it 'should receive the computer player\'s move ' do
       board.board_grid = %w[X 2 3 4 5 6 7 8 9]
       expect(prompt.get_computers_move('X')).to eq(2)
     end
   end
 
-  describe '#print_message' do
-    it 'should print any text supplied' do
-      expect { prompt.print_message('test') }.to output('test').to_stdout
-    end
-  end
+
 end

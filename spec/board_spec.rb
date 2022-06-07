@@ -80,22 +80,11 @@ describe Board do
     end
 
     it 'should return an empty array when there are no spots left' do
-      dummy_game
+      board.board_grid = %w[X O X O X O X O]
       expect(board.spaces_available).to eq([])
     end
   end
-
-  def dummy_game
-    board.mark_board('X', 1)
-    board.mark_board('X', 2)
-    board.mark_board('X', 3)
-    board.mark_board('X', 4)
-    board.mark_board('X', 5)
-    board.mark_board('X', 6)
-    board.mark_board('X', 7)
-    board.mark_board('X', 8)
-    board.mark_board('X', 9)
-  end
+  
 end
 
 ## Utility Methods

@@ -46,6 +46,11 @@ describe Game do
       board.board_grid = %w[O O X X X O O O X]
       expect { game.status }.to output("\n\nThe game has ended in a tie.\n\n").to_stdout
     end
+
+    it 'should print a message when there is a winner' do
+      board.board_grid = %w[X X X O 4 5 O O]
+      expect { game.status }.to output("\n\nPlayer X is the winner.\n\n").to_stdout
+    end
   end
 
   describe '#game_over?' do

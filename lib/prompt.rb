@@ -20,6 +20,7 @@ class Prompt
 
   def print_board
     print_message(@board.display_board)
+    sleep 2
   end
 
   def print_tie
@@ -49,7 +50,6 @@ class Prompt
   def get_players_move(marker)
     player_move = gets.chomp.to_i
     print_players_move(marker, player_move)
-    sleep 1.5
     player_move
   end
 

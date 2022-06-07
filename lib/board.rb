@@ -43,12 +43,12 @@ class Board
   end
 
   def full?
-    taken_spaces >= 9
+    taken_spaces >= @board_grid.length
   end
 
   def winner?
     winning_moves = []
-    WINNING_COMBOS.all? do |winning_game|
+    WINNING_COMBOS.each do |winning_game|
       first_space_eq_second_space = @board_grid[winning_game[0]] == @board_grid[winning_game[1]]
       second_space_eq_third_space = @board_grid[winning_game[1]] == @board_grid[winning_game[2]]
       winning_moves.push(first_space_eq_second_space && second_space_eq_third_space ? true : false)
