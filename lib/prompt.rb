@@ -4,7 +4,7 @@ require 'message'
 require 'board'
 
 class Prompt
-  attr_accessor :board
+  attr_accessor :board, :custom_marker
 
   def initialize(board)
     @board = board
@@ -14,12 +14,20 @@ class Prompt
     print_message(Message.welcome)
   end
 
+  def print_ask_for_custom_marker
+    print_message(Message.ask_for_custom_marker)
+  end
+
+  def print_player_custom_marker_choice(player, marker)
+    print_message(Message.player_custom_marker_choice(player, marker))
+  end
+
   def print_instruction
     print_message(Message.instruction)
   end
 
   def print_board
-    print_message(@board.display_board)
+    print_message(Message.display_board(@board.board_grid))
     sleep 2
   end
 
@@ -45,6 +53,11 @@ class Prompt
 
   def print_invalid_move_error
     print_message(Message.invalid_move_error)
+  end
+
+  def get_custom_marker
+    @custom_marker = gets.chomp.upcase
+    custom_marker
   end
 
   def get_players_move(marker)

@@ -18,10 +18,6 @@ class Board
     [2, 4, 6]
   ].freeze
 
-  def display_board
-    "\n #{@board_grid[0]} | #{@board_grid[1]} | #{@board_grid[2]} \n---|---|---\n #{@board_grid[3]} | #{@board_grid[4]} | #{@board_grid[5]}  \n---|---|---\n #{@board_grid[6]} | #{@board_grid[7]} | #{@board_grid[8]} \n\n\n"
-  end
-
   def mark_board(player, move)
     @board_grid[move - 1] = player
   end

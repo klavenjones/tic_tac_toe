@@ -14,9 +14,23 @@ describe Prompt do
     end
   end
 
+  describe '#print_ask_for_custom_marker' do
+    it 'should print the instruction to choose custom marker message' do
+      expect { prompt.print_ask_for_custom_marker }.to output(Message.ask_for_custom_marker).to_stdout
+    end
+  end
+
+  describe '#print_player_custom_marker_choice' do
+    it 'should print the choice the player made after choosing a marker' do
+      player = 1
+      marker = "R"
+      expect { prompt.print_player_custom_marker_choice(player, marker) }.to output(Message.player_custom_marker_choice(player, marker)).to_stdout
+    end
+  end
+
   describe '#print_board' do
     it 'should Print the tic tac toe board' do
-      expect { prompt.print_board }.to output(board.display_board).to_stdout
+      expect { prompt.print_board }.to output(Message.display_board(board.board_grid)).to_stdout
     end
   end
 
@@ -66,6 +80,13 @@ describe Prompt do
       expect { prompt.print_players_move(marker, 9) }.to output(
         Message.players_move(marker, 9)
       ).to_stdout
+    end
+  end
+
+  describe '#get_custom_marker' do
+    it 'should receive and return player\'s custom marker choice' do
+      allow(prompt).to receive(:gets).and_return('a')
+      expect(prompt.get_custom_marker).to eq('A')
     end
   end
 
