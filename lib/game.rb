@@ -17,7 +17,7 @@ class Game
   end
 
   def start_game
-    @prompt.print_message(@board.display_board)
+    @prompt.print_board
     turn
   end
 
@@ -26,7 +26,7 @@ class Game
       @prompt.print_current_player(@current_player.marker)
       @prompt.print_instruction
       play_turn(@current_player, @current_player.get_move)
-      @prompt.print_message(@board.display_board)
+      @prompt.print_board
     end
 
     status

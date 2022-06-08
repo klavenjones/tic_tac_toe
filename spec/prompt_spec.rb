@@ -20,6 +20,16 @@ describe Prompt do
     end
   end
 
+  describe '#print_player_custom_marker' do
+    it 'should print the prompt message for player 1 to choose a custom marker' do
+      expect { prompt.print_player_custom_marker(1) }.to output(Message.player_custom_marker(1)).to_stdout
+    end
+
+    it 'should print the prompt message for player 2 to choose a custom marker' do
+      expect { prompt.print_player_custom_marker(2) }.to output(Message.player_custom_marker(2)).to_stdout
+    end
+  end
+
   describe '#print_player_custom_marker_choice' do
     it 'should print the choice the player made after choosing a marker' do
       player = 1

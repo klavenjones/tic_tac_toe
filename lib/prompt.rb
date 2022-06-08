@@ -18,6 +18,10 @@ class Prompt
     print_message(Message.ask_for_custom_marker)
   end
 
+  def print_player_custom_marker(player)
+    print_message(Message.player_custom_marker(player))
+  end
+
   def print_player_custom_marker_choice(player, marker)
     print_message(Message.player_custom_marker_choice(player, marker))
   end
@@ -28,7 +32,6 @@ class Prompt
 
   def print_board
     print_message(Message.display_board(@board.board_grid))
-    sleep 2
   end
 
   def print_tie
@@ -56,7 +59,7 @@ class Prompt
   end
 
   def get_custom_marker
-    @custom_marker = gets.chomp.upcase
+    @custom_marker = gets.chomp.upcase!
     custom_marker
   end
 
