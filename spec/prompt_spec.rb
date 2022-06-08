@@ -33,7 +33,7 @@ describe Prompt do
   describe '#print_player_custom_marker_choice' do
     it 'should print the choice the player made after choosing a marker' do
       player = 1
-      marker = "R"
+      marker = 'R'
       expect { prompt.print_player_custom_marker_choice(player, marker) }.to output(Message.player_custom_marker_choice(player, marker)).to_stdout
     end
   end

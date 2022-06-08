@@ -7,7 +7,6 @@ describe Board do
   subject(:board) { described_class.new }
   let(:prompt) { Prompt.new(board) }
 
-
   describe '#mark_board' do
     it 'should verify that the player marked position number one (Top left corner)' do
       verify_position_one('X')
@@ -87,7 +86,7 @@ def verify_position_one(marker)
   prompt = Prompt.new(board)
   board.mark_board(marker, 1)
 
-  expect{ prompt.print_board }.to output(
+  expect { prompt.print_board }.to output(
     "\n #{marker} | 2 | 3 \n---|---|---\n 4 | 5 | 6  \n---|---|---\n 7 | 8 | 9 \n\n\n"
   ).to_stdout
 end
@@ -96,7 +95,7 @@ def verify_position_nine(marker)
   board = Board.new
   prompt = Prompt.new(board)
   board.mark_board(marker, 9)
-  expect{prompt.print_board}.to output(
+  expect { prompt.print_board }.to output(
     "\n 1 | 2 | 3 \n---|---|---\n 4 | 5 | 6  \n---|---|---\n 7 | 8 | #{marker} \n\n\n"
   ).to_stdout
 end

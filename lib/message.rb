@@ -19,11 +19,11 @@ class Message
     "\n\nPlease choose a custom marker to identify yourself on the board. ex. A, B, C\n\n"
   end
 
-  def self.player_custom_marker(player) 
+  def self.player_custom_marker(player)
     "\n\nPlayer #{player}: please choose your custom marker.\n\n"
   end
 
-  def self.player_custom_marker_choice(player, marker) 
+  def self.player_custom_marker_choice(player, marker)
     "\n\nPlayer #{player} your marker choice is: #{marker}.\n\n"
   end
 

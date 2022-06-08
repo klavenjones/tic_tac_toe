@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class InputValidation
-
   VALID_MARKER_LENGTH = 1
 
   def self.valid_number?(num)
@@ -13,7 +12,7 @@ class InputValidation
   end
 
   def self.valid_marker?(marker)
-    self.single_char?(marker) && !self.valid_number?(marker)
+    single_char?(marker) && !valid_number?(marker)
   end
 
   def self.valid_custom_markers?(marker1, marker2)
@@ -23,5 +22,4 @@ class InputValidation
   def self.marker_taken?(marker1, marker2)
     marker1 == marker2
   end
-
 end

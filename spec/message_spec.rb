@@ -17,10 +17,9 @@ describe Message do
     end
   end
 
-
   describe '#ask_for_custom_marker' do
     it 'should return instructions for a player to choose a custom marker' do
-      expect(Message.ask_for_custom_marker).to eq( "\n\nPlease choose a custom marker to identify yourself on the board. ex. A, B, C\n\n")
+      expect(Message.ask_for_custom_marker).to eq("\n\nPlease choose a custom marker to identify yourself on the board. ex. A, B, C\n\n")
     end
   end
 
@@ -32,7 +31,7 @@ describe Message do
 
   describe '#player_custom_marker_choice' do
     it 'should print the choice of the custom marker from a player' do
-      expect(Message.player_custom_marker_choice(1, "A")).to eq("\n\nPlayer 1 your marker choice is: A.\n\n")
+      expect(Message.player_custom_marker_choice(1, 'A')).to eq("\n\nPlayer 1 your marker choice is: A.\n\n")
     end
   end
 
