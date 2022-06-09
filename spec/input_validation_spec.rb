@@ -50,7 +50,8 @@ describe InputValidation do
   end
 
   describe '#marker_taken?' do
-    it 'should return true if custom marker1 is equal to marker2' do
+    it 'should return true if player 1 custom marker is the same as player 2 custom marker2
+  ' do
       expect(InputValidation.marker_taken?('A', 'A')).to eq(true)
     end
 

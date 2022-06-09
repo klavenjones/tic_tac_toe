@@ -2,6 +2,7 @@
 
 require 'message'
 require 'board'
+require 'input_validation'
 
 class Prompt
   attr_accessor :board, :custom_marker
@@ -58,10 +59,19 @@ class Prompt
     print_message(Message.invalid_move_error)
   end
 
-  def get_custom_marker
-    @custom_marker = gets.chomp.upcase!
-    custom_marker
+  def print_invalid_marker_error
+    print_message(Message.invalid_marker_error)
   end
+
+  def get_custom_marker
+    @custom_marker = gets.chomp
+    until InputValidation.valid_marker?(custom_marker)
+      print_invalid_marker_error 
+      @custom_marker = gets.chomp
+    end
+    custom_marker.upcase!
+  end
+
 
   def get_players_move(marker)
     player_move = gets.chomp.to_i

@@ -67,6 +67,14 @@ describe Message do
     end
   end
 
+  describe '#invalid_marker_error' do
+    it 'should return an error message when a player enters the marker' do
+      expect(Message.invalid_marker_error).to eq(
+        "\nThat is an invalid marker, please enter any letter from A to Z\n"
+      )
+    end
+  end
+
   describe '#winner' do
     it 'should return the correct message when player X is the winner' do
       expect(Message.winner('X')).to eq("\n\nPlayer X is the winner.\n\n")

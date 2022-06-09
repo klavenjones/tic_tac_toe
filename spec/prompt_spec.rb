@@ -60,6 +60,14 @@ describe Prompt do
     end
   end
 
+  describe '#print_invalid_move_error' do
+    it 'should print an error for when a player chooses an invalid marker' do
+      expect { prompt.print_invalid_marker_error }.to output(
+        Message.invalid_marker_error
+      ).to_stdout
+    end
+  end
+
   describe '#print_current_player' do
     it 'should print the current player' do
       marker = 'X'

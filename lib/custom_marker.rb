@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'input_validation'
 
 class CustomMarker
   attr_accessor :player1, :player2, :player1_marker_choice, :player2_marker_choice

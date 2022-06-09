@@ -51,6 +51,10 @@ class Message
     "\nThat was an invalid move, please enter a number in the range of 1-9\n"
   end
 
+  def self.invalid_marker_error
+    "\nThat is an invalid marker, please enter any letter from A to Z\n"
+  end
+
   def self.exit
     'Thanks for playing Tic Tac Toe!'
   end
