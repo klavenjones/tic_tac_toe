@@ -6,7 +6,7 @@ require 'prompt'
 class Computer < Player
   attr_accessor :marker, :type, :prompt
 
-  def initialize(marker = "X")
+  def initialize(marker = 'X')
     super(marker, 'Computer')
     @prompt = prompt
   end
