@@ -17,9 +17,9 @@ class GameRunner
 
     @prompt.welcome
     @prompt.print_ask_for_custom_marker
-    
-    player1_marker = get_player_marker(1) 
-    player2_marker = get_player_marker(2) 
+
+    player1_marker = get_player_marker(1)
+    player2_marker = get_player_marker(2)
 
     @player1 = build_player(@prompt, player1_marker)
     @player2 = build_player(@prompt, player2_marker)
@@ -40,7 +40,6 @@ class GameRunner
     @prompt.print_player_custom_marker_choice(player, player_choice)
     player_choice
   end
-
 
   def start_game
     @game.start_game
