@@ -66,12 +66,11 @@ class Prompt
   def get_custom_marker
     @custom_marker = gets.chomp
     until InputValidation.valid_marker?(custom_marker)
-      print_invalid_marker_error 
+      print_invalid_marker_error
       @custom_marker = gets.chomp
     end
     custom_marker.upcase!
   end
-
 
   def get_players_move(marker)
     player_move = gets.chomp.to_i

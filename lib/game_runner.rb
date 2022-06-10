@@ -25,7 +25,6 @@ class GameRunner
     @custom_marker = CustomMarker.new(@prompt, @player1, @player2)
     @custom_marker.choose_custom_marker
 
-
     @game = Game.new(@board, @prompt, @player1, @player2)
   end
 

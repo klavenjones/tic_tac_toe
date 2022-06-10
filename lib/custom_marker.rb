@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'input_validation'
 
 class CustomMarker
