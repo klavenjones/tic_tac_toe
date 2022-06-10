@@ -4,9 +4,9 @@ require 'player'
 require 'prompt'
 
 class Human < Player
-  attr_accessor :marker, :type
+  attr_accessor :marker, :type, :prompt
 
-  def initialize(marker, prompt)
+  def initialize(marker = 'X')
     super(marker, 'Human')
     @prompt = prompt
   end
