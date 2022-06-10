@@ -4,7 +4,6 @@ require 'player_builder'
 require 'prompt'
 require 'game'
 require 'board'
-require 'custom_marker'
 
 class GameRunner
   def begin_session
