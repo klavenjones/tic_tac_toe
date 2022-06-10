@@ -7,7 +7,6 @@ require 'prompt'
 require 'message'
 
 describe Game do
-
   before(:each) do
     @board = Board.new
     @prompt = Prompt.new(@board)
@@ -75,8 +74,6 @@ describe Game do
       expect(@game.game_over?).to eq(true)
     end
   end
-
-  
 end
 
 # Utility Method

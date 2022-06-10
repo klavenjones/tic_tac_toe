@@ -4,14 +4,13 @@ require 'player_builder'
 require 'prompt'
 require 'board'
 
-
 describe Computer do
   before(:each) do
     @board = Board.new
     @prompt = Prompt.new(@board)
-    builder = PlayerBuilder.new("Computer")
+    builder = PlayerBuilder.new('Computer')
     builder.set_player_prompt(@prompt)
-    builder.set_player_marker("O")
+    builder.set_player_marker('O')
     @computer_player = builder.player
   end
 

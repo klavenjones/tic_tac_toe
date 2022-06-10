@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'player_builder'
 require 'prompt'
 require 'board'
@@ -9,7 +10,7 @@ describe Human do
     @prompt = Prompt.new(@board)
     builder = PlayerBuilder.new
     builder.set_player_prompt(@prompt)
-    builder.set_player_marker("O")
+    builder.set_player_marker('O')
     @human_player = builder.player
   end
 
