@@ -15,7 +15,9 @@ describe Game do
 
   describe '#start_game' do
     it 'should display tic tac toe board' do
-      expect { prompt.print_board }.to output(board.display_board).to_stdout
+      expect { prompt.print_board }.to output(
+        Message.display_board(board.board_grid)
+      ).to_stdout
     end
   end
 

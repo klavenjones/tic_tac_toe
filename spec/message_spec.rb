@@ -17,6 +17,24 @@ describe Message do
     end
   end
 
+  describe '#ask_for_custom_marker' do
+    it 'should return instructions for a player to choose a custom marker' do
+      expect(Message.ask_for_custom_marker).to eq("\n\nPlease choose a custom marker to identify yourself on the board. ex. A, B, C\n\n")
+    end
+  end
+
+  describe '#player_custom_marker' do
+    it 'should print a prompt for the current player to make a choice for their custom marker' do
+      expect(Message.player_custom_marker(1)).to eq("\n\nPlayer 1: please choose your custom marker.\n\n")
+    end
+  end
+
+  describe '#player_custom_marker_choice' do
+    it 'should print the choice of the custom marker from a player' do
+      expect(Message.player_custom_marker_choice(1, 'A')).to eq("\n\nPlayer 1 your marker choice is: A.\n\n")
+    end
+  end
+
   describe '#current_player' do
     it 'should return a prompt to the current player' do
       expect(Message.current_player('X')).to eq(
@@ -45,6 +63,14 @@ describe Message do
     it 'should return an error message when a player enters the wrong number' do
       expect(Message.invalid_move_error).to eq(
         "\nThat was an invalid move, please enter a number in the range of 1-9\n"
+      )
+    end
+  end
+
+  describe '#invalid_marker_error' do
+    it 'should return an error message when a player enters the marker' do
+      expect(Message.invalid_marker_error).to eq(
+        "\nThat is an invalid marker, please enter any letter from A to Z\n"
       )
     end
   end
