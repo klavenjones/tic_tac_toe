@@ -75,6 +75,14 @@ describe Message do
     end
   end
 
+  describe '#duplicate_marker_error' do
+    it 'should return an error message when a player 2 enters the same marker as player 1' do
+      expect(Message.duplicate_marker_error).to eq(
+        "\nPlayer one has chosen this marker already. Please select a marker that is unique.\n"
+      )
+    end
+  end
+
   describe '#winner' do
     it 'should return the correct message when player X is the winner' do
       expect(Message.winner('X')).to eq("\n\nPlayer X is the winner.\n\n")

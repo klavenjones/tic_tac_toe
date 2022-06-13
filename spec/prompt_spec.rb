@@ -60,10 +60,18 @@ describe Prompt do
     end
   end
 
-  describe '#print_invalid_move_error' do
+  describe '#print_invalid_marker_error' do
     it 'should print an error for when a player chooses an invalid marker' do
       expect { prompt.print_invalid_marker_error }.to output(
         Message.invalid_marker_error
+      ).to_stdout
+    end
+  end
+
+  describe '#print_duplicate_marker_error' do
+    it 'should print an error for when a player chooses a duplicate marker' do
+      expect { prompt.print_duplicate_marker_error }.to output(
+        Message.duplicate_marker_error
       ).to_stdout
     end
   end

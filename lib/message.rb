@@ -55,6 +55,10 @@ class Message
     "\nThat is an invalid marker, please enter any letter from A to Z\n"
   end
 
+  def self.duplicate_marker_error
+    "\nPlayer one has chosen this marker already. Please select a marker that is unique.\n"
+  end
+
   def self.exit
     'Thanks for playing Tic Tac Toe!'
   end
