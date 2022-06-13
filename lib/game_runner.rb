@@ -15,8 +15,14 @@ class GameRunner
     @board = Board.new
     @prompt = Prompt.new(@board)
 
-    @player1 = build_player(@prompt, 'X')
-    @player2 = build_player(@prompt, 'O')
+    @prompt.welcome
+    @prompt.print_ask_for_custom_marker
+
+    player1_marker = get_player_marker(1)
+    player2_marker = get_player_marker(2)
+
+    @player1 = build_player(@prompt, player1_marker)
+    @player2 = build_player(@prompt, player2_marker)
 
     @game = Game.new(@board, @prompt, @player1, @player2)
   end
@@ -26,6 +32,13 @@ class GameRunner
     builder.set_player_prompt(prompt)
     builder.set_player_marker(marker)
     builder.player
+  end
+
+  def get_player_marker(player)
+    @prompt.print_player_custom_marker(player)
+    player_choice = @prompt.get_custom_marker
+    @prompt.print_player_custom_marker_choice(player, player_choice)
+    player_choice
   end
 
   def start_game
