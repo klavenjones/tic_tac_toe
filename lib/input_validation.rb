@@ -15,10 +15,6 @@ class InputValidation
     single_char?(marker) && !valid_number?(marker)
   end
 
-  def self.valid_custom_markers?(marker1, marker2)
-    valid_marker?(marker2) && !marker_taken?(marker1, marker2)
-  end
-
   def self.marker_taken?(marker1, marker2)
     marker1 == marker2
   end

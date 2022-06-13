@@ -85,6 +85,14 @@ class Prompt
     computer_move
   end
 
+  def validate_unique_markers?(marker1, marker2)
+    while InputValidation.marker_taken?(marker1, marker2)
+      print_invalid_marker_error
+      marker2 = get_custom_marker
+    end
+    marker2
+  end
+
   def print_message(msg)
     print msg
   end
