@@ -4,6 +4,7 @@ require 'prompt'
 require 'message'
 require 'board'
 
+# rubocop:disable Metrics/BlockLength
 describe Prompt do
   let(:board) { Board.new }
   subject(:prompt) { described_class.new(board) }
@@ -130,3 +131,4 @@ describe Prompt do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
