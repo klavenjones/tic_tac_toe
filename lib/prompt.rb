@@ -19,6 +19,10 @@ class Prompt
     print_message(Message.ask_for_custom_marker)
   end
 
+  def print_game_mode_prompt
+    print_message(Message.game_mode_prompt)
+  end
+
   def print_player_custom_marker(player)
     print_message(Message.player_custom_marker(player))
   end
@@ -80,6 +84,11 @@ class Prompt
     player_move = gets.chomp.to_i
     print_players_move(marker, player_move)
     player_move
+  end
+
+  def get_game_mode
+    mode_choice = gets.chomp.to_i
+    mode_choice
   end
 
   def get_computers_move(marker)

@@ -35,6 +35,15 @@ describe Message do
     end
   end
 
+  describe '#player_game_mode_choice' do
+    it 'should print the game mode choice if Computer vs Human was selected' do
+      expect(Message.player_game_mode_choice(2)).to eq("\n\nYou have chosen play game mode 2: Computer vs. Human.\n\n")
+    end
+    it 'should print the game mode choice if Human vs Human was selected' do
+      expect(Message.player_game_mode_choice(1)).to eq("\n\nYou have chosen play game mode 1: Human vs. Human.\n\n")
+    end
+  end
+
   describe '#current_player' do
     it 'should return a prompt to the current player' do
       expect(Message.current_player('X')).to eq(
@@ -96,6 +105,13 @@ describe Message do
   describe '#tie' do
     it 'should return that the game ended in a tie' do
       expect(Message.tie).to eq("\n\nThe game has ended in a tie.\n\n")
+    end
+  end
+
+
+  describe '#game_mode_prompt'do
+    it 'should return a message that asks the user to choose a game mode' do
+      expect(Message.game_mode_prompt).to eq("\n\nPlease select the game mode you would like to play (Select 1 or 2): \n1. Human vs. Human\n2. Computer vs. Human\n\n")
     end
   end
 

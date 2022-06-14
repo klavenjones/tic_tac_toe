@@ -110,6 +110,14 @@ describe Prompt do
     end
   end
 
+  describe '#print_game_mode_prompt' do
+    it 'Should print a message that asks the user to choose a game mode' do
+     expect { prompt.print_game_mode_prompt }.to output(
+        Message.game_mode_prompt
+      ).to_stdout
+    end
+  end
+
   describe '#get_custom_marker' do
     it 'should receive and return player\'s custom marker choice' do
       allow(prompt).to receive(:gets).and_return('a')
@@ -121,6 +129,13 @@ describe Prompt do
     it 'should receive the player\'s move ' do
       allow(prompt).to receive(:gets).and_return('9')
       expect(prompt.get_players_move('X')).to eq(9)
+    end
+  end
+
+  describe '#get_game_mode' do
+    it 'should receive the player\'s game mode choice' do
+      allow(prompt).to receive(:gets).and_return('1')
+      expect(prompt.get_game_mode).to eq(1)
     end
   end
 
