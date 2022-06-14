@@ -112,7 +112,7 @@ describe Prompt do
 
   describe '#print_game_mode_prompt' do
     it 'Should print a message that asks the user to choose a game mode' do
-     expect { prompt.print_game_mode_prompt }.to output(
+      expect { prompt.print_game_mode_prompt }.to output(
         Message.game_mode_prompt
       ).to_stdout
     end

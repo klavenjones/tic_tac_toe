@@ -11,15 +11,14 @@ class GameRunner
     start_game
   end
 
+  # rubocop:disable Metrics/MethodLength
   def initialize_game
     @board = Board.new
     @prompt = Prompt.new(@board)
 
     @prompt.welcome
     @prompt.print_game_mode_prompt
-    
-    
-    
+
     @prompt.print_ask_for_custom_marker
 
     player1_marker = get_player_marker(1)
@@ -31,6 +30,7 @@ class GameRunner
 
     @game = Game.new(@board, @prompt, @player1, @player2)
   end
+  # rubocop:enable Metrics/MethodLength
 
   def build_player(prompt, marker)
     builder = PlayerBuilder.new

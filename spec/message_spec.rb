@@ -108,8 +108,7 @@ describe Message do
     end
   end
 
-
-  describe '#game_mode_prompt'do
+  describe '#game_mode_prompt' do
     it 'should return a message that asks the user to choose a game mode' do
       expect(Message.game_mode_prompt).to eq("\n\nPlease select the game mode you would like to play (Select 1 or 2): \n1. Human vs. Human\n2. Computer vs. Human\n\n")
     end

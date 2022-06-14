@@ -87,8 +87,7 @@ class Prompt
   end
 
   def get_game_mode
-    mode_choice = gets.chomp.to_i
-    mode_choice
+    gets.chomp.to_i
   end
 
   def get_computers_move(marker)
