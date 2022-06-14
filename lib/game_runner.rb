@@ -17,7 +17,6 @@ class GameRunner
     @prompt = Prompt.new(@board)
 
     @prompt.welcome
-    @prompt.print_game_mode_prompt
 
     @prompt.print_ask_for_custom_marker
 
