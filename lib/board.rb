@@ -24,13 +24,13 @@ class Board
 
   def taken_spaces
     count = 0
-    @board_grid.each { |space| count += 1 if %w[X O].include?(space) }
+    @board_grid.each { |space| count += 1 if space.match(/^[[:alpha:]]$/) }
     count
   end
 
   def spaces_available
     spaces = []
-    @board_grid.each { |space| spaces.push(space) unless %w[X O].include?(space) }
+    @board_grid.each { |space| spaces.push(space) unless space.match(/^[[:alpha:]]$/) }
     spaces
   end
 
