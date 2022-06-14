@@ -92,6 +92,10 @@ class Prompt
 
   def get_game_mode
     game_mode_choice = gets.chomp.to_i
+    until InputValidation.valid_game_choice?(game_mode_choice)
+      print "Invalid game mode choice, please pick either game mode 1 or 2: \n1. Human Vs Human\n2. Computer vs Human\n"
+      game_mode_choice = gets.chomp.to_i
+    end
     print_player_game_mode_choice(game_mode_choice)
     game_mode_choice
   end
@@ -103,7 +107,7 @@ class Prompt
     computer_move
   end
 
-  def validate_unique_markers?(marker1, marker2)
+  def validate_unique_markers(marker1, marker2)
     while InputValidation.marker_taken?(marker1, marker2)
       print_duplicate_marker_error
       marker2 = get_custom_marker

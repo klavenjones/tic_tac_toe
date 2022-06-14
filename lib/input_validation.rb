@@ -2,6 +2,11 @@
 
 class InputValidation
   VALID_MARKER_LENGTH = 1
+  VALID_GAME_MODES = [1, 2].freeze
+
+  def self.valid_game_choice?(choice)
+    VALID_GAME_MODES.include?(choice)
+  end
 
   def self.valid_number?(num)
     num.to_i.between?(1, 9)
