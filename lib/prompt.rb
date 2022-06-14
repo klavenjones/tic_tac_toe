@@ -63,6 +63,10 @@ class Prompt
     print_message(Message.invalid_marker_error)
   end
 
+  def print_duplicate_marker_error
+    print_message(Message.duplicate_marker_error)
+  end
+
   def get_custom_marker
     @custom_marker = gets.chomp
     until InputValidation.valid_marker?(custom_marker)
@@ -83,6 +87,14 @@ class Prompt
     print_computers_move(marker, computer_move)
     sleep 1.5
     computer_move
+  end
+
+  def validate_unique_markers?(marker1, marker2)
+    while InputValidation.marker_taken?(marker1, marker2)
+      print_duplicate_marker_error
+      marker2 = get_custom_marker
+    end
+    marker2
   end
 
   def print_message(msg)

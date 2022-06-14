@@ -4,6 +4,7 @@ require 'prompt'
 require 'message'
 require 'board'
 
+# rubocop:disable Metrics/BlockLength
 describe Prompt do
   let(:board) { Board.new }
   subject(:prompt) { described_class.new(board) }
@@ -60,10 +61,18 @@ describe Prompt do
     end
   end
 
-  describe '#print_invalid_move_error' do
+  describe '#print_invalid_marker_error' do
     it 'should print an error for when a player chooses an invalid marker' do
       expect { prompt.print_invalid_marker_error }.to output(
         Message.invalid_marker_error
+      ).to_stdout
+    end
+  end
+
+  describe '#print_duplicate_marker_error' do
+    it 'should print an error for when a player chooses a duplicate marker' do
+      expect { prompt.print_duplicate_marker_error }.to output(
+        Message.duplicate_marker_error
       ).to_stdout
     end
   end
@@ -122,3 +131,4 @@ describe Prompt do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
