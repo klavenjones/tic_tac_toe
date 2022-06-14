@@ -11,6 +11,18 @@ class Message
     "\n\nPlease pick a spot by pressing one number in the range of 1-9\n\n"
   end
 
+  def self.game_mode_prompt
+    "\n\nPlease select the game mode you would like to play (Select 1 or 2): \n1. Human vs. Human\n2. Computer vs. Human\n\n"
+  end
+
+  def self.player_game_mode_choice(choice)
+    if choice == 1
+      "\n\nYou have chosen play game mode 1: Human vs. Human.\n\n"
+    else
+      "\n\nYou have chosen play game mode 2: Computer vs. Human.\n\n"
+    end
+  end
+
   def self.display_board(board_grid)
     "\n #{board_grid[0]} | #{board_grid[1]} | #{board_grid[2]} \n---|---|---\n #{board_grid[3]} | #{board_grid[4]} | #{board_grid[5]}  \n---|---|---\n #{board_grid[6]} | #{board_grid[7]} | #{board_grid[8]} \n\n\n"
   end
