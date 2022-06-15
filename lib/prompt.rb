@@ -71,6 +71,10 @@ class Prompt
     print_message(Message.invalid_marker_error)
   end
 
+  def print_invalid_game_mode_error
+    print_message(Message.invalid_game_mode_error)
+  end
+
   def print_duplicate_marker_error
     print_message(Message.duplicate_marker_error)
   end
@@ -93,7 +97,7 @@ class Prompt
   def get_game_mode
     game_mode_choice = gets.chomp.to_i
     until InputValidation.valid_game_choice?(game_mode_choice)
-      print "Invalid game mode choice, please pick either game mode 1 or 2: \n1. Human Vs Human\n2. Computer vs Human\n"
+      print_invalid_game_mode_error
       game_mode_choice = gets.chomp.to_i
     end
     print_player_game_mode_choice(game_mode_choice)

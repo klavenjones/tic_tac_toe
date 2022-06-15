@@ -67,6 +67,10 @@ class Message
     "\nThat is an invalid marker, please enter any letter from A to Z\n"
   end
 
+  def self.invalid_game_mode_error
+    "\nInvalid game mode choice, please pick either game mode 1 or 2: \n1. Human Vs Human\n2. Computer vs Human\n"
+  end
+
   def self.duplicate_marker_error
     "\nPlayer one has chosen this marker already. Please select a marker that is unique.\n"
   end

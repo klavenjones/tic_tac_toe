@@ -126,6 +126,14 @@ describe Prompt do
     end
   end
 
+  describe '#print_invalid_game_mode_error' do
+    it 'Should print a message that prints an error message for invalid game mode choice' do
+      expect { prompt.print_invalid_game_mode_error }.to output(
+        Message.invalid_game_mode_error
+      ).to_stdout
+    end
+  end
+
   describe '#print_game_mode_prompt' do
     it 'Should print a message that asks the user to choose a game mode' do
       expect { prompt.print_game_mode_prompt }.to output(
