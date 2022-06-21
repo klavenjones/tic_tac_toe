@@ -2,7 +2,11 @@
 
 $LOAD_PATH << './lib'
 require 'game_runner'
+require 'database'
 
 tic_tac_toe = GameRunner.new
 
 tic_tac_toe.begin_session
+
+# @db = Database.new
+# @db.create_table

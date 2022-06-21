@@ -4,6 +4,9 @@ require 'player_builder'
 require 'prompt'
 require 'game'
 require 'board'
+require 'database'
+
+
 
 class GameRunner
   def begin_session
@@ -12,6 +15,8 @@ class GameRunner
   end
 
   def initialize_game
+
+ 
     @board = Board.new
     @prompt = Prompt.new(@board)
 
@@ -20,8 +25,7 @@ class GameRunner
 
     @prompt.print_ask_for_custom_marker
     player1_marker = get_player_marker(1)
-    player2_marker = get_player_marker(2)
-    player2_marker = @prompt.validate_unique_markers(player1_marker, player2_marker)
+    player2_marker = @prompt.validate_unique_markers(player1_marker, get_player_marker(2))
 
     @player1 = build_player(@prompt, player1_marker, game_mode_choice)
     @player2 = build_player(@prompt, player2_marker)
