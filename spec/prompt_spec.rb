@@ -15,6 +15,12 @@ describe Prompt do
     end
   end
 
+  describe '#print_message' do
+    it 'should print the incoming message' do
+      expect { prompt.print_message('test') }.to output('test').to_stdout
+    end
+  end
+
   describe '#print_ask_for_custom_marker' do
     it 'should print the instruction to choose custom marker message' do
       expect { prompt.print_ask_for_custom_marker }.to output(Message.ask_for_custom_marker).to_stdout
