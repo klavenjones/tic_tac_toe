@@ -59,4 +59,17 @@ describe InputValidation do
       expect(InputValidation.marker_taken?('A', 'R')).to eq(false)
     end
   end
+
+  describe '#valid_game_mode?' do
+    it 'should return false when the game mode choice is not 1 or 2' do
+      expect(InputValidation.valid_game_choice?('A')).to eq(false)
+      expect(InputValidation.valid_game_choice?(3)).to eq(false)
+      expect(InputValidation.valid_game_choice?('')).to eq(false)
+    end
+
+    it 'should return true when the game mode choice is 1 or 2' do
+      expect(InputValidation.valid_game_choice?(1)).to eq(true)
+      expect(InputValidation.valid_game_choice?(2)).to eq(true)
+    end
+  end
 end

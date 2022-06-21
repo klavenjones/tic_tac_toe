@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'message'
-
+# rubocop:disable Metrics/BlockLength
 describe Message do
   describe '#welcome' do
     it 'should return the correct welcome message' do
@@ -84,6 +84,14 @@ describe Message do
     end
   end
 
+  describe '#invalid_game_mode_error' do
+    it 'should return an error message when a player enters the wrong input for game mode' do
+      expect(Message.invalid_game_mode_error).to eq(
+        "\nInvalid game mode choice, please pick either game mode 1 or 2: \n1. Human Vs Human\n2. Computer vs Human\n"
+      )
+    end
+  end
+
   describe '#duplicate_marker_error' do
     it 'should return an error message when a player 2 enters the same marker as player 1' do
       expect(Message.duplicate_marker_error).to eq(
@@ -120,3 +128,4 @@ describe Message do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

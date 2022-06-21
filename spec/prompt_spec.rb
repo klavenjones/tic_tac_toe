@@ -15,6 +15,12 @@ describe Prompt do
     end
   end
 
+  describe '#print_message' do
+    it 'should print the incoming message' do
+      expect { prompt.print_message('test') }.to output('test').to_stdout
+    end
+  end
+
   describe '#print_ask_for_custom_marker' do
     it 'should print the instruction to choose custom marker message' do
       expect { prompt.print_ask_for_custom_marker }.to output(Message.ask_for_custom_marker).to_stdout
@@ -122,6 +128,14 @@ describe Prompt do
     it 'Should print a message that prints the game mode choice' do
       expect { prompt.print_player_game_mode_choice(1) }.to output(
         Message.player_game_mode_choice(1)
+      ).to_stdout
+    end
+  end
+
+  describe '#print_invalid_game_mode_error' do
+    it 'Should print a message that prints an error message for invalid game mode choice' do
+      expect { prompt.print_invalid_game_mode_error }.to output(
+        Message.invalid_game_mode_error
       ).to_stdout
     end
   end
