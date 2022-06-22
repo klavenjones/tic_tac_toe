@@ -1,39 +1,37 @@
+# frozen_string_literal: true
+
 require 'sqlite3'
 
-class Database 
-   
-    def create_table 
-        begin
-            @db = SQLite3::Database.new ":memory:"
-            @db = SQLite3::Database.open "test.db"
-            @db.execute "CREATE TABLE IF NOT EXISTS games(winner VARCHAR(1), loser VARCHAR(1), date DATE)"
-            puts @db.get_first_value 'SELECT SQLITE_VERSION()'
-        rescue SQLite3::Exception => e
-            print e
-        else
-            print 'TABLE CREATED!'
-        ensure
-            print 'Finished Process'
-            @db.close if @db
-        end
-    end
+class Database
+  attr_accessor :database_name
 
-    def create_game
-        begin
-            @db = SQLite3::Database.open "test.db"
-            @db.execute "INSERT INTO games VALUES ('X', 'Y', date('now'))"
-        rescue SQLite3::Exception => e
-            print e
-        else
-            print 'VALUES CREATED!'
-        ensure
-            print 'Finished Process'
-            
-        end
-    end
+  def initialize(database_name)
+    @database_name = database_name
+    create_database unless File.file?(@database_name)
+    create_table
+  end
 
-    
+  def create_database
+    @db = SQLite3::Database.new @database_name
+    puts @db.get_first_value 'SELECT SQLITE_VERSION()'
+  rescue SQLite3::Exception => e
+    print e
+  ensure
+    @db&.close
+  end
 
-    
-    
+  def create_table
+    @db = SQLite3::Database.open @database_name
+    @db.execute <<-SQL
+                CREATE TABLE IF NOT EXISTS games (
+                gameId INTEGER PRIMARY KEY AUTOINCREMENT,
+                winner VARCHAR(1),
+                loser VARCHAR(1),#{' '}
+                date DATE);
+    SQL
+  rescue SQLite3::Exception => e
+    print e
+  ensure
+    @db&.close
+  end
 end

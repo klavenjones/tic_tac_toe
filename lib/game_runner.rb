@@ -6,8 +6,6 @@ require 'game'
 require 'board'
 require 'database'
 
-
-
 class GameRunner
   def begin_session
     initialize_game
@@ -15,8 +13,6 @@ class GameRunner
   end
 
   def initialize_game
-
- 
     @board = Board.new
     @prompt = Prompt.new(@board)
 
