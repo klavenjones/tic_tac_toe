@@ -27,6 +27,12 @@ describe Prompt do
     end
   end
 
+  describe '#print_ask_to_save_game' do
+    it 'should print the instruction to choose custom marker message' do
+      expect { prompt.print_ask_to_save_game }.to output(Message.ask_to_save_game).to_stdout
+    end
+  end
+
   describe '#print_player_custom_marker' do
     it 'should print the prompt message for player 1 to choose a custom marker' do
       expect { prompt.print_player_custom_marker(1) }.to output(Message.player_custom_marker(1)).to_stdout
@@ -140,6 +146,14 @@ describe Prompt do
     end
   end
 
+  describe '#print_invalid_save_game_error' do
+    it 'Should print a message that prints an error message for invalid save game choice' do
+      expect { prompt.print_invalid_save_game_error }.to output(
+        Message.invalid_save_game_error
+      ).to_stdout
+    end
+  end
+
   describe '#print_game_mode_prompt' do
     it 'Should print a message that asks the user to choose a game mode' do
       expect { prompt.print_game_mode_prompt }.to output(
@@ -169,11 +183,35 @@ describe Prompt do
     end
   end
 
+  describe '#get_save_game_choice' do
+    it 'should receive the player\'s save game choice if Yes' do
+      allow(prompt).to receive(:gets).and_return('Y')
+      expect(prompt.get_save_game_choice).to eq('Y')
+    end
+
+    it 'should receive the player\'s save game choice if Yes' do
+      allow(prompt).to receive(:gets).and_return('y')
+      expect(prompt.get_save_game_choice).to eq('Y')
+    end
+
+    it 'should receive the player\'s save game choice if No' do
+      allow(prompt).to receive(:gets).and_return('N')
+      expect(prompt.get_save_game_choice).to eq('N')
+    end
+
+    it 'should receive the player\'s save game choice if No' do
+      allow(prompt).to receive(:gets).and_return('n')
+      expect(prompt.get_save_game_choice).to eq('N')
+    end
+  end
+
   describe '#get_computers_move' do
     it 'should receive the computer player\'s move ' do
       board.board_grid = %w[X 2 3 4 5 6 7 8 9]
       expect(prompt.get_computers_move('X')).to eq(2)
     end
   end
+
+  
 end
 # rubocop:enable Metrics/BlockLength

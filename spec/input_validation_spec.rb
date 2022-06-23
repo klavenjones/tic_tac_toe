@@ -64,12 +64,25 @@ describe InputValidation do
     it 'should return false when the game mode choice is not 1 or 2' do
       expect(InputValidation.valid_game_choice?('A')).to eq(false)
       expect(InputValidation.valid_game_choice?(3)).to eq(false)
-      expect(InputValidation.valid_game_choice?('')).to eq(false)
+      expect(InputValidation.valid_game_choice?('YES')).to eq(false)
     end
 
     it 'should return true when the game mode choice is 1 or 2' do
       expect(InputValidation.valid_game_choice?(1)).to eq(true)
       expect(InputValidation.valid_game_choice?(2)).to eq(true)
+    end
+  end
+
+  describe '#valid_save_choice?' do
+    it 'should return false when the save game choice is not Y or N' do
+      expect(InputValidation.valid_save_choice?('A')).to eq(false)
+      expect(InputValidation.valid_save_choice?(3)).to eq(false)
+      expect(InputValidation.valid_save_choice?('')).to eq(false)
+    end
+
+    it 'should return true when the save game choice is Y or N' do
+      expect(InputValidation.valid_save_choice?("Y")).to eq(true)
+      expect(InputValidation.valid_save_choice?("N")).to eq(true)
     end
   end
 end
