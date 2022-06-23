@@ -31,6 +31,10 @@ class Message
     "\n\nPlease choose a custom marker to identify yourself on the board. ex. A, B, C\n\n"
   end
 
+  def self.ask_to_save_game
+    "\nWould you like to save the result of the game?\nPress Y for Yes\nPress N for No\n"
+  end
+
   def self.player_custom_marker(player)
     "\n\nPlayer #{player}: please choose your custom marker.\n\n"
   end
@@ -69,6 +73,10 @@ class Message
 
   def self.invalid_game_mode_error
     "\nInvalid game mode choice, please pick either game mode 1 or 2: \n1. Human Vs Human\n2. Computer vs Human\n"
+  end
+
+  def self.invalid_save_game_error
+    "\nInvalid save game choice, please type either: \nY for Yes \nN for No\n"
   end
 
   def self.duplicate_marker_error

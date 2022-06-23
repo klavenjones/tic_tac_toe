@@ -24,23 +24,29 @@ describe Message do
   end
 
   describe '#player_custom_marker' do
-    it 'should print a prompt for the current player to make a choice for their custom marker' do
+    it 'should return a prompt for the current player to make a choice for their custom marker' do
       expect(Message.player_custom_marker(1)).to eq("\n\nPlayer 1: please choose your custom marker.\n\n")
     end
   end
 
   describe '#player_custom_marker_choice' do
-    it 'should print the choice of the custom marker from a player' do
+    it 'should return the choice of the custom marker from a player' do
       expect(Message.player_custom_marker_choice(1, 'A')).to eq("\n\nPlayer 1 your marker choice is: A.\n\n")
     end
   end
 
   describe '#player_game_mode_choice' do
-    it 'should print the game mode choice if Computer vs Human was selected' do
+    it 'should return the game mode choice if Computer vs Human was selected' do
       expect(Message.player_game_mode_choice(2)).to eq("\n\nYou have chosen play game mode 2: Computer vs. Human.\n\n")
     end
-    it 'should print the game mode choice if Human vs Human was selected' do
+    it 'should return the game mode choice if Human vs Human was selected' do
       expect(Message.player_game_mode_choice(1)).to eq("\n\nYou have chosen play game mode 1: Human vs. Human.\n\n")
+    end
+  end
+
+  describe '#ask_to_save_game' do
+    it 'should return a prompt asking a user if they want to save the result of the game' do
+      expect(Message.ask_to_save_game).to eq("\nWould you like to save the result of the game?\nPress Y for Yes\nPress N for No\n")
     end
   end
 
@@ -88,6 +94,14 @@ describe Message do
     it 'should return an error message when a player enters the wrong input for game mode' do
       expect(Message.invalid_game_mode_error).to eq(
         "\nInvalid game mode choice, please pick either game mode 1 or 2: \n1. Human Vs Human\n2. Computer vs Human\n"
+      )
+    end
+  end
+
+  describe '#invalid_save_game_error' do
+    it 'should return an error message when a player enters the wrong input for saving the game' do
+      expect(Message.invalid_save_game_error).to eq(
+        "\nInvalid save game choice, please type either: \nY for Yes \nN for No\n"
       )
     end
   end

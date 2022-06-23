@@ -4,6 +4,7 @@ require 'message'
 require 'board'
 require 'input_validation'
 
+# rubocop:disable Metrics/ClassLength
 class Prompt
   attr_accessor :board, :custom_marker
 
@@ -17,6 +18,10 @@ class Prompt
 
   def print_ask_for_custom_marker
     print_message(Message.ask_for_custom_marker)
+  end
+
+  def print_ask_to_save_game
+    print_message(Message.ask_to_save_game)
   end
 
   def print_game_mode_prompt
@@ -75,6 +80,10 @@ class Prompt
     print_message(Message.invalid_game_mode_error)
   end
 
+  def print_invalid_save_game_error
+    print_message(Message.invalid_save_game_error)
+  end
+
   def print_duplicate_marker_error
     print_message(Message.duplicate_marker_error)
   end
@@ -104,6 +113,15 @@ class Prompt
     game_mode_choice
   end
 
+  def get_save_game_choice
+    save_game_choice = gets.chomp.upcase
+    until InputValidation.valid_save_choice?(save_game_choice)
+      print_invalid_save_game_error
+      save_game_choice = gets.chomp.upcase!
+    end
+    save_game_choice
+  end
+
   def get_computers_move(marker)
     computer_move = @board.spaces_available[0].to_i
     print_computers_move(marker, computer_move)
@@ -123,3 +141,4 @@ class Prompt
     print msg
   end
 end
+# rubocop:enable Metrics/ClassLength

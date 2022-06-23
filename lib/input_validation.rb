@@ -3,6 +3,7 @@
 class InputValidation
   VALID_MARKER_LENGTH = 1
   VALID_GAME_MODES = [1, 2].freeze
+  VALID_SAVE_CHOICE = %w[Y N].freeze
 
   def self.valid_game_choice?(choice)
     VALID_GAME_MODES.include?(choice)
@@ -22,5 +23,9 @@ class InputValidation
 
   def self.marker_taken?(marker1, marker2)
     marker1 == marker2
+  end
+
+  def self.valid_save_choice?(choice)
+    VALID_SAVE_CHOICE.include?(choice)
   end
 end
