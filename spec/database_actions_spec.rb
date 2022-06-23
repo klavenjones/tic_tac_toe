@@ -22,7 +22,7 @@ describe DatabaseActions do
     it 'should save a game to the database' do
       @db.save_game('X', 'O')
       puts @db.get_all_games
-      expect(@db.get_game(1)).to eq([{ 'gameId' => 1, 'winner' => 'X', 'loser' => 'O', 'date' => '2022-06-22' }])
+      expect(@db.get_game(1).length).to eq(1)
     end
   end
 
@@ -41,18 +41,14 @@ describe DatabaseActions do
       @db.save_game('M', 'N')
       @db.save_game('R', 'S')
 
-      expect(@db.get_all_games).to eq([
-                                        { 'gameId' => 1, 'winner' => 'X', 'loser' => 'O', 'date' => '2022-06-22' },
-                                        { 'gameId' => 3, 'winner' => 'X', 'loser' => 'B', 'date' => '2022-06-22' },
-                                        { 'gameId' => 4, 'winner' => 'M', 'loser' => 'N', 'date' => '2022-06-22' },
-                                        { 'gameId' => 5, 'winner' => 'R', 'loser' => 'S', 'date' => '2022-06-22' }
-                                      ])
+      expect(@db.get_all_games.length).to eq(4)
     end
   end
 
   describe '#get_game' do
     it 'should return the game where the the game_id = 1' do
-      expect(@db.get_game(1)).to eq([{ 'gameId' => 1, 'winner' => 'X', 'loser' => 'O', 'date' => '2022-06-22' }])
+      result = @db.get_game(1)
+      expect(result[0]['gameId']).to eq(1)
     end
   end
 end
