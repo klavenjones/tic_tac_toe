@@ -47,6 +47,14 @@ class Message
     "\n\nPlayer #{player} is the winner.\n\n"
   end
 
+  def self.save_game_success
+    "\n\nYou have successfully saved the game. Bye Bye!\n"
+  end
+
+  def self.save_game_declined
+    "\n\nYou have chosen to save the game. Bye Bye!\n"
+  end
+
   def self.current_player(marker)
     "\nPlayer #{marker} it's your turn to make a move."
   end

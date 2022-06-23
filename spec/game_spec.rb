@@ -5,16 +5,22 @@ require 'player_builder'
 require 'board'
 require 'prompt'
 require 'message'
+require 'database_actions'
 
 describe Game do
+  database_name = 'test.db'
   before(:each) do
     @board = Board.new
     @prompt = Prompt.new(@board)
-
+    @database_actions = DatabaseActions.new(database_name)
     @player1 = build_player(@prompt, 'X')
     @player2 = build_player(@prompt, 'O')
 
-    @game = Game.new(@board, @prompt, @player1, @player2)
+    @game = Game.new(@board, @prompt, @player1, @player2, @database_actions)
+  end
+
+  after(:each) do
+    File.delete(database_name)
   end
 
   describe '#start_game' do
