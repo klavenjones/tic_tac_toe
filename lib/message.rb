@@ -52,7 +52,7 @@ class Message
   end
 
   def self.save_game_declined
-    "\n\nYou have chosen to save the game. Bye Bye!\n"
+    "\n\nYou have chosen not to save the game. Bye Bye!\n"
   end
 
   def self.current_player(marker)

@@ -31,7 +31,7 @@ class Game
     end
 
     status
-    # save_game
+    save_game
   end
 
   def play_turn(player, move)

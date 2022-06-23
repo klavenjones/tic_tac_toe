@@ -31,7 +31,7 @@ describe Message do
 
   describe '#save_game_declined' do
     it 'should return results if a user elects to not save the game' do
-      expect(Message.save_game_declined).to eq("\n\nYou have chosen to save the game. Bye Bye!\n")
+      expect(Message.save_game_declined).to eq("\n\nYou have chosen not to save the game. Bye Bye!\n")
     end
   end
 
