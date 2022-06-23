@@ -81,8 +81,8 @@ describe InputValidation do
     end
 
     it 'should return true when the save game choice is Y or N' do
-      expect(InputValidation.valid_save_choice?("Y")).to eq(true)
-      expect(InputValidation.valid_save_choice?("N")).to eq(true)
+      expect(InputValidation.valid_save_choice?('Y')).to eq(true)
+      expect(InputValidation.valid_save_choice?('N')).to eq(true)
     end
   end
 end

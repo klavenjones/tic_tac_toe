@@ -26,6 +26,6 @@ class InputValidation
   end
 
   def self.valid_save_choice?(choice)
-     VALID_SAVE_CHOICE.include?(choice)
+    VALID_SAVE_CHOICE.include?(choice)
   end
 end

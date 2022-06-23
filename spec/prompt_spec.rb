@@ -211,7 +211,5 @@ describe Prompt do
       expect(prompt.get_computers_move('X')).to eq(2)
     end
   end
-
-  
 end
 # rubocop:enable Metrics/BlockLength

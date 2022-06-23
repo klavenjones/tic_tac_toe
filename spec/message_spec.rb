@@ -44,10 +44,9 @@ describe Message do
     end
   end
 
-
   describe '#ask_to_save_game' do
     it 'should return a prompt asking a user if they want to save the result of the game' do
-        expect(Message.ask_to_save_game).to eq("\nWould you like to save the result of the game?\nPress Y for Yes\nPress N for No\n")
+      expect(Message.ask_to_save_game).to eq("\nWould you like to save the result of the game?\nPress Y for Yes\nPress N for No\n")
     end
   end
 

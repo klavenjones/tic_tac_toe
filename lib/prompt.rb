@@ -4,6 +4,7 @@ require 'message'
 require 'board'
 require 'input_validation'
 
+# rubocop:disable Metrics/ClassLength
 class Prompt
   attr_accessor :board, :custom_marker
 
@@ -120,7 +121,7 @@ class Prompt
     end
     save_game_choice
   end
-  
+
   def get_computers_move(marker)
     computer_move = @board.spaces_available[0].to_i
     print_computers_move(marker, computer_move)
@@ -140,3 +141,4 @@ class Prompt
     print msg
   end
 end
+# rubocop:enable Metrics/ClassLength
