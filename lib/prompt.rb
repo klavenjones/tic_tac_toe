@@ -24,6 +24,14 @@ class Prompt
     print_message(Message.ask_to_save_game)
   end
 
+  def print_save_game_success
+    print_message(Message.save_game_success)
+  end
+
+  def print_save_game_declined
+    print_message(Message.save_game_declined)
+  end
+
   def print_game_mode_prompt
     print_message(Message.game_mode_prompt)
   end

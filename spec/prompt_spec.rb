@@ -21,6 +21,18 @@ describe Prompt do
     end
   end
 
+  describe '#print_save_game_success' do
+    it 'should print a message telling the user they saved the game' do
+      expect { prompt.print_save_game_success }.to output(Message.save_game_success).to_stdout
+    end
+  end
+
+  describe '#print_save_game_declined' do
+    it 'should print print a message telling the user they declined to save the game' do
+      expect { prompt.print_save_game_declined }.to output(Message.save_game_declined).to_stdout
+    end
+  end
+
   describe '#print_ask_for_custom_marker' do
     it 'should print the instruction to choose custom marker message' do
       expect { prompt.print_ask_for_custom_marker }.to output(Message.ask_for_custom_marker).to_stdout

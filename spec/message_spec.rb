@@ -23,6 +23,18 @@ describe Message do
     end
   end
 
+  describe '#save_game_success' do
+    it 'should return results if a user elects to save the game' do
+      expect(Message.save_game_success).to eq("\n\nYou have successfully saved the game. Bye Bye!\n")
+    end
+  end
+
+  describe '#save_game_declined' do
+    it 'should return results if a user elects to not save the game' do
+      expect(Message.save_game_declined).to eq("\n\nYou have chosen not to save the game. Bye Bye!\n")
+    end
+  end
+
   describe '#player_custom_marker' do
     it 'should return a prompt for the current player to make a choice for their custom marker' do
       expect(Message.player_custom_marker(1)).to eq("\n\nPlayer 1: please choose your custom marker.\n\n")
