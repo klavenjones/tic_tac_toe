@@ -35,16 +35,17 @@ describe Database do
     end
   end
 
-  describe '#create_table' do
+  describe '#create_tables' do
     it 'should create a table names games' do
       db = Database.new(database_name)
 
-      db.create_table
+      db.create_tables
       sqlite3 = SQLite3::Database.open database_name
       sqlite3.results_as_hash = true
-      result = sqlite3.execute "SELECT name FROM sqlite_master WHERE type='table' AND name='games'"
-      expect(result.length).to eq(1)
-      expect(result[0]['name']).to eq('games')
+      result = sqlite3.execute "SELECT name FROM sqlite_master WHERE type='table' AND name='games' OR name='results'"
+      expect(result.length).to eq(2)
+      expect(result[0]['name']).to eq('results')
+      expect(result[1]['name']).to eq('games')
 
       sqlite3.close
     end

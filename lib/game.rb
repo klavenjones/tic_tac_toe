@@ -7,14 +7,14 @@ require 'board'
 class Game
   attr_reader :board, :prompt, :player1, :player2, :current_player, :winning_player
 
-  def initialize(board, prompt, player1, player2, database_actions)
+  def initialize(board, prompt, player1, player2, game_database_actions)
     @board = board
     @prompt = prompt
     @player1 = player1
     @player2 = player2
     @current_player = player1
     @winning_player = player1
-    @database_actions = database_actions
+    @game_database_actions = game_database_actions
   end
 
   def start_game
@@ -31,7 +31,6 @@ class Game
         # #Save game state Logic will go inside here.
         break
       end
-
       play_turn(@current_player, choice.to_i)
       @prompt.print_board
     end
@@ -85,7 +84,7 @@ class Game
     @prompt.print_ask_to_save_game
     choice = @prompt.get_save_game_choice
     losing_player = @player1 == @winning_player ? @player2 : @player1
-    @database_actions.save_game(@winning_player.marker, losing_player.marker) if choice == 'Y'
+    @game_database_actions.save_game(@winning_player.marker, losing_player.marker) if choice == 'Y'
     choice == 'Y' ? @prompt.print_save_game_success : @prompt.print_save_game_declined
   end
 

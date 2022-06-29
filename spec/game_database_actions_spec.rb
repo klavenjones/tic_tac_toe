@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
 require 'sqlite3'
-require 'database_actions'
+require 'board'
+require 'game_database_actions'
 
-describe DatabaseActions do
+describe GameDatabaseActions do
   database_name = 'test.db'
   before(:all) do
     ## Initialize database actions
-    @db = DatabaseActions.new(database_name)
+    @db = GameDatabaseActions.new(database_name)
+    @board = Board.new.board_grid.join('')
+    
     @sqlite3 = SQLite3::Database.open database_name
     @sqlite3.results_as_hash = true
   end
@@ -20,15 +23,14 @@ describe DatabaseActions do
 
   describe '#save_game' do
     it 'should save a game to the database' do
-      @db.save_game('X', 'O')
-      puts @db.get_all_games
-      expect(@db.get_game(1).length).to eq(1)
+     @db.save_game("Human vs Human", 'X', 'O', @board)
+     expect(@db.get_game(1).length).to eq(1)
     end
   end
 
   describe '#delete_game' do
     it 'should delete a game from the database' do
-      @db.save_game('A', 'B')
+      @db.save_game("Human vs Human", 'A', 'B',  @board)
       @db.delete_game(2)
       result = @sqlite3.execute 'SELECT * FROM games WHERE gameId=?', 2
       expect(result.length).to eq(0)
@@ -37,10 +39,9 @@ describe DatabaseActions do
 
   describe '#get_all_games' do
     it 'should return a list of all the games' do
-      @db.save_game('X', 'B')
-      @db.save_game('M', 'N')
-      @db.save_game('R', 'S')
-
+      @db.save_game("Human vs Human", 'X', 'B', @board)
+      @db.save_game("Human vs Human", 'M', 'N', @board)
+      @db.save_game("Human vs Human", 'R', 'S', @board)
       expect(@db.get_all_games.length).to eq(4)
     end
   end

@@ -8,7 +8,7 @@ class Database
   def initialize(database_name)
     @database_name = database_name
     create_database unless File.file?(@database_name)
-    create_table
+    create_tables
   end
 
   def create_database
@@ -20,13 +20,24 @@ class Database
     @db&.close
   end
 
-  def create_table
+  def create_tables
     @db = SQLite3::Database.open @database_name
+    @db.execute <<-SQL
+                CREATE TABLE IF NOT EXISTS results (
+                resultId INTEGER PRIMARY KEY AUTOINCREMENT,
+                winner VARCHAR,
+                loser VARCHAR,
+                board VARCHAR,
+                date DATE);
+    SQL
+
     @db.execute <<-SQL
                 CREATE TABLE IF NOT EXISTS games (
                 gameId INTEGER PRIMARY KEY AUTOINCREMENT,
-                winner VARCHAR(1),
-                loser VARCHAR(1),#{' '}
+                type VARCHAR,
+                current_player VARCHAR,
+                opposing_player VARCHAR,
+                board VARCHAR,
                 date DATE);
     SQL
   rescue SQLite3::Exception => e
