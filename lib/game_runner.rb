@@ -5,6 +5,7 @@ require 'prompt'
 require 'game'
 require 'board'
 require 'game_database_actions'
+require 'results_database_actions'
 
 class GameRunner
   def begin_session
@@ -16,6 +17,7 @@ class GameRunner
     @board = Board.new
     @prompt = Prompt.new(@board)
     @game_database_actions = GameDatabaseActions.new('tic_tac_toe.db')
+    @results_database_actions = ResultsDatabaseActions.new('tic_tac_toe.db')
 
     @prompt.welcome
     game_mode_choice = get_game_mode
@@ -27,7 +29,7 @@ class GameRunner
     @player1 = build_player(@prompt, player1_marker, game_mode_choice)
     @player2 = build_player(@prompt, player2_marker)
 
-    @game = Game.new(@board, @prompt, @player1, @player2, @game_database_actions)
+    @game = Game.new(@board, @prompt, @player1, @player2, @game_database_actions, @results_database_actions)
   end
 
   def build_player(prompt, marker, game_mode_choice = 1)

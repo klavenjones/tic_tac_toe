@@ -6,6 +6,7 @@ require 'board'
 require 'prompt'
 require 'message'
 require 'game_database_actions'
+require 'results_database_actions'
 
 describe Game do
   database_name = 'test.db'
@@ -13,10 +14,11 @@ describe Game do
     @board = Board.new
     @prompt = Prompt.new(@board)
     @game_database_actions = GameDatabaseActions.new(database_name)
+    @results_database_actions = ResultsDatabaseActions.new(database_name)
     @player1 = build_player(@prompt, 'X')
     @player2 = build_player(@prompt, 'O')
 
-    @game = Game.new(@board, @prompt, @player1, @player2, @game_database_actions)
+    @game = Game.new(@board, @prompt, @player1, @player2, @results_database_actions, @game_database_actions)
   end
 
   after(:each) do
