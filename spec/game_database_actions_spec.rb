@@ -9,8 +9,8 @@ describe GameDatabaseActions do
   before(:all) do
     ## Initialize database actions
     @db = GameDatabaseActions.new(database_name)
-    @board = Board.new.board_grid.join('')
-    
+    @board = Board.new.board_grid.join
+
     @sqlite3 = SQLite3::Database.open database_name
     @sqlite3.results_as_hash = true
   end
@@ -23,14 +23,14 @@ describe GameDatabaseActions do
 
   describe '#save_game' do
     it 'should save a game to the database' do
-     @db.save_game("Human vs Human", 'X', 'O', @board)
-     expect(@db.get_game(1).length).to eq(1)
+      @db.save_game('Human vs Human', 'X', 'O', @board)
+      expect(@db.get_game(1).length).to eq(1)
     end
   end
 
   describe '#delete_game' do
     it 'should delete a game from the database' do
-      @db.save_game("Human vs Human", 'A', 'B',  @board)
+      @db.save_game('Human vs Human', 'A', 'B', @board)
       @db.delete_game(2)
       result = @sqlite3.execute 'SELECT * FROM games WHERE gameId=?', 2
       expect(result.length).to eq(0)
@@ -39,9 +39,9 @@ describe GameDatabaseActions do
 
   describe '#get_all_games' do
     it 'should return a list of all the games' do
-      @db.save_game("Human vs Human", 'X', 'B', @board)
-      @db.save_game("Human vs Human", 'M', 'N', @board)
-      @db.save_game("Human vs Human", 'R', 'S', @board)
+      @db.save_game('Human vs Human', 'X', 'B', @board)
+      @db.save_game('Human vs Human', 'M', 'N', @board)
+      @db.save_game('Human vs Human', 'R', 'S', @board)
       expect(@db.get_all_games.length).to eq(4)
     end
   end

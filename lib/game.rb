@@ -31,6 +31,7 @@ class Game
         # #Save game state Logic will go inside here.
         break
       end
+
       play_turn(@current_player, choice.to_i)
       @prompt.print_board
     end

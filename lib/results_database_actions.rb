@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'database'
 
 class ResultsDatabaseActions < Database
-
   def save_result(winner, loser, board)
     @db = SQLite3::Database.open @database_name
     @db.execute "INSERT INTO results (winner, loser, board, date) VALUES (?, ?, ?, date('now'))", winner, loser, board
