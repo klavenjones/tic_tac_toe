@@ -85,4 +85,17 @@ describe InputValidation do
       expect(InputValidation.valid_save_choice?('N')).to eq(true)
     end
   end
+
+  describe '#valid_in_game_save_choice?' do
+    it 'should return false when the user selects anything outside S (save) and or numbers 1-9' do
+      expect(InputValidation.valid_in_game_save_choice?('R')).to eq(false)
+      expect(InputValidation.valid_in_game_save_choice?(0)).to eq(false)
+      expect(InputValidation.valid_in_game_save_choice?('Y')).to eq(false)
+    end
+
+    it 'should return true when the user selects proper input. Which is S' do
+      expect(InputValidation.valid_in_game_save_choice?('S')).to eq(true)
+      expect(InputValidation.valid_in_game_save_choice?('s')).to eq(true)
+    end
+  end
 end

@@ -106,8 +106,8 @@ class Prompt
   end
 
   def get_players_move(marker)
-    player_move = gets.chomp.to_i
-    print_players_move(marker, player_move)
+    player_move = gets.chomp
+    print_players_move(marker, player_move.to_i) unless InputValidation.valid_in_game_save_choice?(player_move)
     player_move
   end
 
@@ -128,6 +128,10 @@ class Prompt
       save_game_choice = gets.chomp.upcase!
     end
     save_game_choice
+  end
+
+  def get_save_in_game_choice
+    gets.chomp.upcase
   end
 
   def get_computers_move(marker)

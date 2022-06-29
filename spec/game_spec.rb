@@ -80,6 +80,13 @@ describe Game do
       expect(@game.game_over?).to eq(true)
     end
   end
+
+  describe '#end_game' do
+    it 'should print that you saved the game successfully based on the player choice' do
+      expect(@game.end_game('s')).to eq(@prompt.print_save_game_success)
+      expect(@game.end_game('S')).to eq(@prompt.print_save_game_success)
+    end
+  end
 end
 
 # Utility Method

@@ -26,12 +26,17 @@ class Game
     until game_over?
       @prompt.print_current_player(@current_player.marker)
       @prompt.print_instruction
-      play_turn(@current_player, @current_player.get_move)
+      choice = @current_player.get_move
+      if InputValidation.valid_in_game_save_choice?(choice)
+        # #Save game state Logic will go inside here.
+        break
+      end
+
+      play_turn(@current_player, choice.to_i)
       @prompt.print_board
     end
 
-    status
-    save_game
+    end_game(choice)
   end
 
   def play_turn(player, move)
@@ -68,15 +73,28 @@ class Game
     !@board.spot_taken?(input) && InputValidation.valid_number?(input)
   end
 
+  def valid_in_game_save_choice?(input)
+    InputValidation.valid_in_game_save_choice?(input)
+  end
+
   def status
     board.full? && !board.winner? ? @prompt.print_tie : @prompt.print_winner(@winning_player.marker)
   end
 
-  def save_game
+  def save_result
     @prompt.print_ask_to_save_game
     choice = @prompt.get_save_game_choice
     losing_player = @player1 == @winning_player ? @player2 : @player1
     @database_actions.save_game(@winning_player.marker, losing_player.marker) if choice == 'Y'
     choice == 'Y' ? @prompt.print_save_game_success : @prompt.print_save_game_declined
+  end
+
+  def end_game(choice)
+    if InputValidation.valid_in_game_save_choice?(choice)
+      @prompt.print_save_game_success
+    else
+      status
+      save_result
+    end
   end
 end

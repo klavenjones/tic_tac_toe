@@ -184,7 +184,7 @@ describe Prompt do
   describe '#get_players_move' do
     it 'should receive the player\'s move ' do
       allow(prompt).to receive(:gets).and_return('9')
-      expect(prompt.get_players_move('X')).to eq(9)
+      expect(prompt.get_players_move('X')).to eq('9')
     end
   end
 

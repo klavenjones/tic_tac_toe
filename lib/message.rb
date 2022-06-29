@@ -8,7 +8,7 @@ class Message
   end
 
   def self.instruction
-    "\n\nPlease pick a spot by pressing one number in the range of 1-9\n\n"
+    "\n\nPlease pick a spot by pressing one number in the range of 1-9\n\nIf you want to quit and save this game please type S\n"
   end
 
   def self.game_mode_prompt
