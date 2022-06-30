@@ -7,15 +7,18 @@ require 'board'
 class Game
   attr_reader :board, :prompt, :player1, :player2, :current_player, :winning_player
 
-  def initialize(board, prompt, player1, player2, database_actions)
+  # rubocop:disable Metrics/ParameterLists
+  def initialize(board, prompt, player1, player2, game_database_actions, results_database_actions)
     @board = board
     @prompt = prompt
     @player1 = player1
     @player2 = player2
     @current_player = player1
     @winning_player = player1
-    @database_actions = database_actions
+    @game_database_actions = game_database_actions
+    @results_database_actions = results_database_actions
   end
+  # rubocop:enable Metrics/ParameterLists
 
   def start_game
     @prompt.print_board
@@ -28,7 +31,7 @@ class Game
       @prompt.print_instruction
       choice = @current_player.get_move
       if InputValidation.valid_in_game_save_choice?(choice)
-        # #Save game state Logic will go inside here.
+        save_game
         break
       end
 
@@ -85,8 +88,14 @@ class Game
     @prompt.print_ask_to_save_game
     choice = @prompt.get_save_game_choice
     losing_player = @player1 == @winning_player ? @player2 : @player1
-    @database_actions.save_game(@winning_player.marker, losing_player.marker) if choice == 'Y'
+    @results_database_actions.save_result(@winning_player.marker, losing_player.marker, @board.board_grid.join) if choice == 'Y'
     choice == 'Y' ? @prompt.print_save_game_success : @prompt.print_save_game_declined
+  end
+
+  def save_game
+    game_type = @player1.type == 'Computer' ? 'Computer vs. Human' : 'Human vs Human'
+    @opposing_player = @player1 == @current_player ? @player2 : @player1
+    @game_database_actions.save_game(game_type, @current_player.marker, @opposing_player.marker, @board.board_grid.join)
   end
 
   def end_game(choice)

@@ -2,10 +2,10 @@
 
 require 'database'
 
-class DatabaseActions < Database
-  def save_game(player1, player2)
+class GameDatabaseActions < Database
+  def save_game(type, current_player, opposing_player, board)
     @db = SQLite3::Database.open @database_name
-    @db.execute "INSERT INTO games (winner, loser, date) VALUES (?, ?, date('now'))", player1, player2
+    @db.execute "INSERT INTO games (type, current_player, opposing_player, board, date) VALUES (?, ?, ?, ?, date('now'))", type, current_player, opposing_player, board
   rescue SQLite3::Exception => e
     print e
   ensure
