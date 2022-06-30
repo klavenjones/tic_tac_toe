@@ -28,14 +28,32 @@ describe Prompt do
   end
 
   describe '#print_save_game_declined' do
-    it 'should print print a message telling the user they declined to save the game' do
+    it 'should print a message telling the user they declined to save the game' do
       expect { prompt.print_save_game_declined }.to output(Message.save_game_declined).to_stdout
+    end
+  end
+
+  describe '#print_show_results_message' do
+    it 'should return a message when a user elects to show results of past games' do
+      expect { prompt.print_show_results_message }.to output(Message.show_results_message).to_stdout
+    end
+  end
+
+  describe '#print_show_games_message' do
+    it 'should return a message when a user elects to play an existing game' do
+      expect { prompt.print_show_games_message }.to output(Message.show_games_message).to_stdout
     end
   end
 
   describe '#print_ask_for_custom_marker' do
     it 'should print the instruction to choose custom marker message' do
       expect { prompt.print_ask_for_custom_marker }.to output(Message.ask_for_custom_marker).to_stdout
+    end
+  end
+
+  describe '#print_ask_to_revisit_game' do
+    it 'should print instructions for a player to choose between starting a new game,viewing results, and playing an existing game' do
+      expect { prompt.print_ask_to_revisit_game }.to output(Message.ask_to_revisit_game).to_stdout
     end
   end
 
@@ -192,6 +210,18 @@ describe Prompt do
     it 'should receive the player\'s game mode choice' do
       allow(prompt).to receive(:gets).and_return('1')
       expect(prompt.get_game_mode).to eq(1)
+    end
+  end
+
+  describe '#get_revisit_game_choice' do
+    it 'should receive the player\'s choice of option 1. when asked it theyd like to revist a game, start a new game or review game results' do
+      allow(prompt).to receive(:gets).and_return('1')
+      expect(prompt.get_revisit_game_choice).to eq(1)
+    end
+
+    it 'should receive the player\'s choice of option 1. when asked it theyd like to revist a game, start a new game or review game results' do
+      allow(prompt).to receive(:gets).and_return('2')
+      expect(prompt.get_revisit_game_choice).to eq(2)
     end
   end
 

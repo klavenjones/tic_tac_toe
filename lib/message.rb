@@ -31,8 +31,20 @@ class Message
     "\n\nPlease choose a custom marker to identify yourself on the board. ex. A, B, C\n\n"
   end
 
+  def self.ask_to_revisit_game
+    "\n\nBefore we start, what would you like to do? start a new game, play an existing game, or view old game results? \n\n1. Start a new game \n2. Play an existing game.\n3. View Game Results."
+  end
+
   def self.ask_to_save_game
     "\nWould you like to save the result of the game?\nPress Y for Yes\nPress N for No\n"
+  end
+
+  def self.show_games_message
+    "\n\nHere are all your existing games: \n\n"
+  end
+
+  def self.show_results_message
+    "\n\nHere are all of the results you saved: \n\n"
   end
 
   def self.player_custom_marker(player)

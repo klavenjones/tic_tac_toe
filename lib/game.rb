@@ -34,7 +34,6 @@ class Game
         save_game
         break
       end
-
       play_turn(@current_player, choice.to_i)
       @prompt.print_board
     end
