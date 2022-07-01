@@ -20,8 +20,20 @@ class Prompt
     print_message(Message.ask_for_custom_marker)
   end
 
+  def print_ask_to_revisit_game
+    print_message(Message.ask_to_revisit_game)
+  end
+
   def print_ask_to_save_game
     print_message(Message.ask_to_save_game)
+  end
+
+  def print_show_games_message
+    print_message(Message.show_games_message)
+  end
+
+  def print_show_results_message
+    print_message(Message.show_results_message)
   end
 
   def print_save_game_success
@@ -132,6 +144,16 @@ class Prompt
 
   def get_save_in_game_choice
     gets.chomp.upcase
+  end
+
+  def get_revisit_game_choice
+    revisit_choice = gets.chomp.to_i
+    until InputValidation.valid_revisit_choice?(revisit_choice)
+      print "\nInvalid selection. Please select 1, 2, or 3\n"
+      print_ask_to_revisit_game
+      revisit_choice = gets.chomp.to_i
+    end
+    revisit_choice
   end
 
   def get_computers_move(marker)

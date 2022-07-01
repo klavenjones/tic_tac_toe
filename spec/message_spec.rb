@@ -23,6 +23,24 @@ describe Message do
     end
   end
 
+  describe '#ask_to_revisit_game' do
+    it 'should return instructions for a player to choose between starting a new game,viewing results, and playing an existing game' do
+      expect(Message.ask_to_revisit_game).to eq("\n\nBefore we start, what would you like to do? start a new game, play an existing game, or view old game results? \n\n1. Start a new game \n2. Play an existing game.\n3. View Game Results.")
+    end
+  end
+
+  describe '#show_games_message' do
+    it 'should return a message when a user elects to play an existing game' do
+      expect(Message.show_games_message).to eq("\n\nHere are all your existing games: \n\n")
+    end
+  end
+
+  describe '#show_results_message' do
+    it 'should return a message when a user elects to show results of past games' do
+      expect(Message.show_results_message).to eq("\n\nHere are all of the results you saved: \n\n")
+    end
+  end
+
   describe '#save_game_success' do
     it 'should return results if a user elects to save the game' do
       expect(Message.save_game_success).to eq("\n\nYou have successfully saved the game. Bye Bye!\n")
@@ -76,9 +94,6 @@ describe Message do
         "\nPlayer X chose the spot labeled: 9\n"
       )
     end
-  end
-
-  describe '#players_move' do
     it 'should return the computer\'s move' do
       expect(Message.computers_move('X', 9)).to eq(
         "\nComputer player X chose the spot labeled: 9\n"

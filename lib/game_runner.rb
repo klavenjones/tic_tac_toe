@@ -19,13 +19,14 @@ class GameRunner
     @game_database_actions = GameDatabaseActions.new('tic_tac_toe.db')
     @results_database_actions = ResultsDatabaseActions.new('tic_tac_toe.db')
 
+    @prompt.print_ask_to_revisit_game
+    @prompt.get_revisit_game_choice
+
     @prompt.welcome
     game_mode_choice = get_game_mode
-
     @prompt.print_ask_for_custom_marker
     player1_marker = get_player_marker(1)
     player2_marker = @prompt.validate_unique_markers(player1_marker, get_player_marker(2))
-
     @player1 = build_player(@prompt, player1_marker, game_mode_choice)
     @player2 = build_player(@prompt, player2_marker)
 

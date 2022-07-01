@@ -73,6 +73,20 @@ describe InputValidation do
     end
   end
 
+  describe '#valid_revist_choice?' do
+    it 'should return false when the revisit choice is not 1 or 2' do
+      expect(InputValidation.valid_revisit_choice?('A')).to eq(false)
+      expect(InputValidation.valid_revisit_choice?(55)).to eq(false)
+      expect(InputValidation.valid_revisit_choice?('YES')).to eq(false)
+    end
+
+    it 'should return true when the revisit choice is 1 or 2' do
+      expect(InputValidation.valid_revisit_choice?(1)).to eq(true)
+      expect(InputValidation.valid_revisit_choice?(2)).to eq(true)
+      expect(InputValidation.valid_revisit_choice?(3)).to eq(true)
+    end
+  end
+
   describe '#valid_save_choice?' do
     it 'should return false when the save game choice is not Y or N' do
       expect(InputValidation.valid_save_choice?('A')).to eq(false)
