@@ -159,7 +159,7 @@ class Prompt
   def get_computers_move(marker)
     computer_move = @board.spaces_available[0].to_i
     print_computers_move(marker, computer_move)
-    sleep 1.5
+    sleep 1
     computer_move
   end
 
