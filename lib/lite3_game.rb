@@ -21,7 +21,7 @@ class Lite3Game
   # rubocop:enable Metrics/ParameterLists
 
   def start_game
-    @prompt.print_board
+    @prompt.print_lite3_board
     turn
   end
 
@@ -35,7 +35,7 @@ class Lite3Game
         break
       end
       play_turn(@current_player, choice.to_i)
-      @prompt.print_board
+      @prompt.print_lite3_board
     end
 
     end_game(choice)

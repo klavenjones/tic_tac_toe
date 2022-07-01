@@ -68,6 +68,10 @@ class Prompt
     print_message(Message.display_board(@board.board_grid))
   end
 
+  def print_lite3_board
+    print_message(Message.display_lite3_board(@board.board_grid))
+  end
+
   def print_tie
     print_message(Message.tie)
   end

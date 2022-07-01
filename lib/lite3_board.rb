@@ -40,7 +40,7 @@ class Lite3Board
 
   def spaces_available
     spaces = []
-    @board_grid.each { |space| spaces.push(space) unless space[:marker].match(/^[[:alpha:]]$/) }
+    @board_grid.each { |space| spaces << "#{space[:space_index] + 1}" unless space[:marker].match(/^[[:alpha:]]$/)} 
     spaces
   end
 

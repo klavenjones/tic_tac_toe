@@ -3,6 +3,7 @@
 require 'prompt'
 require 'message'
 require 'board'
+require 'lite3_board'
 
 # rubocop:disable Metrics/BlockLength
 describe Prompt do
@@ -84,6 +85,16 @@ describe Prompt do
   describe '#print_board' do
     it 'should Print the tic tac toe board' do
       expect { prompt.print_board }.to output(Message.display_board(board.board_grid)).to_stdout
+    end
+  end
+
+  describe '#print_lite3_board' do
+    before(:all) do
+      @board = Lite3Board.new
+      @prompt = Prompt.new(@board)
+    end
+    it 'should Print the tic tac toe board' do
+      expect { @prompt.print_lite3_board }.to output(Message.display_lite3_board(@board.board_grid)).to_stdout
     end
   end
 
