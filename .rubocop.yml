@@ -1,0 +1,17 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - Guardfile
+  SuggestExtensions: false
+Metrics/AbcSize:
+  Max: 25
+Metrics/BlockLength:
+  Max: 100
+Metrics/MethodLength:
+  Max: 60
+Layout/LineLength:
+  Max: 300
+Style/Documentation:
+  Enabled: false
+Naming/AccessorMethodName:
+  Enabled: false
