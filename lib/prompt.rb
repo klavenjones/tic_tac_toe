@@ -118,7 +118,7 @@ class Prompt
       print_invalid_marker_error
       @custom_marker = gets.chomp
     end
-    custom_marker.upcase!
+    custom_marker.upcase
   end
 
   def get_players_move(marker)
