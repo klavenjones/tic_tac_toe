@@ -68,6 +68,10 @@ class Prompt
     print_message(Message.display_board(@board.board_grid))
   end
 
+  def print_lite3_board
+    print_message(Message.display_lite3_board(@board.board_grid))
+  end
+
   def print_tie
     print_message(Message.tie)
   end
@@ -114,7 +118,7 @@ class Prompt
       print_invalid_marker_error
       @custom_marker = gets.chomp
     end
-    custom_marker.upcase!
+    custom_marker.upcase
   end
 
   def get_players_move(marker)
@@ -159,7 +163,7 @@ class Prompt
   def get_computers_move(marker)
     computer_move = @board.spaces_available[0].to_i
     print_computers_move(marker, computer_move)
-    sleep 1.5
+    sleep 1
     computer_move
   end
 

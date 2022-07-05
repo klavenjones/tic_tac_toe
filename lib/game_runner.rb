@@ -3,7 +3,8 @@
 require 'player_builder'
 require 'prompt'
 require 'game'
-require 'board'
+require 'lite3_game'
+require 'lite3_board'
 require 'game_database_actions'
 require 'results_database_actions'
 
@@ -14,13 +15,10 @@ class GameRunner
   end
 
   def initialize_game
-    @board = Board.new
+    @board = Lite3Board.new
     @prompt = Prompt.new(@board)
     @game_database_actions = GameDatabaseActions.new('tic_tac_toe.db')
     @results_database_actions = ResultsDatabaseActions.new('tic_tac_toe.db')
-
-    @prompt.print_ask_to_revisit_game
-    @prompt.get_revisit_game_choice
 
     @prompt.welcome
     game_mode_choice = get_game_mode
@@ -30,7 +28,7 @@ class GameRunner
     @player1 = build_player(@prompt, player1_marker, game_mode_choice)
     @player2 = build_player(@prompt, player2_marker)
 
-    @game = Game.new(@board, @prompt, @player1, @player2, @game_database_actions, @results_database_actions)
+    @game = Lite3Game.new(@board, @prompt, @player1, @player2, @game_database_actions, @results_database_actions)
   end
 
   def build_player(prompt, marker, game_mode_choice = 1)
