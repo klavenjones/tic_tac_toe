@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class Message
+  GAME_MODE_CHOICE = {
+    1 => "\n\nYou have chosen play game mode 1: Human vs. Human.\n\n",
+    2 => "\n\nYou have chosen play game mode 2: Computer vs. Human.\n\n",
+    3 => "\n\nYou have chosen play game mode 3: Human vs. Human. - Lite3 version.\n\n",
+    4 => "\n\nYou have chosen play game mode 4: Computer vs. Human - Lite3 version.\n\n"
+  }.freeze
+
   def self.welcome
     "\n\n-----------------------------------------------------\n
      Welcome To Tic Tac Toe
@@ -12,15 +19,11 @@ class Message
   end
 
   def self.game_mode_prompt
-    "\n\nPlease select the game mode you would like to play (Select 1 or 2): \n1. Human vs. Human\n2. Computer vs. Human\n\n"
+    "\n\nPlease select the game mode you would like to play (Select either 1, 2, 3 or 4): \n1. Human vs. Human\n2. Computer vs. Human\n3. Human vs. Human - Lite3 \n4. Computer vs. Human - Lite3\n\n"
   end
 
   def self.player_game_mode_choice(choice)
-    if choice == 1
-      "\n\nYou have chosen play game mode 1: Human vs. Human.\n\n"
-    else
-      "\n\nYou have chosen play game mode 2: Computer vs. Human.\n\n"
-    end
+    GAME_MODE_CHOICE[choice]
   end
 
   def self.display_board(board_grid)
@@ -96,7 +99,7 @@ class Message
   end
 
   def self.invalid_game_mode_error
-    "\nInvalid game mode choice, please pick either game mode 1 or 2: \n1. Human Vs Human\n2. Computer vs Human\n"
+    "\nInvalid game mode choice, please pick either game mode 1, 2, 3 or 4: \n1. Human Vs Human\n2. Computer vs Human\n3. Human vs. Human - Lite3 \n4. Computer vs. Human - Lite3\n\n"
   end
 
   def self.invalid_save_game_error

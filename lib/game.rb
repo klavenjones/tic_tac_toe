@@ -5,7 +5,7 @@ require 'input_validation'
 require 'board'
 
 class Game
-  attr_reader :board, :prompt, :player1, :player2, :current_player, :winning_player
+  attr_accessor :board, :prompt, :player1, :player2, :current_player, :winning_player
 
   # rubocop:disable Metrics/ParameterLists
   def initialize(board, prompt, player1, player2, game_database_actions, results_database_actions)

@@ -89,6 +89,12 @@ describe Message do
     it 'should return the game mode choice if Human vs Human was selected' do
       expect(Message.player_game_mode_choice(1)).to eq("\n\nYou have chosen play game mode 1: Human vs. Human.\n\n")
     end
+    it 'should return the game mode choice if Human vs Human - Lite3 was selected' do
+      expect(Message.player_game_mode_choice(3)).to eq("\n\nYou have chosen play game mode 3: Human vs. Human. - Lite3 version.\n\n")
+    end
+    it 'should return the game mode choice if Computer vs Human - Lite3 was selected' do
+      expect(Message.player_game_mode_choice(4)).to eq("\n\nYou have chosen play game mode 4: Computer vs. Human - Lite3 version.\n\n")
+    end
   end
 
   describe '#ask_to_save_game' do
@@ -137,7 +143,7 @@ describe Message do
   describe '#invalid_game_mode_error' do
     it 'should return an error message when a player enters the wrong input for game mode' do
       expect(Message.invalid_game_mode_error).to eq(
-        "\nInvalid game mode choice, please pick either game mode 1 or 2: \n1. Human Vs Human\n2. Computer vs Human\n"
+        "\nInvalid game mode choice, please pick either game mode 1, 2, 3 or 4: \n1. Human Vs Human\n2. Computer vs Human\n3. Human vs. Human - Lite3 \n4. Computer vs. Human - Lite3\n\n"
       )
     end
   end
@@ -176,7 +182,7 @@ describe Message do
 
   describe '#game_mode_prompt' do
     it 'should return a message that asks the user to choose a game mode' do
-      expect(Message.game_mode_prompt).to eq("\n\nPlease select the game mode you would like to play (Select either 1, 2, 3 or 4): \n1. Human vs. Human\n2. Computer vs. Human\n\n3. Human vs. Human - Lite3 \n4. Computer vs. Human - Lite3\n\n")
+      expect(Message.game_mode_prompt).to eq("\n\nPlease select the game mode you would like to play (Select either 1, 2, 3 or 4): \n1. Human vs. Human\n2. Computer vs. Human\n3. Human vs. Human - Lite3 \n4. Computer vs. Human - Lite3\n\n")
     end
   end
 

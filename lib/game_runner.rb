@@ -7,6 +7,7 @@ require 'lite3_game'
 require 'lite3_board'
 require 'game_database_actions'
 require 'results_database_actions'
+require 'game_builder'
 
 class GameRunner
   def begin_session
@@ -15,27 +16,50 @@ class GameRunner
   end
 
   def initialize_game
-    @board = Lite3Board.new
-    @prompt = Prompt.new(@board)
+    @prompt = Prompt.new
+    @prompt.welcome
+
     @game_database_actions = GameDatabaseActions.new('tic_tac_toe.db')
     @results_database_actions = ResultsDatabaseActions.new('tic_tac_toe.db')
 
-    @prompt.welcome
     game_mode_choice = get_game_mode
+    @board = get_board(game_mode_choice)
+
+    @prompt.board = @board
     @prompt.print_ask_for_custom_marker
+
     player1_marker = get_player_marker(1)
     player2_marker = @prompt.validate_unique_markers(player1_marker, get_player_marker(2))
+
     @player1 = build_player(@prompt, player1_marker, game_mode_choice)
     @player2 = build_player(@prompt, player2_marker)
 
-    @game = Lite3Game.new(@board, @prompt, @player1, @player2, @game_database_actions, @results_database_actions)
+    @game = build_game(game_mode_choice, @board, @prompt, @player1, @player2, @game_database_actions, @results_database_actions)
   end
 
   def build_player(prompt, marker, game_mode_choice = 1)
-    builder = game_mode_choice == 2 ? PlayerBuilder.new('Computer') : PlayerBuilder.new
-    builder.set_player_prompt(prompt)
-    builder.set_player_marker(marker)
-    builder.player
+    player_builder = [2, 4].include?(game_mode_choice) ? PlayerBuilder.new('Computer') : PlayerBuilder.new
+    player_builder.set_player_prompt(prompt)
+    player_builder.set_player_marker(marker)
+    player_builder.player
+  end
+
+  # rubocop:disable Metrics/ParameterLists
+  def build_game(game_mode_choice, board, prompt, player1, player2, game_database_actions, results_database_actions)
+    game_builder = GameBuilder.new(game_mode_choice)
+    game_builder.set_board(board)
+    game_builder.set_prompt(prompt)
+    game_builder.set_player_one(player1)
+    game_builder.set_player_two(player2)
+    game_builder.set_game_database_actions(game_database_actions)
+    game_builder.set_results_database_actions(results_database_actions)
+    game_builder.set_game
+    game_builder.game
+  end
+  # rubocop:enable Metrics/ParameterLists
+
+  def get_board(game_mode_choice = 1)
+    [1, 2].include?(game_mode_choice) ? Board.new : Lite3Board.new
   end
 
   def get_player_marker(player)
