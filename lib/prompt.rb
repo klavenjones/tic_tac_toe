@@ -4,7 +4,6 @@ require 'message'
 require 'board'
 require 'input_validation'
 
-# rubocop:disable Metrics/ClassLength
 class Prompt
   attr_accessor :board, :custom_marker
 
@@ -123,7 +122,10 @@ class Prompt
 
   def get_players_move(marker)
     player_move = gets.chomp
-    print_players_move(marker, player_move.to_i) unless InputValidation.valid_in_game_save_choice?(player_move)
+    unless InputValidation.valid_in_game_save_choice?(player_move)
+      print_players_move(marker,
+                         player_move.to_i)
+    end
     player_move
   end
 
@@ -179,4 +181,3 @@ class Prompt
     print msg
   end
 end
-# rubocop:enable Metrics/ClassLength

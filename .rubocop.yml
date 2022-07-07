@@ -10,7 +10,10 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 60
 Layout/LineLength:
-  Max: 300
+  # Max: 80
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
 Style/Documentation:
   Enabled: false
 Naming/AccessorMethodName:
