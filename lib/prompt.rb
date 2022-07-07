@@ -8,7 +8,7 @@ require 'input_validation'
 class Prompt
   attr_accessor :board, :custom_marker
 
-  def initialize(board)
+  def initialize(board = Board.new)
     @board = board
   end
 

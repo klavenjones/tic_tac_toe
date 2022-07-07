@@ -63,13 +63,15 @@ describe InputValidation do
   describe '#valid_game_mode?' do
     it 'should return false when the game mode choice is not 1 or 2' do
       expect(InputValidation.valid_game_choice?('A')).to eq(false)
-      expect(InputValidation.valid_game_choice?(3)).to eq(false)
+      expect(InputValidation.valid_game_choice?(6)).to eq(false)
       expect(InputValidation.valid_game_choice?('YES')).to eq(false)
     end
 
-    it 'should return true when the game mode choice is 1 or 2' do
+    it 'should return true when the game mode choice is either 1, 2, 3, or 4' do
       expect(InputValidation.valid_game_choice?(1)).to eq(true)
       expect(InputValidation.valid_game_choice?(2)).to eq(true)
+      expect(InputValidation.valid_game_choice?(3)).to eq(true)
+      expect(InputValidation.valid_game_choice?(4)).to eq(true)
     end
   end
 
