@@ -57,12 +57,11 @@ describe Board do
 
   describe '#spot_taken?' do
     it 'should return true if the space is taken' do
-      board.board_grid = '%w[X 2 3 4 5 6 7 8 9]'
+      board.mark_board('X', 1)
       expect(board.spot_taken?(1)).to eq(true)
     end
 
     it 'should return false if the space is available' do
-      board.board_grid = '%w[1 2 3 4 5 6 7 8 9]'
       expect(board.spot_taken?(1)).to eq(false)
     end
   end
@@ -74,7 +73,7 @@ describe Board do
     end
 
     it 'should return an empty array when there are no spots left' do
-      board.board_grid = %w[X O X O X O X O]
+      (1..9).each { |space| board.mark_board('X', space) }
       expect(board.spaces_available).to eq([])
     end
   end
