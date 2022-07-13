@@ -24,53 +24,71 @@ describe Prompt do
 
   describe '#print_save_game_success' do
     it 'should print a message telling the user they saved the game' do
-      expect { prompt.print_save_game_success }.to output(Message.save_game_success).to_stdout
+      expect do
+        prompt.print_save_game_success
+      end.to output(Message.save_game_success).to_stdout
     end
   end
 
   describe '#print_save_game_declined' do
     it 'should print a message telling the user they declined to save the game' do
-      expect { prompt.print_save_game_declined }.to output(Message.save_game_declined).to_stdout
+      expect do
+        prompt.print_save_game_declined
+      end.to output(Message.save_game_declined).to_stdout
     end
   end
 
   describe '#print_show_results_message' do
     it 'should return a message when a user elects to show results of past games' do
-      expect { prompt.print_show_results_message }.to output(Message.show_results_message).to_stdout
+      expect do
+        prompt.print_show_results_message
+      end.to output(Message.show_results_message).to_stdout
     end
   end
 
   describe '#print_show_games_message' do
     it 'should return a message when a user elects to play an existing game' do
-      expect { prompt.print_show_games_message }.to output(Message.show_games_message).to_stdout
+      expect do
+        prompt.print_show_games_message
+      end.to output(Message.show_games_message).to_stdout
     end
   end
 
   describe '#print_ask_for_custom_marker' do
     it 'should print the instruction to choose custom marker message' do
-      expect { prompt.print_ask_for_custom_marker }.to output(Message.ask_for_custom_marker).to_stdout
+      expect do
+        prompt.print_ask_for_custom_marker
+      end.to output(Message.ask_for_custom_marker).to_stdout
     end
   end
 
   describe '#print_ask_to_revisit_game' do
     it 'should print instructions for a player to choose between starting a new game,viewing results, and playing an existing game' do
-      expect { prompt.print_ask_to_revisit_game }.to output(Message.ask_to_revisit_game).to_stdout
+      expect do
+        prompt.print_ask_to_revisit_game
+      end.to output(Message.ask_to_revisit_game).to_stdout
     end
   end
 
   describe '#print_ask_to_save_game' do
     it 'should print the instruction to choose custom marker message' do
-      expect { prompt.print_ask_to_save_game }.to output(Message.ask_to_save_game).to_stdout
+      expect do
+        prompt.print_ask_to_save_game
+      end.to output(Message.ask_to_save_game).to_stdout
     end
   end
 
   describe '#print_player_custom_marker' do
     it 'should print the prompt message for player 1 to choose a custom marker' do
-      expect { prompt.print_player_custom_marker(1) }.to output(Message.player_custom_marker(1)).to_stdout
+      expect do
+        prompt.print_player_custom_marker(1)
+      end.to output(Message.player_custom_marker(1)).to_stdout
     end
 
     it 'should print the prompt message for player 2 to choose a custom marker' do
-      expect { prompt.print_player_custom_marker(2) }.to output(Message.player_custom_marker(2)).to_stdout
+      expect do
+        prompt.print_player_custom_marker(2)
+      end.to output(Message.player_custom_marker(2)).to_stdout
     end
   end
 
@@ -78,13 +96,19 @@ describe Prompt do
     it 'should print the choice the player made after choosing a marker' do
       player = 1
       marker = 'R'
-      expect { prompt.print_player_custom_marker_choice(player, marker) }.to output(Message.player_custom_marker_choice(player, marker)).to_stdout
+      expect do
+        prompt.print_player_custom_marker_choice(player,
+                                                 marker)
+      end.to output(Message.player_custom_marker_choice(player,
+                                                        marker)).to_stdout
     end
   end
 
   describe '#print_board' do
     it 'should Print the tic tac toe board' do
-      expect { prompt.print_board }.to output(Message.display_board(board.board_grid)).to_stdout
+      expect do
+        prompt.print_board
+      end.to output(Message.display_board(board.board_grid)).to_stdout
     end
   end
 
@@ -94,7 +118,9 @@ describe Prompt do
       @prompt = Prompt.new(@board)
     end
     it 'should Print the tic tac toe board' do
-      expect { @prompt.print_lite3_board }.to output(Message.display_lite3_board(@board.board_grid)).to_stdout
+      expect do
+        @prompt.print_lite3_board
+      end.to output(Message.display_lite3_board(@board.board_grid)).to_stdout
     end
   end
 

@@ -29,16 +29,23 @@ class GameRunner
     @prompt.print_ask_for_custom_marker
 
     player1_marker = get_player_marker(1)
-    player2_marker = @prompt.validate_unique_markers(player1_marker, get_player_marker(2))
+    player2_marker = @prompt.validate_unique_markers(player1_marker,
+                                                     get_player_marker(2))
 
     @player1 = build_player(@prompt, player1_marker, game_mode_choice)
     @player2 = build_player(@prompt, player2_marker)
 
-    @game = build_game(game_mode_choice, @board, @prompt, @player1, @player2, @game_database_actions, @results_database_actions)
+    @game = build_game(game_mode_choice, @board, @prompt, @player1, @player2,
+                       @game_database_actions, @results_database_actions)
   end
 
   def build_player(prompt, marker, game_mode_choice = 1)
-    player_builder = [2, 4].include?(game_mode_choice) ? PlayerBuilder.new('Computer') : PlayerBuilder.new
+    player_builder = if [2,
+                         4].include?(game_mode_choice)
+                       PlayerBuilder.new('Computer')
+                     else
+                       PlayerBuilder.new
+                     end
     player_builder.set_player_prompt(prompt)
     player_builder.set_player_marker(marker)
     player_builder.player

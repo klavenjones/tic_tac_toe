@@ -78,7 +78,8 @@ describe Message do
 
   describe '#player_custom_marker_choice' do
     it 'should return the choice of the custom marker from a player' do
-      expect(Message.player_custom_marker_choice(1, 'A')).to eq("\n\nPlayer 1 your marker choice is: A.\n\n")
+      expect(Message.player_custom_marker_choice(1,
+                                                 'A')).to eq("\n\nPlayer 1 your marker choice is: A.\n\n")
     end
   end
 

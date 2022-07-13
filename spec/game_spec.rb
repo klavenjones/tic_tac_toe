@@ -18,7 +18,8 @@ describe Game do
     @player1 = build_player(@prompt, 'X')
     @player2 = build_player(@prompt, 'O')
 
-    @game = Game.new(@board, @prompt, @player1, @player2, @results_database_actions, @game_database_actions)
+    @game = Game.new(@board, @prompt, @player1, @player2,
+                     @results_database_actions, @game_database_actions)
   end
 
   after(:each) do
@@ -58,12 +59,16 @@ describe Game do
   describe '#status' do
     it 'should print a message when there is a tie' do
       @board.board_grid = %w[O O X X X O O O X]
-      expect { @game.status }.to output("\n\nThe game has ended in a tie.\n\n").to_stdout
+      expect do
+        @game.status
+      end.to output("\n\nThe game has ended in a tie.\n\n").to_stdout
     end
 
     it 'should print a message when there is a winner' do
       @board.board_grid = %w[X X X O 4 5 O O]
-      expect { @game.status }.to output("\n\nPlayer X is the winner.\n\n").to_stdout
+      expect do
+        @game.status
+      end.to output("\n\nPlayer X is the winner.\n\n").to_stdout
     end
   end
 
