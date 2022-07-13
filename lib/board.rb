@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'space'
 
 class Board
@@ -19,10 +20,9 @@ class Board
     [2, 4, 6]
   ].freeze
 
-
   def build_board
-    board = []  
-    (1..9).each_with_index {|space, index| board.push(Space.new(space.to_s, index))}
+    board = []
+    (1..9).each_with_index { |space, index| board.push(Space.new(space.to_s, index)) }
     board
   end
 
@@ -46,7 +46,7 @@ class Board
 
   def spot_taken?(spot)
     if spot > @board_grid.length
-      return false
+      false
     else
       @board_grid[spot - 1].marker != spot.to_s
     end
@@ -55,7 +55,7 @@ class Board
   def full?
     taken_spaces >= @board_grid.length
   end
-  
+
   def winner?
     winning_moves = []
     WINNING_COMBOS.each do |winning_game|

@@ -30,7 +30,6 @@ class Message
     "\n #{board_grid[0].marker} | #{board_grid[1].marker} | #{board_grid[2].marker} \n---|---|---\n #{board_grid[3].marker} | #{board_grid[4].marker} | #{board_grid[5].marker}  \n---|---|---\n #{board_grid[6].marker} | #{board_grid[7].marker} | #{board_grid[8].marker} \n\n\n"
   end
 
-
   def self.ask_for_custom_marker
     "\n\nPlease choose a custom marker to identify yourself on the board. ex. A, B, C\n\n"
   end
