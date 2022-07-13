@@ -39,7 +39,7 @@ class Board
   def spaces_available
     spaces = []
     @board_grid.each do |space|
-      spaces.push(space.marker) unless space.marker.match(/^[[:alpha:]]$/)
+      spaces.push(space) unless space.marker.match(/^[[:alpha:]]$/)
     end
     spaces
   end

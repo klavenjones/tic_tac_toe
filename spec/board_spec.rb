@@ -67,9 +67,9 @@ describe Board do
   end
 
   describe '#spaces_available' do
-    it 'should return an array of available spaces on the board, when the first spot is taken' do
+    it 'should return an array with only 8 available spaces.' do
       board.mark_board('X', 1)
-      expect(board.spaces_available).to eq(%w[2 3 4 5 6 7 8 9])
+      expect(board.spaces_available.length).to eq(8)
     end
 
     it 'should return an empty array when there are no spots left' do
