@@ -30,7 +30,6 @@ describe Space do
     end
   end
 
-
   describe '#reset_time_on_board' do
     it 'should reset the time_on_board to 0' do
       @space.update_time_on_board
@@ -39,6 +38,4 @@ describe Space do
       expect(@space.time_on_board).to eq(0)
     end
   end
-
-
 end

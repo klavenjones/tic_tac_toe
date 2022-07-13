@@ -9,17 +9,16 @@ describe Board do
     @prompt = Prompt.new(@board)
   end
 
-
   describe '#mark_board' do
     it 'should verify that the player marked position number one (Top left corner)' do
-      @board.mark_board("X", 1)
+      @board.mark_board('X', 1)
       expect { @prompt.print_board }.to output(
         "\n X | 2 | 3 \n---|---|---\n 4 | 5 | 6  \n---|---|---\n 7 | 8 | 9 \n\n\n"
       ).to_stdout
     end
 
     it 'should verify that the player marked position number nine (Bottom right corner)' do
-      @board.mark_board("X", 9)
+      @board.mark_board('X', 9)
       expect { @prompt.print_board }.to output(
         "\n 1 | 2 | 3 \n---|---|---\n 4 | 5 | 6  \n---|---|---\n 7 | 8 | X \n\n\n"
       ).to_stdout
@@ -103,5 +102,3 @@ describe Board do
     end
   end
 end
-
-

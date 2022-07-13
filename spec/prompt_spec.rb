@@ -7,12 +7,10 @@ require 'lite3_board'
 
 # rubocop:disable Metrics/BlockLength
 describe Prompt do
-
   before(:each) do
     @board = Board.new
     @prompt = Prompt.new(@board)
   end
-
 
   describe '#welcome' do
     it 'should Print the welcome message' do
@@ -102,7 +100,7 @@ describe Prompt do
       marker = 'R'
       expect do
         @prompt.print_player_custom_marker_choice(player,
-                                                 marker)
+                                                  marker)
       end.to output(Message.player_custom_marker_choice(player,
                                                         marker)).to_stdout
     end
@@ -115,7 +113,6 @@ describe Prompt do
       end.to output(Message.display_board(@board.board_grid)).to_stdout
     end
   end
-
 
   describe '#print_instruction' do
     it 'should Print the instructions to the game' do
@@ -280,7 +277,7 @@ describe Prompt do
   describe '#get_computers_move' do
     it 'should receive the computer player\'s move ' do
       # @board.board_grid = %w[X 2 3 4 5 6 7 8 9]
-      expect(@prompt.get_computers_move('X').marker).to eq("1")
+      expect(@prompt.get_computers_move('X').marker).to eq('1')
     end
   end
 end

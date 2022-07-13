@@ -66,7 +66,6 @@ describe Game do
 
     it 'should print a message when there is a winner' do
       mark_board_as_winner
-
       expect do
         @game.status
       end.to output("\n\nPlayer X is the winner.\n\n").to_stdout
@@ -106,21 +105,21 @@ def build_player(prompt, marker)
 end
 
 def mark_board_as_winner
-  @board.mark_board("X", 1)
-  @board.mark_board("X", 2)
-  @board.mark_board("X", 3)
-  @board.mark_board("O", 4)
-  @board.mark_board("O", 5)
+  @board.mark_board('X', 1)
+  @board.mark_board('X', 2)
+  @board.mark_board('X', 3)
+  @board.mark_board('O', 4)
+  @board.mark_board('O', 5)
 end
 
 def mark_board_as_tie
-  @board.mark_board("O", 1)
-  @board.mark_board("O", 2)
-  @board.mark_board("X", 3)
-  @board.mark_board("X", 4)
-  @board.mark_board("X", 5)
-  @board.mark_board("O", 6)
-  @board.mark_board("O", 7)
-  @board.mark_board("O", 8)
-  @board.mark_board("X", 9)
+  @board.mark_board('O', 1)
+  @board.mark_board('O', 2)
+  @board.mark_board('X', 3)
+  @board.mark_board('X', 4)
+  @board.mark_board('X', 5)
+  @board.mark_board('O', 6)
+  @board.mark_board('O', 7)
+  @board.mark_board('O', 8)
+  @board.mark_board('X', 9)
 end
