@@ -20,4 +20,8 @@ class Space
   def update_time_on_board
     @time_on_board += 1
   end
+
+  def reset_time_on_board
+    @time_on_board = 0
+  end
 end
