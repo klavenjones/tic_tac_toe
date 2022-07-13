@@ -77,6 +77,23 @@ describe Board do
       expect(board.spaces_available).to eq([])
     end
   end
+
+  describe '#build_board' do
+    it 'should build board and return an array' do
+        expect(board.build_board).to be_a(Array)
+    end
+
+    it 'should build board and an element should return an instance of a Space' do
+      space = board.build_board[0]  
+      expect(space).to be_instance_of(Space)
+    end
+ 
+    it 'should mark the board and return the marker of X' do
+      board.mark_board('X', 1)
+      space = board.board_grid[0]
+      expect(space.marker).to eq("X")
+    end
+  end
 end
 
 ## Utility Methods

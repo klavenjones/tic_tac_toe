@@ -21,16 +21,11 @@ describe Message do
 
   describe '#display_board' do
     before(:all) do
-      @lite3_board = Lite3Board.new
       @board = Board.new
       @board_message = "\n 1 | 2 | 3 \n---|---|---\n 4 | 5 | 6  \n---|---|---\n 7 | 8 | 9 \n\n\n"
     end
     it 'should return the board of the normal tic tac toe game' do
       expect(Message.display_board(@board.board_grid)).to eq(@board_message)
-    end
-
-    it 'should return the board of the lite3 tic tac toe game' do
-      expect(Message.display_lite3_board(@lite3_board.board_grid)).to eq(@board_message)
     end
   end
 
