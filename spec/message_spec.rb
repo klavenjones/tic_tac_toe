@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'board'
-require 'lite3_board'
 require 'message'
 # rubocop:disable Metrics/BlockLength
 describe Message do

@@ -3,7 +3,6 @@
 require 'prompt'
 require 'message'
 require 'board'
-require 'lite3_board'
 
 # rubocop:disable Metrics/BlockLength
 describe Prompt do
