@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "game"
+require 'game'
 
 class GameBuilder
   attr_accessor :game,
