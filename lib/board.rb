@@ -26,6 +26,20 @@ class Board
     board
   end
 
+  def update_board(player, move)
+    mark_board(player, move)
+  end
+
+  def update_space
+    @board_grid.each do |space|
+      space.update_time_on_board unless space.marker.match(/^[[:digit:]]$/)
+      if space.time_on_board > 4
+        space.reset_marker
+        space.reset_time_on_board
+      end
+    end
+  end
+
   def mark_board(player, move)
     @board_grid[move - 1].update_marker(player)
   end

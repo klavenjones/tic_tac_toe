@@ -36,28 +36,16 @@ class Game
       play_turn(@current_player, choice.to_i)
       @prompt.print_board
     end
-
     end_game(choice)
   end
 
   def play_turn(player, move)
     if valid_move?(move)
-      update_board(player, move)
+      @board.update_board(player.marker, move)
       set_winning_player(player) if @board.winner?
       update_current_player
     else
       @prompt.print_invalid_move_error
-    end
-  end
-
-  def update_board(player, move)
-    if player == @player1
-      @board.mark_board(@player1.marker,
-                        move)
-    else
-      @board.mark_board(
-        @player2.marker, move
-      )
     end
   end
 
