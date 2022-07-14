@@ -67,10 +67,6 @@ class Prompt
     print_message(Message.display_board(@board.board_grid))
   end
 
-  def print_lite3_board
-    print_message(Message.display_lite3_board(@board.board_grid))
-  end
-
   def print_tie
     print_message(Message.tie)
   end
@@ -163,7 +159,7 @@ class Prompt
   end
 
   def get_computers_move(marker)
-    computer_move = @board.spaces_available[0].to_i
+    computer_move = @board.spaces_available[0]
     print_computers_move(marker, computer_move)
     sleep 1
     computer_move

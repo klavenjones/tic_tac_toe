@@ -2,7 +2,6 @@
 
 require 'game'
 require 'lite3_game'
-require 'lite3_board'
 require 'board'
 require 'game_builder'
 require 'player_builder'
@@ -31,13 +30,6 @@ describe GameBuilder do
   it 'should return the board based on the board set' do
     builder = GameBuilder.new(1)
     board = Board.new
-    builder.set_board(board)
-    expect(builder.board).to eq(board)
-  end
-
-  it 'should return the lite3 board based on the board set' do
-    builder = GameBuilder.new(1)
-    board = Lite3Board.new
     builder.set_board(board)
     expect(builder.board).to eq(board)
   end

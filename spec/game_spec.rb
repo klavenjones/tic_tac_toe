@@ -58,14 +58,14 @@ describe Game do
 
   describe '#status' do
     it 'should print a message when there is a tie' do
-      @board.board_grid = %w[O O X X X O O O X]
+      mark_board_as_tie
       expect do
         @game.status
       end.to output("\n\nThe game has ended in a tie.\n\n").to_stdout
     end
 
     it 'should print a message when there is a winner' do
-      @board.board_grid = %w[X X X O 4 5 O O]
+      mark_board_as_winner
       expect do
         @game.status
       end.to output("\n\nPlayer X is the winner.\n\n").to_stdout
@@ -78,12 +78,12 @@ describe Game do
     end
 
     it 'should return true when the board is full' do
-      @board.board_grid = %w[X O X X O X O O X]
+      mark_board_as_tie
       expect(@game.game_over?).to eq(true)
     end
 
     it 'should return true when a player has won' do
-      @board.board_grid = %w[X X X O 5 6 O 8 9]
+      mark_board_as_winner
       expect(@game.game_over?).to eq(true)
     end
   end
@@ -102,4 +102,24 @@ def build_player(prompt, marker)
   builder.set_player_prompt(prompt)
   builder.set_player_marker(marker)
   builder.player
+end
+
+def mark_board_as_winner
+  @board.mark_board('X', 1)
+  @board.mark_board('X', 2)
+  @board.mark_board('X', 3)
+  @board.mark_board('O', 4)
+  @board.mark_board('O', 5)
+end
+
+def mark_board_as_tie
+  @board.mark_board('O', 1)
+  @board.mark_board('O', 2)
+  @board.mark_board('X', 3)
+  @board.mark_board('X', 4)
+  @board.mark_board('X', 5)
+  @board.mark_board('O', 6)
+  @board.mark_board('O', 7)
+  @board.mark_board('O', 8)
+  @board.mark_board('X', 9)
 end
