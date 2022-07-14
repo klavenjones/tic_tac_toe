@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'game'
-require 'lite3_game'
 require 'board'
 require 'game_builder'
 require 'player_builder'
