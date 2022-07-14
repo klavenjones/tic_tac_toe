@@ -3,7 +3,6 @@
 require 'player_builder'
 require 'prompt'
 require 'game'
-require 'lite3_game'
 require 'game_database_actions'
 require 'results_database_actions'
 require 'game_builder'
@@ -22,7 +21,7 @@ class GameRunner
     @results_database_actions = ResultsDatabaseActions.new('tic_tac_toe.db')
 
     game_mode_choice = get_game_mode
-    @board = get_board(game_mode_choice)
+    @board = Board.new
 
     @prompt.board = @board
     @prompt.print_ask_for_custom_marker
@@ -63,10 +62,6 @@ class GameRunner
     game_builder.game
   end
   # rubocop:enable Metrics/ParameterLists
-
-  def get_board(game_mode_choice = 1)
-    [1, 2].include?(game_mode_choice) ? Board.new : Lite3Board.new
-  end
 
   def get_player_marker(player)
     @prompt.print_player_custom_marker(player)

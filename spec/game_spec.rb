@@ -8,6 +8,7 @@ require 'message'
 require 'game_database_actions'
 require 'results_database_actions'
 
+# rubocop:disable Metrics/BlockLength
 describe Game do
   database_name = 'test.db'
   before(:each) do
@@ -99,9 +100,39 @@ describe Game do
       expect(@game.end_game('S')).to eq(@prompt.print_save_game_success)
     end
   end
-end
 
-# Utility Method
+
+  context "A full game played with normal Board" do
+    it 'should print that there is a winner of the game' do
+       update_board_x_times(7)
+       board = @game.board
+       expect(board.winner?).to eq(true)
+    end
+
+    it 'should only have four spaces available after five turns' do
+      update_board_x_times(5)
+      board = @game.board
+      expect(board.spaces_available.length).to eq(4)
+    end
+  end
+
+  context 'A full game played with Lite3 Board' do
+    it 'should never be a win or tie' do
+      update_board_x_times(9)
+      board = @game.board
+      expect(board.winner?).to eq(false)
+    end
+
+    it 'should always have five spaces available after more then 5 moves ' do
+      update_board_x_times(9)
+      board = @game.board
+      expect(board.spaces_available.length).to eq(5)
+    end
+  end
+end
+# rubocop:enable Metrics/BlockLength
+
+# Utility Methods
 def build_player(prompt, marker)
   builder = PlayerBuilder.new
   builder.set_player_prompt(prompt)
@@ -127,4 +158,11 @@ def mark_board_as_tie
   @board.mark_board('O', 7)
   @board.mark_board('O', 8)
   @board.mark_board('X', 9)
+end
+
+def update_board_x_times(num)
+  (1..num).each do |turn|
+    marker = turn.even? ? 'O' : 'X'
+    @board.update_board(marker, turn)
+  end
 end
