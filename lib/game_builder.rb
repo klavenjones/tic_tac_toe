@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 require 'game'
-require 'lite3_game'
 
 class GameBuilder
-  attr_accessor :game, :mode, :player1, :player2, :board, :prompt,
-                :game_database_actions, :results_database_actions
+  attr_accessor :game,
+                :mode,
+                :player1,
+                :player2,
+                :board,
+                :prompt,
+                :game_database_actions,
+                :results_database_actions
 
   def initialize(mode)
     @mode = mode
@@ -36,13 +41,13 @@ class GameBuilder
   end
 
   def set_game
-    @game = if @mode == 1 || @mode == 2
-              Game.new(@board, @prompt, @player1,
-                       @player2, @game_database_actions, @results_database_actions)
-            else
-              Lite3Game.new(
-                @board, @prompt, @player1, @player2, @game_database_actions, @results_database_actions
-              )
-            end
+    Game.new(
+      board: @board,
+      prompt: @prompt,
+      player1: @player1,
+      player2: @player2,
+      game_database_actions: @game_database_actions,
+      results_database_actions: @results_database_actions
+    )
   end
 end

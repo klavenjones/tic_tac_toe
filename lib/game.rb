@@ -8,18 +8,16 @@ class Game
   attr_accessor :board, :prompt, :player1, :player2, :current_player,
                 :winning_player
 
-  # rubocop:disable Metrics/ParameterLists
-  def initialize(board, prompt, player1, player2, game_database_actions, results_database_actions)
-    @board = board
-    @prompt = prompt
-    @player1 = player1
-    @player2 = player2
-    @current_player = player1
-    @winning_player = player1
-    @game_database_actions = game_database_actions
-    @results_database_actions = results_database_actions
+  def initialize(args)
+    @board = args[:board]
+    @prompt = args[:prompt]
+    @player1 = args[:player1]
+    @player2 = args[:player2]
+    @current_player = args[:player1]
+    @winning_player = args[:player1]
+    @game_database_actions = args[:game_database_actions]
+    @results_database_actions = args[:results_database_actions]
   end
-  # rubocop:enable Metrics/ParameterLists
 
   def start_game
     @prompt.print_board
@@ -38,28 +36,16 @@ class Game
       play_turn(@current_player, choice.to_i)
       @prompt.print_board
     end
-
     end_game(choice)
   end
 
   def play_turn(player, move)
     if valid_move?(move)
-      update_board(player, move)
+      @board.update_board(player.marker, move)
       set_winning_player(player) if @board.winner?
       update_current_player
     else
       @prompt.print_invalid_move_error
-    end
-  end
-
-  def update_board(player, move)
-    if player == @player1
-      @board.mark_board(@player1.marker,
-                        move)
-    else
-      @board.mark_board(
-        @player2.marker, move
-      )
     end
   end
 

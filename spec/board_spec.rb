@@ -75,7 +75,6 @@ describe Board do
   describe '#spaces_available' do
     it 'should return an array with only 8 available spaces.' do
       @board.mark_board('X', 1)
-      print @board.spaces_available[0].marker
       expect(@board.spaces_available.length).to eq(8)
     end
 
@@ -100,5 +99,30 @@ describe Board do
       space = @board.board_grid[0]
       expect(space.marker).to eq('X')
     end
+  end
+
+  describe '#update_board' do
+    it 'should return the updated space' do
+      update_board_x_times(1)
+      expect(@board.board_grid[0].marker).to eq('X')
+    end
+    it 'should reset the time_on_board when the board is updated more then 4 times' do
+      update_board_x_times(5)
+      expect(@board.board_grid[0].time_on_board).to eq(0)
+    end
+  end
+
+  describe '#update_space' do
+    it 'should return the updated time on board of 1' do
+      @board.mark_board('X', 1)
+      @board.update_space
+      expect(@board.board_grid[0].time_on_board).to eq(1)
+    end
+  end
+end
+
+def update_board_x_times(num)
+  (1..num).each do |space|
+    @board.update_board('X', space)
   end
 end

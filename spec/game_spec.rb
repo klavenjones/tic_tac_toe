@@ -8,6 +8,7 @@ require 'message'
 require 'game_database_actions'
 require 'results_database_actions'
 
+# rubocop:disable Metrics/BlockLength
 describe Game do
   database_name = 'test.db'
   before(:each) do
@@ -18,13 +19,18 @@ describe Game do
     @player1 = build_player(@prompt, 'X')
     @player2 = build_player(@prompt, 'O')
 
-    @game = Game.new(@board, @prompt, @player1, @player2,
-                     @results_database_actions, @game_database_actions)
+    @game =
+      Game.new(
+        board: @board,
+        prompt: @prompt,
+        player1: @player1,
+        player2: @player2,
+        game_database_actions: @game_database_actions,
+        results_database_actions: @results_database_actions
+      )
   end
 
-  after(:each) do
-    File.delete(database_name)
-  end
+  after(:each) { File.delete(database_name) }
 
   describe '#start_game' do
     it 'should display tic tac toe board' do
@@ -59,16 +65,16 @@ describe Game do
   describe '#status' do
     it 'should print a message when there is a tie' do
       mark_board_as_tie
-      expect do
-        @game.status
-      end.to output("\n\nThe game has ended in a tie.\n\n").to_stdout
+      expect { @game.status }.to output(
+        "\n\nThe game has ended in a tie.\n\n"
+      ).to_stdout
     end
 
     it 'should print a message when there is a winner' do
       mark_board_as_winner
-      expect do
-        @game.status
-      end.to output("\n\nPlayer X is the winner.\n\n").to_stdout
+      expect { @game.status }.to output(
+        "\n\nPlayer X is the winner.\n\n"
+      ).to_stdout
     end
   end
 
@@ -94,9 +100,39 @@ describe Game do
       expect(@game.end_game('S')).to eq(@prompt.print_save_game_success)
     end
   end
-end
 
-# Utility Method
+
+  context "A full game played with normal Board" do
+    it 'should print that there is a winner of the game' do
+       update_board_x_times(7)
+       board = @game.board
+       expect(board.winner?).to eq(true)
+    end
+
+    it 'should only have four spaces available after five turns' do
+      update_board_x_times(5)
+      board = @game.board
+      expect(board.spaces_available.length).to eq(4)
+    end
+  end
+
+  context 'A full game played with Lite3 Board' do
+    it 'should never be a win or tie' do
+      update_board_x_times(9)
+      board = @game.board
+      expect(board.winner?).to eq(false)
+    end
+
+    it 'should always have five spaces available after more then 5 moves ' do
+      update_board_x_times(9)
+      board = @game.board
+      expect(board.spaces_available.length).to eq(5)
+    end
+  end
+end
+# rubocop:enable Metrics/BlockLength
+
+# Utility Methods
 def build_player(prompt, marker)
   builder = PlayerBuilder.new
   builder.set_player_prompt(prompt)
@@ -122,4 +158,11 @@ def mark_board_as_tie
   @board.mark_board('O', 7)
   @board.mark_board('O', 8)
   @board.mark_board('X', 9)
+end
+
+def update_board_x_times(num)
+  (1..num).each do |turn|
+    marker = turn.even? ? 'O' : 'X'
+    @board.update_board(marker, turn)
+  end
 end

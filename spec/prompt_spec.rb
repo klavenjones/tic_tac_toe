@@ -275,8 +275,7 @@ describe Prompt do
 
   describe '#get_computers_move' do
     it 'should receive the computer player\'s move ' do
-      # @board.board_grid = %w[X 2 3 4 5 6 7 8 9]
-      expect(@prompt.get_computers_move('X').marker).to eq('1')
+      expect(@prompt.get_computers_move('X')).to eq(1)
     end
   end
 end
