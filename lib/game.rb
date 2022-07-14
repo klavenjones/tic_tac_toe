@@ -8,18 +8,16 @@ class Game
   attr_accessor :board, :prompt, :player1, :player2, :current_player,
                 :winning_player
 
-  # rubocop:disable Metrics/ParameterLists
-  def initialize(board, prompt, player1, player2, game_database_actions, results_database_actions)
-    @board = board
-    @prompt = prompt
-    @player1 = player1
-    @player2 = player2
-    @current_player = player1
-    @winning_player = player1
-    @game_database_actions = game_database_actions
-    @results_database_actions = results_database_actions
+  def initialize(args)
+    @board = args[:board]
+    @prompt = args[:prompt]
+    @player1 = args[:player1]
+    @player2 = args[:player2]
+    @current_player = args[:player1]
+    @winning_player = args[:player1]
+    @game_database_actions = args[:game_database_actions]
+    @results_database_actions = args[:results_database_actions]
   end
-  # rubocop:enable Metrics/ParameterLists
 
   def start_game
     @prompt.print_board

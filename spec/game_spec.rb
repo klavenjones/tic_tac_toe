@@ -18,13 +18,18 @@ describe Game do
     @player1 = build_player(@prompt, 'X')
     @player2 = build_player(@prompt, 'O')
 
-    @game = Game.new(@board, @prompt, @player1, @player2,
-                     @results_database_actions, @game_database_actions)
+    @game =
+      Game.new(
+        board: @board,
+        prompt: @prompt,
+        player1: @player1,
+        player2: @player2,
+        game_database_actions: @game_database_actions,
+        results_database_actions: @results_database_actions
+      )
   end
 
-  after(:each) do
-    File.delete(database_name)
-  end
+  after(:each) { File.delete(database_name) }
 
   describe '#start_game' do
     it 'should display tic tac toe board' do
@@ -59,16 +64,16 @@ describe Game do
   describe '#status' do
     it 'should print a message when there is a tie' do
       mark_board_as_tie
-      expect do
-        @game.status
-      end.to output("\n\nThe game has ended in a tie.\n\n").to_stdout
+      expect { @game.status }.to output(
+        "\n\nThe game has ended in a tie.\n\n"
+      ).to_stdout
     end
 
     it 'should print a message when there is a winner' do
       mark_board_as_winner
-      expect do
-        @game.status
-      end.to output("\n\nPlayer X is the winner.\n\n").to_stdout
+      expect { @game.status }.to output(
+        "\n\nPlayer X is the winner.\n\n"
+      ).to_stdout
     end
   end
 
