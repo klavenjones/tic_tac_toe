@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'game'
+require 'board'
+require 'lite3_board'
 
 class GameBuilder
   attr_accessor :game,
@@ -24,8 +26,8 @@ class GameBuilder
     @player2 = player2
   end
 
-  def set_board(board)
-    @board = board
+  def set_board
+    @board = @mode == 1 || @mode == 2 ? Board.new : Lite3Board.new
   end
 
   def set_prompt(prompt)
@@ -41,7 +43,7 @@ class GameBuilder
   end
 
   def set_game
-    Game.new(
+    @game = Game.new(
       board: @board,
       prompt: @prompt,
       player1: @player1,

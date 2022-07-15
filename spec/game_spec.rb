@@ -3,6 +3,7 @@
 require 'game'
 require 'player_builder'
 require 'board'
+require 'lite3_board'
 require 'prompt'
 require 'message'
 require 'game_database_actions'
@@ -101,30 +102,48 @@ describe Game do
     end
   end
 
-
-  context "A full game played with normal Board" do
-    it 'should print that there is a winner of the game' do
-       update_board_x_times(7)
-       board = @game.board
-       expect(board.winner?).to eq(true)
+  context 'A full game played with normal Board' do
+    it 'should be true when there is a winner of the game' do
+      update_game_board_x_times(@board, 9)
+      board = @game.board
+      expect(board.winner?).to eq(true)
     end
 
     it 'should only have four spaces available after five turns' do
-      update_board_x_times(5)
+      update_game_board_x_times(@board, 5)
       board = @game.board
       expect(board.spaces_available.length).to eq(4)
     end
   end
 
   context 'A full game played with Lite3 Board' do
+    before(:each) do
+      @lite3_board = Lite3Board.new
+      @prompt = Prompt.new(@board)
+      @game_database_actions = GameDatabaseActions.new(database_name)
+      @results_database_actions = ResultsDatabaseActions.new(database_name)
+      @player1 = build_player(@prompt, 'X')
+      @player2 = build_player(@prompt, 'O')
+
+      @game =
+        Game.new(
+          board: @lite3_board,
+          prompt: @prompt,
+          player1: @player1,
+          player2: @player2,
+          game_database_actions: @game_database_actions,
+          results_database_actions: @results_database_actions
+        )
+    end
+
     it 'should never be a win or tie' do
-      update_board_x_times(9)
+      update_game_board_x_times(@lite3_board, 9)
       board = @game.board
       expect(board.winner?).to eq(false)
     end
 
     it 'should always have five spaces available after more then 5 moves ' do
-      update_board_x_times(9)
+      update_game_board_x_times(@lite3_board, 9)
       board = @game.board
       expect(board.spaces_available.length).to eq(5)
     end
@@ -160,9 +179,9 @@ def mark_board_as_tie
   @board.mark_board('X', 9)
 end
 
-def update_board_x_times(num)
+def update_game_board_x_times(board, num)
   (1..num).each do |turn|
     marker = turn.even? ? 'O' : 'X'
-    @board.update_board(marker, turn)
+    board.update_board(marker, turn)
   end
 end

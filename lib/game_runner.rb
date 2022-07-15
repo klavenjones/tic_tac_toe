@@ -21,11 +21,7 @@ class GameRunner
     @results_database_actions = ResultsDatabaseActions.new('tic_tac_toe.db')
 
     game_mode_choice = get_game_mode
-    @board = Board.new
-
-    @prompt.board = @board
     @prompt.print_ask_for_custom_marker
-
     player1_marker = get_player_marker(1)
     player2_marker = @prompt.validate_unique_markers(player1_marker,
                                                      get_player_marker(2))
@@ -50,9 +46,10 @@ class GameRunner
   end
 
   # rubocop:disable Metrics/ParameterLists
-  def build_game(game_mode_choice, board, prompt, player1, player2, game_database_actions, results_database_actions)
+  def build_game(game_mode_choice, _board, prompt, player1, player2, game_database_actions, results_database_actions)
     game_builder = GameBuilder.new(game_mode_choice)
-    game_builder.set_board(board)
+    game_builder.set_board
+    prompt.board = game_builder.board
     game_builder.set_prompt(prompt)
     game_builder.set_player_one(player1)
     game_builder.set_player_two(player2)

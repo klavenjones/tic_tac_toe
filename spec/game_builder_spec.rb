@@ -2,6 +2,7 @@
 
 require 'game'
 require 'board'
+require 'lite3_board'
 require 'game_builder'
 require 'player_builder'
 require 'results_database_actions'
@@ -26,11 +27,16 @@ describe GameBuilder do
     expect(builder.player2).to eq(player_builder.player)
   end
 
-  it 'should return the board based on the board set' do
+  it 'should return the board based on the mode set' do
     builder = GameBuilder.new(1)
-    board = Board.new
-    builder.set_board(board)
-    expect(builder.board).to eq(board)
+    builder.set_board
+    expect(builder.board).to be_instance_of(Board)
+  end
+
+  it 'should return the lite3 board based on the mode set' do
+    builder = GameBuilder.new(3)
+    builder.set_board
+    expect(builder.board).to be_instance_of(Lite3Board)
   end
 
   it 'should return the prompt based on the prompt set' do
