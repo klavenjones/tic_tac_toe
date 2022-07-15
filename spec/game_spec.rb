@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+$LOAD_PATH << './util'
+require 'rspec_utils'
 require 'game'
 require 'player_builder'
 require 'board'
@@ -12,13 +14,15 @@ require 'results_database_actions'
 # rubocop:disable Metrics/BlockLength
 describe Game do
   database_name = 'test.db'
+  include RspecUtilMethods
+
   before(:each) do
     @board = Board.new
     @prompt = Prompt.new(@board)
     @game_database_actions = GameDatabaseActions.new(database_name)
     @results_database_actions = ResultsDatabaseActions.new(database_name)
-    @player1 = build_player(@prompt, 'X')
-    @player2 = build_player(@prompt, 'O')
+    @player1 = build_player(PlayerBuilder.new, @prompt, 'X')
+    @player2 = build_player(PlayerBuilder.new, @prompt, 'O')
 
     @game =
       Game.new(
@@ -65,14 +69,14 @@ describe Game do
 
   describe '#status' do
     it 'should print a message when there is a tie' do
-      mark_board_as_tie
+      mark_board_as_tie(@board)
       expect { @game.status }.to output(
         "\n\nThe game has ended in a tie.\n\n"
       ).to_stdout
     end
 
     it 'should print a message when there is a winner' do
-      mark_board_as_winner
+      mark_board_as_winner(@board)
       expect { @game.status }.to output(
         "\n\nPlayer X is the winner.\n\n"
       ).to_stdout
@@ -85,12 +89,12 @@ describe Game do
     end
 
     it 'should return true when the board is full' do
-      mark_board_as_tie
+      mark_board_as_tie(@board)
       expect(@game.game_over?).to eq(true)
     end
 
     it 'should return true when a player has won' do
-      mark_board_as_winner
+      mark_board_as_winner(@board)
       expect(@game.game_over?).to eq(true)
     end
   end
@@ -122,8 +126,8 @@ describe Game do
       @prompt = Prompt.new(@board)
       @game_database_actions = GameDatabaseActions.new(database_name)
       @results_database_actions = ResultsDatabaseActions.new(database_name)
-      @player1 = build_player(@prompt, 'X')
-      @player2 = build_player(@prompt, 'O')
+      @player1 = build_player(PlayerBuilder.new, @prompt, 'X')
+      @player2 = build_player(PlayerBuilder.new, @prompt, 'O')
 
       @game =
         Game.new(
@@ -150,38 +154,3 @@ describe Game do
   end
 end
 # rubocop:enable Metrics/BlockLength
-
-# Utility Methods
-def build_player(prompt, marker)
-  builder = PlayerBuilder.new
-  builder.set_player_prompt(prompt)
-  builder.set_player_marker(marker)
-  builder.player
-end
-
-def mark_board_as_winner
-  @board.mark_board('X', 1)
-  @board.mark_board('X', 2)
-  @board.mark_board('X', 3)
-  @board.mark_board('O', 4)
-  @board.mark_board('O', 5)
-end
-
-def mark_board_as_tie
-  @board.mark_board('O', 1)
-  @board.mark_board('O', 2)
-  @board.mark_board('X', 3)
-  @board.mark_board('X', 4)
-  @board.mark_board('X', 5)
-  @board.mark_board('O', 6)
-  @board.mark_board('O', 7)
-  @board.mark_board('O', 8)
-  @board.mark_board('X', 9)
-end
-
-def update_game_board_x_times(board, num)
-  (1..num).each do |turn|
-    marker = turn.even? ? 'O' : 'X'
-    board.update_board(marker, turn)
-  end
-end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+$LOAD_PATH << './util'
+require 'rspec_utils'
 require 'board'
 require 'prompt'
 
@@ -8,6 +10,8 @@ describe Board do
     @board = Board.new
     @prompt = Prompt.new(@board)
   end
+
+  include RspecUtilMethods
 
   describe '#mark_board' do
     it 'should verify that the player marked position number one (Top left corner)' do
@@ -101,12 +105,8 @@ describe Board do
 
   describe '#update_board' do
     it 'should return the updated space on the board class' do
-      update_board_x_times(1)
+      update_board_x_times(@board, 1)
       expect(@board.board_grid[0].marker).to eq('X')
     end
   end
-end
-
-def update_board_x_times(num)
-  (1..num).each { |space| @board.update_board('X', space) }
 end
