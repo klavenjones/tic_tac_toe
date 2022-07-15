@@ -24,7 +24,7 @@ class InputValidation
   end
 
   def self.valid_marker?(marker)
-    single_char?(marker) && !valid_number?(marker)
+    single_char?(marker) && /^[[:alpha:]]$/.match?(marker)
   end
 
   def self.marker_taken?(marker1, marker2)
