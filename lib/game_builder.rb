@@ -7,8 +7,7 @@ require 'lite3_board'
 class GameBuilder
   attr_accessor :game,
                 :mode,
-                :player1,
-                :player2,
+                :players,
                 :board,
                 :prompt,
                 :game_database_actions,
@@ -18,12 +17,8 @@ class GameBuilder
     @mode = mode
   end
 
-  def set_player_one(player1)
-    @player1 = player1
-  end
-
-  def set_player_two(player2)
-    @player2 = player2
+  def set_players(players)
+    @players = players
   end
 
   def set_board
@@ -46,8 +41,7 @@ class GameBuilder
     @game = Game.new(
       board: @board,
       prompt: @prompt,
-      player1: @player1,
-      player2: @player2,
+      players: @players,
       game_database_actions: @game_database_actions,
       results_database_actions: @results_database_actions
     )

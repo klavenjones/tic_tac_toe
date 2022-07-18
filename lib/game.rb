@@ -5,16 +5,14 @@ require 'input_validation'
 require 'board'
 
 class Game
-  attr_accessor :board, :prompt, :player1, :player2, :current_player,
-                :winning_player
+  attr_accessor :board, :prompt, :players, :current_player, :winning_player
 
   def initialize(args)
     @board = args[:board]
     @prompt = args[:prompt]
-    @player1 = args[:player1]
-    @player2 = args[:player2]
-    @current_player = args[:player1]
-    @winning_player = args[:player1]
+    @players = args[:players]
+    @current_player = args[:players][0]
+    @winning_player = args[:players][0]
     @game_database_actions = args[:game_database_actions]
     @results_database_actions = args[:results_database_actions]
   end
@@ -50,7 +48,7 @@ class Game
   end
 
   def update_current_player
-    @current_player == @player1 ? set_current_player(@player2) : set_current_player(@player1)
+    set_current_player(@players.reverse![0])
   end
 
   def set_current_player(current_player)
@@ -74,25 +72,41 @@ class Game
   end
 
   def status
-    board.full? && !board.winner? ? @prompt.print_tie : @prompt.print_winner(@winning_player.marker)
+    if board.full? && !board.winner?
+      @prompt.print_tie
+    else
+      @prompt.print_winner(@winning_player.marker)
+    end
   end
 
   def save_result
     @prompt.print_ask_to_save_game
     choice = @prompt.get_save_game_choice
-    losing_player = @player1 == @winning_player ? @player2 : @player1
+    losing_player = @players[0] == @winning_player ? @players[0] : @players[1]
     if choice == 'Y'
-      @results_database_actions.save_result(@winning_player.marker,
-                                            losing_player.marker, @board.board_grid.join)
+      @results_database_actions.save_result(
+        @winning_player.marker,
+        losing_player.marker,
+        @board.board_grid.join
+      )
     end
-    choice == 'Y' ? @prompt.print_save_game_success : @prompt.print_save_game_declined
+    if choice == 'Y'
+      @prompt.print_save_game_success
+    else
+      @prompt.print_save_game_declined
+    end
   end
 
   def save_game
-    game_type = @player1.type == 'Computer' ? 'Computer vs. Human' : 'Human vs Human'
-    @opposing_player = @player1 == @current_player ? @player2 : @player1
-    @game_database_actions.save_game(game_type, @current_player.marker,
-                                     @opposing_player.marker, @board.board_grid.join)
+    game_type =
+      @players[0].type == 'Computer' ? 'Computer vs. Human' : 'Human vs Human'
+    @opposing_player = @players[0] == @current_player ? @players[0] : @players[1]
+    @game_database_actions.save_game(
+      game_type,
+      @current_player.marker,
+      @opposing_player.marker,
+      @board.board_grid.join
+    )
   end
 
   def end_game(choice)

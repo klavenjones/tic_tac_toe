@@ -26,16 +26,17 @@ class GameRunner
     player2_marker =
       @prompt.validate_unique_markers(player1_marker, get_player_marker(2))
 
-    @player1 = build_player(@prompt, player1_marker, game_mode_choice)
-    @player2 = build_player(@prompt, player2_marker)
+    @players = [
+      build_player(@prompt, player1_marker, game_mode_choice),
+      build_player(@prompt, player2_marker)
+    ]
 
     @game =
       build_game(
         game_mode_choice: game_mode_choice,
         board: @board,
         prompt: @prompt,
-        player1: @player1,
-        player2: @player2,
+        players: @players,
         game_database_actions: @game_database_actions,
         results_database_actions: @results_database_actions
       )
@@ -58,8 +59,7 @@ class GameRunner
     game_builder.set_board
     args[:prompt].board = game_builder.board
     game_builder.set_prompt(args[:prompt])
-    game_builder.set_player_one(args[:player1])
-    game_builder.set_player_two(args[:player2])
+    game_builder.set_players(args[:players])
     game_builder.set_game_database_actions(args[:game_database_actions])
     game_builder.set_results_database_actions(args[:results_database_actions])
     game_builder.set_game
