@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
+$LOAD_PATH << './util'
+require 'rspec_utils'
 require 'lite3_board'
 require 'board'
 
 describe Lite3Board do
+  include RspecUtilMethods
+
   before(:each) do
     @lite3_board = Lite3Board.new
   end
@@ -14,11 +18,11 @@ describe Lite3Board do
 
   describe '#update_board' do
     it 'should return the updated space' do
-      update_lite3_board_x_times(1)
+      update_board_x_times(@lite3_board, 1)
       expect(@lite3_board.board_grid[0].marker).to eq('X')
     end
     it 'should reset the time_on_board when the board is updated more then 4 times' do
-      update_lite3_board_x_times(5)
+      update_board_x_times(@lite3_board, 5)
       print @lite3_board.board_grid[0].marker
       expect(@lite3_board.board_grid[0].time_on_board).to eq(0)
     end
@@ -30,11 +34,5 @@ describe Lite3Board do
       @lite3_board.update_space
       expect(@lite3_board.board_grid[0].time_on_board).to eq(1)
     end
-  end
-end
-
-def update_lite3_board_x_times(num)
-  (1..num).each do |space|
-    @lite3_board.update_board('X', space)
   end
 end

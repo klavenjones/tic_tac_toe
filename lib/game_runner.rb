@@ -23,42 +23,48 @@ class GameRunner
     game_mode_choice = get_game_mode
     @prompt.print_ask_for_custom_marker
     player1_marker = get_player_marker(1)
-    player2_marker = @prompt.validate_unique_markers(player1_marker,
-                                                     get_player_marker(2))
+    player2_marker =
+      @prompt.validate_unique_markers(player1_marker, get_player_marker(2))
 
     @player1 = build_player(@prompt, player1_marker, game_mode_choice)
     @player2 = build_player(@prompt, player2_marker)
 
-    @game = build_game(game_mode_choice, @board, @prompt, @player1, @player2,
-                       @game_database_actions, @results_database_actions)
+    @game =
+      build_game(
+        game_mode_choice: game_mode_choice,
+        board: @board,
+        prompt: @prompt,
+        player1: @player1,
+        player2: @player2,
+        game_database_actions: @game_database_actions,
+        results_database_actions: @results_database_actions
+      )
   end
 
   def build_player(prompt, marker, game_mode_choice = 1)
-    player_builder = if [2,
-                         4].include?(game_mode_choice)
-                       PlayerBuilder.new('Computer')
-                     else
-                       PlayerBuilder.new
-                     end
+    player_builder =
+      if [2, 4].include?(game_mode_choice)
+        PlayerBuilder.new('Computer')
+      else
+        PlayerBuilder.new
+      end
     player_builder.set_player_prompt(prompt)
     player_builder.set_player_marker(marker)
     player_builder.player
   end
 
-  # rubocop:disable Metrics/ParameterLists
-  def build_game(game_mode_choice, _board, prompt, player1, player2, game_database_actions, results_database_actions)
-    game_builder = GameBuilder.new(game_mode_choice)
+  def build_game(args)
+    game_builder = GameBuilder.new(args[:game_mode_choice])
     game_builder.set_board
-    prompt.board = game_builder.board
-    game_builder.set_prompt(prompt)
-    game_builder.set_player_one(player1)
-    game_builder.set_player_two(player2)
-    game_builder.set_game_database_actions(game_database_actions)
-    game_builder.set_results_database_actions(results_database_actions)
+    args[:prompt].board = game_builder.board
+    game_builder.set_prompt(args[:prompt])
+    game_builder.set_player_one(args[:player1])
+    game_builder.set_player_two(args[:player2])
+    game_builder.set_game_database_actions(args[:game_database_actions])
+    game_builder.set_results_database_actions(args[:results_database_actions])
     game_builder.set_game
     game_builder.game
   end
-  # rubocop:enable Metrics/ParameterLists
 
   def get_player_marker(player)
     @prompt.print_player_custom_marker(player)
