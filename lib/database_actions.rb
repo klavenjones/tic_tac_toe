@@ -2,21 +2,29 @@
 
 require 'database'
 
-class ResultsDatabaseActions < Database
-  def save_result(winner, loser, board)
+class DatabaseActions < Database
+  def build_placeholders(length)
+    placeholders = String.new('')
+    (1..length).each do |_item|
+      placeholders << '?, '
+    end
+    placeholders
+  end
+
+  def save(table, columns, values)
+    placeholders = build_placeholders(values.length)
     @db = SQLite3::Database.open @database_name
-    @db.execute "INSERT INTO results (winner, loser, board, date) VALUES (?, ?, ?, date('now'))",
-                winner, loser, board
+    @db.execute "INSERT INTO #{table} (#{columns}) VALUES (#{placeholders} date('now'))", values
   rescue SQLite3::Exception => e
     print e
   ensure
     @db&.close
   end
 
-  def get_all_results
+  def get_all(table)
     @db = SQLite3::Database.open @database_name
     @db.results_as_hash = true
-    result = @db.execute 'SELECT * FROM results'
+    result = @db.execute "SELECT * FROM #{table}"
     result
   rescue SQLite3::Exception => e
     print e
@@ -24,10 +32,10 @@ class ResultsDatabaseActions < Database
     @db&.close
   end
 
-  def get_result(result_id)
+  def get_one(table, id, value)
     @db = SQLite3::Database.open @database_name
     @db.results_as_hash = true
-    result = @db.execute 'SELECT * FROM results WHERE resultId=?', result_id
+    result = @db.execute "SELECT * FROM #{table} WHERE #{id}=?", value
     result
   rescue SQLite3::Exception => e
     print e
@@ -35,10 +43,10 @@ class ResultsDatabaseActions < Database
     @db&.close
   end
 
-  def delete_result(result_id)
+  def delete(table, id, value)
     @db = SQLite3::Database.open @database_name
     @db.results_as_hash = true
-    result = @db.execute 'DELETE FROM results WHERE resultId=?', result_id
+    result = @db.execute "DELETE FROM #{table} WHERE #{id}=?", value
     result
   rescue SQLite3::Exception => e
     print e
