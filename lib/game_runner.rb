@@ -3,7 +3,7 @@
 require 'player_builder'
 require 'prompt'
 require 'game'
-require 'game_database_actions'
+require 'database_actions'
 require 'results_database_actions'
 require 'game_builder'
 
@@ -17,8 +17,7 @@ class GameRunner
     @prompt = Prompt.new
     @prompt.welcome
 
-    @game_database_actions = GameDatabaseActions.new('tic_tac_toe.db')
-    @results_database_actions = ResultsDatabaseActions.new('tic_tac_toe.db')
+    @database_actions = DatabaseActions.new('tic_tac_toe.db')
 
     game_mode_choice = get_game_mode
     @prompt.print_ask_for_custom_marker
@@ -37,8 +36,7 @@ class GameRunner
         board: @board,
         prompt: @prompt,
         players: @players,
-        game_database_actions: @game_database_actions,
-        results_database_actions: @results_database_actions
+        database_actions: @database_actions
       )
   end
 
@@ -60,8 +58,7 @@ class GameRunner
     args[:prompt].board = game_builder.board
     game_builder.set_prompt(args[:prompt])
     game_builder.set_players(args[:players])
-    game_builder.set_game_database_actions(args[:game_database_actions])
-    game_builder.set_results_database_actions(args[:results_database_actions])
+    game_builder.set_database_actions(args[:database_actions])
     game_builder.set_game
     game_builder.game
   end

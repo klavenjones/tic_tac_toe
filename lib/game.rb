@@ -13,8 +13,7 @@ class Game
     @players = args[:players]
     @current_player = args[:players][0]
     @winning_player = args[:players][0]
-    @game_database_actions = args[:game_database_actions]
-    @results_database_actions = args[:results_database_actions]
+    @database_actions = args[:database_actions]
   end
 
   def start_game
@@ -82,15 +81,11 @@ class Game
   def save_result
     @prompt.print_ask_to_save_game
     choice = @prompt.get_save_game_choice
-    losing_player = @players[0] == @winning_player ? @players[0] : @players[1]
     if choice == 'Y'
-      @results_database_actions.save_result(
-        @winning_player.marker,
-        losing_player.marker,
-        @board.board_grid.join
-      )
-    end
-    if choice == 'Y'
+      columns = 'winner, loser, board, date'
+      losing_player = @players[0] == @winning_player ? @players[1] : @players[0]
+      values = [@winning_player.marker, losing_player.marker, @board.board_grid.join]
+      @database_actions.save('results', columns, values)
       @prompt.print_save_game_success
     else
       @prompt.print_save_game_declined
@@ -98,15 +93,11 @@ class Game
   end
 
   def save_game
-    game_type =
-      @players[0].type == 'Computer' ? 'Computer vs. Human' : 'Human vs Human'
-    @opposing_player = @players[0] == @current_player ? @players[0] : @players[1]
-    @game_database_actions.save_game(
-      game_type,
-      @current_player.marker,
-      @opposing_player.marker,
-      @board.board_grid.join
-    )
+    columns = 'type, current_player, opposing_player, board, date'
+    game_type = @players[0].type == 'Computer' ? 'Computer vs. Human' : 'Human vs Human'
+    @opposing_player = @players[0] == @current_player ? @players[1] : @players[0]
+    values = [game_type, @current_player.marker, @opposing_player.marker, @board.board_grid.join]
+    @database_actions.save('games', columns, values)
   end
 
   def end_game(choice)

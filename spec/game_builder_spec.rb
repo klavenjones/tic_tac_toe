@@ -5,7 +5,7 @@ require 'board'
 require 'lite3_board'
 require 'game_builder'
 require 'player_builder'
-require 'results_database_actions'
+require 'database_actions'
 
 describe GameBuilder do
   it 'should return the mode a player chose' do
@@ -53,9 +53,9 @@ describe GameBuilder do
 
   it 'should return the database actions based on the actions set' do
     builder = GameBuilder.new(1)
-    results_database_actions = ResultsDatabaseActions.new('test.db')
-    builder.set_results_database_actions(results_database_actions)
-    expect(builder.results_database_actions).to eq(results_database_actions)
+    database_actions = DatabaseActions.new('test.db')
+    builder.set_database_actions(database_actions)
+    expect(builder.database_actions).to eq(database_actions)
     File.delete('test.db')
   end
 end
