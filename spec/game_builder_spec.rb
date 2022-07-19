@@ -13,18 +13,22 @@ describe GameBuilder do
     expect(builder.mode).to eq(1)
   end
 
-  it 'should return player1 based on the player set' do
+  it 'should return player 1 based on the player set' do
     builder = GameBuilder.new(1)
-    player_builder = PlayerBuilder.new('Human')
-    builder.set_player_one(player_builder.player)
-    expect(builder.player1).to eq(player_builder.player)
+    player1_builder = PlayerBuilder.new('Human')
+    player2_builder = PlayerBuilder.new('Human')
+    players = [player1_builder.player, player2_builder.player]
+    builder.set_players(players)
+    expect(builder.players[1]).to eq(players[1])
   end
 
   it 'should return player2 based on the player set' do
     builder = GameBuilder.new(1)
-    player_builder = PlayerBuilder.new('Human')
-    builder.set_player_two(player_builder.player)
-    expect(builder.player2).to eq(player_builder.player)
+    player1_builder = PlayerBuilder.new('Human')
+    player2_builder = PlayerBuilder.new('Human')
+    players = [player1_builder.player, player2_builder.player]
+    builder.set_players(players)
+    expect(builder.players[0]).to eq(players[0])
   end
 
   it 'should return the board based on the mode set' do

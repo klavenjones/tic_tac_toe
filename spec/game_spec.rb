@@ -21,15 +21,16 @@ describe Game do
     @prompt = Prompt.new(@board)
     @game_database_actions = GameDatabaseActions.new(database_name)
     @results_database_actions = ResultsDatabaseActions.new(database_name)
-    @player1 = build_player(PlayerBuilder.new, @prompt, 'X')
-    @player2 = build_player(PlayerBuilder.new, @prompt, 'O')
+    @players = [
+      build_player(PlayerBuilder.new, @prompt, 'X'),
+      build_player(PlayerBuilder.new, @prompt, 'O')
+    ]
 
     @game =
       Game.new(
         board: @board,
         prompt: @prompt,
-        player1: @player1,
-        player2: @player2,
+        players: @players,
         game_database_actions: @game_database_actions,
         results_database_actions: @results_database_actions
       )
@@ -47,14 +48,14 @@ describe Game do
 
   describe '#set_current_player' do
     it 'should set current player to player and return marker O' do
-      @game.set_current_player(@game.player2)
+      @game.set_current_player(@game.players[1])
       expect(@game.current_player.marker).to eq('O')
     end
   end
 
   describe '#set_winning_player' do
     it 'should set player to winning player and return marker O' do
-      @game.set_winning_player(@game.player2)
+      @game.set_winning_player(@game.players[1])
       expect(@game.winning_player.marker).to eq('O')
     end
   end
@@ -126,15 +127,16 @@ describe Game do
       @prompt = Prompt.new(@board)
       @game_database_actions = GameDatabaseActions.new(database_name)
       @results_database_actions = ResultsDatabaseActions.new(database_name)
-      @player1 = build_player(PlayerBuilder.new, @prompt, 'X')
-      @player2 = build_player(PlayerBuilder.new, @prompt, 'O')
+      @players = [
+        build_player(PlayerBuilder.new, @prompt, 'X'),
+        build_player(PlayerBuilder.new, @prompt, 'O')
+      ]
 
       @game =
         Game.new(
           board: @lite3_board,
           prompt: @prompt,
-          player1: @player1,
-          player2: @player2,
+          players: @players,
           game_database_actions: @game_database_actions,
           results_database_actions: @results_database_actions
         )
