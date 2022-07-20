@@ -8,8 +8,7 @@ require 'board'
 require 'lite3_board'
 require 'prompt'
 require 'message'
-require 'game_database_actions'
-require 'results_database_actions'
+require 'database_actions'
 
 # rubocop:disable Metrics/BlockLength
 describe Game do
@@ -19,8 +18,7 @@ describe Game do
   before(:each) do
     @board = Board.new
     @prompt = Prompt.new(@board)
-    @game_database_actions = GameDatabaseActions.new(database_name)
-    @results_database_actions = ResultsDatabaseActions.new(database_name)
+    @database_actions = DatabaseActions.new(database_name)
     @players = [
       build_player(PlayerBuilder.new, @prompt, 'X'),
       build_player(PlayerBuilder.new, @prompt, 'O')
@@ -31,8 +29,7 @@ describe Game do
         board: @board,
         prompt: @prompt,
         players: @players,
-        game_database_actions: @game_database_actions,
-        results_database_actions: @results_database_actions
+        database_actions: @database_actions
       )
   end
 
@@ -125,8 +122,8 @@ describe Game do
     before(:each) do
       @lite3_board = Lite3Board.new
       @prompt = Prompt.new(@board)
-      @game_database_actions = GameDatabaseActions.new(database_name)
-      @results_database_actions = ResultsDatabaseActions.new(database_name)
+      @database_actions = DatabaseActions.new(database_name)
+
       @players = [
         build_player(PlayerBuilder.new, @prompt, 'X'),
         build_player(PlayerBuilder.new, @prompt, 'O')
@@ -137,7 +134,7 @@ describe Game do
           board: @lite3_board,
           prompt: @prompt,
           players: @players,
-          game_database_actions: @game_database_actions,
+          database_actions: @database_actions,
           results_database_actions: @results_database_actions
         )
     end
