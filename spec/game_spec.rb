@@ -134,8 +134,7 @@ describe Game do
           board: @lite3_board,
           prompt: @prompt,
           players: @players,
-          database_actions: @database_actions,
-          results_database_actions: @results_database_actions
+          database_actions: @database_actions
         )
     end
 

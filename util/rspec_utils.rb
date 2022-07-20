@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module RspecUtilMethods
-  def update_board_x_times(board, num)
-    (1..num).each do |space|
+  def update_board_x_times(board, count)
+    (1..count).each do |space|
       board.update_board('X', space)
     end
   end
 
-  def update_game_board_x_times(board, num)
-    (1..num).each do |turn|
+  def update_game_board_x_times(board, count)
+    (1..count).each do |turn|
       marker = turn.even? ? 'O' : 'X'
       board.update_board(marker, turn)
     end

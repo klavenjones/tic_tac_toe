@@ -10,7 +10,7 @@ class Lite3Board < Board
 
   def update_space
     @board_grid.each do |space|
-      space.update_time_on_board unless space.marker.match(/^[[:digit:]]$/)
+      space.update_time_on_board if space.marked?
       if space.time_on_board > 4
         space.reset_marker
         space.reset_time_on_board
