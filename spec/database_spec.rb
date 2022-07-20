@@ -35,11 +35,12 @@ describe Database do
     end
   end
 
-  describe '#create_tables' do
+  describe '#create_table' do
     it 'should create a table names games' do
       db = Database.new(database_name)
 
-      db.create_tables
+      db.create_table('results', 'winner VARCHAR, loser VARCHAR, board VARCHAR')
+      db.create_table('games', 'type VARCHAR, current_player VARCHAR, opposing_player VARCHAR, board VARCHAR')
       sqlite3 = SQLite3::Database.open database_name
       sqlite3.results_as_hash = true
       result = sqlite3.execute "SELECT name FROM sqlite_master WHERE type='table' AND name='games' OR name='results'"

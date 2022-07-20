@@ -8,7 +8,11 @@ class Database
   def initialize(database_name)
     @database_name = database_name
     create_database unless File.file?(@database_name)
-    create_tables
+  end
+
+  def open_db
+    @db = SQLite3::Database.open @database_name
+    @db.results_as_hash = true
   end
 
   def create_database
@@ -20,26 +24,9 @@ class Database
     @db&.close
   end
 
-  def create_tables
-    @db = SQLite3::Database.open @database_name
-    @db.execute <<-SQL
-                CREATE TABLE IF NOT EXISTS results (
-                resultId INTEGER PRIMARY KEY AUTOINCREMENT,
-                winner VARCHAR,
-                loser VARCHAR,
-                board VARCHAR,
-                date DATE);
-    SQL
-
-    @db.execute <<-SQL
-                CREATE TABLE IF NOT EXISTS games (
-                gameId INTEGER PRIMARY KEY AUTOINCREMENT,
-                type VARCHAR,
-                current_player VARCHAR,
-                opposing_player VARCHAR,
-                board VARCHAR,
-                date DATE);
-    SQL
+  def create_table(table, columns)
+    open_db
+    @db.execute("CREATE TABLE IF NOT EXISTS #{table} (id INTEGER PRIMARY KEY AUTOINCREMENT, #{columns}, date DATE)")
   rescue SQLite3::Exception => e
     print e
   ensure
