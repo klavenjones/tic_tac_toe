@@ -36,14 +36,14 @@ class Board
 
   def taken_spaces
     count = 0
-    @board_grid.each { |space| count += 1 if space.marker.match(/^[[:alpha:]]$/) }
+    @board_grid.each { |space| count += 1 if space.marked? }
     count
   end
 
   def spaces_available
     spaces = []
     @board_grid.each do |space|
-      spaces.push(space) unless space.marker.match(/^[[:alpha:]]$/)
+      spaces.push(space) unless space.marked?
     end
     spaces
   end

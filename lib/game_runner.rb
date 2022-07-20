@@ -4,7 +4,6 @@ require 'player_builder'
 require 'prompt'
 require 'game'
 require 'database_actions'
-require 'results_database_actions'
 require 'game_builder'
 
 class GameRunner
