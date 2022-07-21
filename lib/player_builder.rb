@@ -26,4 +26,10 @@ class PlayerBuilder
     set_player_marker(marker)
     @player
   end
+
+  def build_players(prompt, markers, game_mode_choice = 1)
+    player1 = build_player(prompt, markers[0], game_mode_choice)
+    player2 = build_player(prompt, markers[1])
+    [player1, player2]
+  end
 end

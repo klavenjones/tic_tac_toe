@@ -11,15 +11,11 @@ class GameBuilder
 
   def initialize(mode)
     @mode = mode
-    @player1_builder = PlayerBuilder.new
-    @player2_builder = PlayerBuilder.new
+    @player_builder = PlayerBuilder.new
   end
 
   def set_players(markers)
-    @players = [
-      @player1_builder.build_player(@prompt, markers[0], @mode),
-      @player2_builder.build_player(@prompt, markers[1])
-    ]
+    @players = @player_builder.build_players(@prompt, markers, @mode)
   end
 
   def set_board
