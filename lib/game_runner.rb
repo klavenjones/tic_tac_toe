@@ -27,7 +27,6 @@ class GameRunner
     @markers = [player1_marker, player2_marker]
 
     @game_builder = GameBuilder.new(game_mode_choice)
-
     @game = @game_builder.build_game(@markers)
   end
 

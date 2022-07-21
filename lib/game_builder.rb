@@ -5,6 +5,7 @@ require 'board'
 require 'prompt'
 require 'player_builder'
 require 'lite3_board'
+require 'database_actions'
 
 class GameBuilder
   attr_accessor :game, :mode, :players, :board, :prompt, :database_actions
@@ -12,6 +13,7 @@ class GameBuilder
   def initialize(mode)
     @mode = mode
     @player_builder = PlayerBuilder.new
+    @database_actions = DatabaseActions.new('tic_tac_toe.db')
   end
 
   def set_players(markers)
@@ -40,11 +42,11 @@ class GameBuilder
       )
   end
 
-  def build_game(markers, database_actions = DatabaseActions.new('tic_tac_toe.db'))
+  def build_game(markers, _database_actions = @database_actions)
     set_board
     set_prompt
     set_players(markers)
-    set_database_actions(database_actions)
+    set_database_actions(@database_actions)
     set_game
     @game
   end
