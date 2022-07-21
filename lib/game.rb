@@ -85,6 +85,7 @@ class Game
       columns = 'winner, loser, board, date'
       losing_player = @players[0] == @winning_player ? @players[1] : @players[0]
       values = [@winning_player.marker, losing_player.marker, @board.board_grid.join]
+      @database_actions.create_table('results', 'winner VARCHAR, loser VARCHAR, board VARCHAR')
       @database_actions.save('results', columns, values)
       @prompt.print_save_game_success
     else
@@ -97,6 +98,7 @@ class Game
     game_type = @players[0].type == 'Computer' ? 'Computer vs. Human' : 'Human vs Human'
     @opposing_player = @players[0] == @current_player ? @players[1] : @players[0]
     values = [game_type, @current_player.marker, @opposing_player.marker, @board.board_grid.join]
+    @database_actions.create_table('games', 'type VARCHAR, current_player VARCHAR, opposing_player VARCHAR, board VARCHAR')
     @database_actions.save('games', columns, values)
   end
 

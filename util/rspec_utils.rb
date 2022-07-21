@@ -40,4 +40,10 @@ module RspecUtilMethods
     builder.set_player_marker(marker)
     builder.player
   end
+
+  def save_items_x_times(db, table, columns, values, count)
+    (1..count).each do |_num|
+      db.save(table, columns, values)
+    end
+  end
 end
