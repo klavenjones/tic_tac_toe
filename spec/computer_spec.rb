@@ -8,10 +8,10 @@ describe Computer do
   before(:each) do
     @board = Board.new
     @prompt = Prompt.new(@board)
-    builder = PlayerBuilder.new('Computer')
+    builder = PlayerBuilder.new
     builder.set_player_prompt(@prompt)
     builder.set_player_marker('O')
-    @computer_player = builder.player
+    @computer_player = builder.build_player(@prompt, 'O', 2)
   end
 
   describe 'Computer marker and type' do

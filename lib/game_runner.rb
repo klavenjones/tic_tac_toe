@@ -15,51 +15,20 @@ class GameRunner
   def initialize_game
     @prompt = Prompt.new
     @prompt.welcome
-
     @database_actions = DatabaseActions.new('tic_tac_toe.db')
 
     game_mode_choice = get_game_mode
     @prompt.print_ask_for_custom_marker
+
     player1_marker = get_player_marker(1)
     player2_marker =
       @prompt.validate_unique_markers(player1_marker, get_player_marker(2))
 
-    @players = [
-      build_player(@prompt, player1_marker, game_mode_choice),
-      build_player(@prompt, player2_marker)
-    ]
+    @markers = [player1_marker, player2_marker]
 
-    @game =
-      build_game(
-        game_mode_choice: game_mode_choice,
-        board: @board,
-        prompt: @prompt,
-        players: @players,
-        database_actions: @database_actions
-      )
-  end
+    @game_builder = GameBuilder.new(game_mode_choice)
 
-  def build_player(prompt, marker, game_mode_choice = 1)
-    player_builder =
-      if [2, 4].include?(game_mode_choice)
-        PlayerBuilder.new('Computer')
-      else
-        PlayerBuilder.new
-      end
-    player_builder.set_player_prompt(prompt)
-    player_builder.set_player_marker(marker)
-    player_builder.player
-  end
-
-  def build_game(args)
-    game_builder = GameBuilder.new(args[:game_mode_choice])
-    game_builder.set_board
-    args[:prompt].board = game_builder.board
-    game_builder.set_prompt(args[:prompt])
-    game_builder.set_players(args[:players])
-    game_builder.set_database_actions(args[:database_actions])
-    game_builder.set_game
-    game_builder.game
+    @game = @game_builder.build_game(@markers)
   end
 
   def get_player_marker(player)
